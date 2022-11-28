@@ -25,7 +25,7 @@ const SouqOtlobha = () => {
             type={"outline"}
             img={Filter}
           >
-            فلتر
+            فرز
           </Button>
           <Button
             onClick={() => {

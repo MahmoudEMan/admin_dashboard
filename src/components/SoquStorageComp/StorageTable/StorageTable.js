@@ -19,6 +19,8 @@ import Tooltip from "@mui/material/Tooltip";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import { ReactComponent as SortIcon } from "../../../assets/Icons/icon-24-sort.svg";
+
 import {
   MdOutlineKeyboardArrowDown,
   MdOutlineArrowBackIosNew,
@@ -29,6 +31,7 @@ import { BsTrash } from "react-icons/bs";
 import { Gift, CarImg, CameraImg, ShoesImg } from "../../../assets/Icons/index";
 import { ReactComponent as EditIcon } from "../../../assets/Icons/editt 2.svg";
 import { ReactComponent as AddIcon } from "../../../assets/Icons/icon-24-action-add.svg";
+import { MdOutlineAddBox } from "react-icons/md";
 
 function createData(name, activity, amount, price, sku, icon) {
   return {
@@ -153,10 +156,14 @@ function EnhancedTableHead(props) {
             sx={{
               width: headCell.width ? headCell.width : "auto",
               fontSize: "1rem",
+              color: "#02466A",
             }}
           >
             {headCell.sort && (
               <TableSortLabel
+                IconComponent={() => {
+                  return <SortIcon />;
+                }}
                 active={orderBy === headCell.id}
                 direction={orderBy === headCell.id ? order : "asc"}
                 onClick={createSortHandler(headCell.id)}
@@ -368,8 +375,11 @@ export default function EnhancedTable() {
                               fontSize: "1rem",
                             }}
                           ></BsTrash>
-                          <EditIcon></EditIcon>
-                          <AddIcon c></AddIcon>
+                          <EditIcon width={"18px"}></EditIcon>
+                          <MdOutlineAddBox
+                            color="#1DBBBE"
+                            size={"18px"}
+                          ></MdOutlineAddBox>
                         </div>
                       </TableCell>
                       <TableCell align="center">

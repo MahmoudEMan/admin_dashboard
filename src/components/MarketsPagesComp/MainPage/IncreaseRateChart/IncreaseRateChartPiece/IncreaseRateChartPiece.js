@@ -24,7 +24,7 @@ const data = [
   {
     name: "Mar",
     uv: 2000,
-    pv: 9800,
+    pv: 800,
     amt: 2290,
   },
   {

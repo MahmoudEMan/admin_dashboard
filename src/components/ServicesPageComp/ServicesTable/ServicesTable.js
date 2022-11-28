@@ -77,15 +77,15 @@ const headCells = [
   },
   {
     id: "daysLeft",
-    numeric: false,
+    numeric: true,
     disablePadding: false,
-    label: "المدة المتبقية",
+    label: "يتم تنفيذها",
   },
   {
     id: "rate",
     numeric: true,
     disablePadding: false,
-    label: "التقييم",
+    label: "اسم الخدمة",
   },
 
   {
@@ -125,6 +125,8 @@ function EnhancedTableHead(props) {
             sx={{
               width: headCell.width ? headCell.width : "auto",
               fontSize: "1rem",
+              color: "#011723",
+              fontWeight: "600",
             }}
           >
             {headCell.sort && (
@@ -358,7 +360,7 @@ export default function EnhancedTable() {
                           ></BsTrash>
                         </div>
                       </TableCell>
-                      <TableCell align="center">
+                      <TableCell align="right">
                         <div className="">
                           <h2 dir="rtl" className="font-medium">
                             {row.amount}

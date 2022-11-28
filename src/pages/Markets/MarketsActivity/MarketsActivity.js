@@ -16,6 +16,7 @@ const MarketsActivity = () => {
           onClick={() => {
             setShowAddActivity(true);
           }}
+          style={{ backgroundColor: "#02466A" }}
           type={"normal"}
           svg={
             <IoIosAdd style={{ color: "#fff", fontSize: "1.25rem" }}></IoIosAdd>

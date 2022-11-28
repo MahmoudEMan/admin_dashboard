@@ -352,7 +352,7 @@ export default function EnhancedTable() {
     return arr;
   };
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box sx={{ width: "100%", mt: "3rem" }}>
       <Paper sx={{ width: "100%", mb: 2 }}>
         <EnhancedTableToolbar
           onClick={deleteItems}

@@ -22,7 +22,14 @@ import { visuallyHidden } from "@mui/utils";
 import { BsTrash } from "react-icons/bs";
 import { Gift } from "../../../../assets/Icons/index";
 import { BsStarFill, BsStarHalf } from "react-icons/bs";
-
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import {
+  MdOutlineKeyboardArrowDown,
+  MdOutlineArrowBackIosNew,
+  MdOutlineArrowForwardIos,
+} from "react-icons/md";
+import { ReactComponent as SortIcon } from "../../../../assets/Icons/icon-24-sort.svg";
 function createData(name, activity, opened, daysLeft, rate) {
   return {
     name,
@@ -91,14 +98,14 @@ const headCells = [
   },
   {
     id: "daysLeft",
-    numeric: false,
+    numeric: true,
     disablePadding: false,
     label: "المدة المتبقية",
     sort: true,
   },
   {
     id: "rate",
-    numeric: false,
+    numeric: true,
     disablePadding: false,
     label: "التقييم",
   },
@@ -139,17 +146,6 @@ function EnhancedTableHead(props) {
   return (
     <TableHead sx={{ backgroundColor: "#ebebebd9" }}>
       <TableRow>
-        {/* <TableCell padding="checkbox">
-          <Checkbox
-            color="primary"
-            indeterminate={numSelected > 0 && numSelected < rowCount}
-            checked={rowCount > 0 && numSelected === rowCount}
-            onChange={onSelectAllClick}
-            inputProps={{
-              "aria-label": "select all desserts",
-            }}
-          />
-        </TableCell> */}
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
@@ -159,10 +155,14 @@ function EnhancedTableHead(props) {
             sx={{
               width: headCell.width ? headCell.width : "auto",
               fontSize: "1rem",
+              color: "#02466A",
             }}
           >
             {headCell.sort && (
               <TableSortLabel
+                IconComponent={() => {
+                  return <SortIcon />;
+                }}
                 active={orderBy === headCell.id}
                 direction={orderBy === headCell.id ? order : "asc"}
                 onClick={createSortHandler(headCell.id)}
@@ -268,6 +268,16 @@ export default function EnhancedTable() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [data, setData] = React.useState(rows);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+
+  const rowsPerPagesCount = [5, 10, 25, 50, 100];
+  const handleRowsClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -328,6 +338,14 @@ export default function EnhancedTable() {
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
+  const allRows = () => {
+    const num = Math.ceil(data.length / rowsPerPage);
+    const arr = [];
+    for (let index = 0; index < num; index++) {
+      arr.push(index + 1);
+    }
+    return arr;
+  };
   return (
     <Box sx={{ width: "100%" }}>
       <Paper sx={{ width: "100%", mb: 2 }}>
@@ -410,9 +428,9 @@ export default function EnhancedTable() {
                           />
                         </div>
                       </TableCell>
-                      <TableCell align="center">
+                      <TableCell align="right">
                         <div className="">
-                          <h2 dir="rtl" className="font-medium">
+                          <h2 dir="rtl" className="font-medium ">
                             <span className="ml-1">{row.daysLeft}</span>
                             <span>يوم</span>
                           </h2>
@@ -420,7 +438,7 @@ export default function EnhancedTable() {
                       </TableCell>
                       <TableCell align="right">
                         <div
-                          className="flex justify-between items-center py-1 px-3 w-16 h-6 rounded-md"
+                          className="flex ml-auto justify-between items-center py-1 px-3 w-16 h-6 rounded-md"
                           style={{ backgroundColor: "rgb(164,161,251)" }}
                         >
                           <h2 className="font-medium" style={{ color: "#fff" }}>
@@ -447,7 +465,7 @@ export default function EnhancedTable() {
                       </TableCell>
                       <TableCell
                         align="right"
-                        sx={{ display: "flex", gap: "0.5rem", p: "24px" }}
+                        sx={{ display: "flex", gap: "0.5rem", p: "24px 0" }}
                       >
                         <img src={Gift} alt="" />
                         <h2 className="font-medium">{row.activity}</h2>
@@ -491,19 +509,93 @@ export default function EnhancedTable() {
             </TableBody>
           </Table>
         </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          count={data.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-          labelRowsPerPage={"عدد الصفوف"}
-          input={{ display: "none" }}
-          showLastButton={true}
-          showFirstButton={true}
-        />
       </Paper>
+      <div className="flex items-center justify-between">
+        <div
+          className="flex items-center gap-2 p-2 rounded-md"
+          style={{ border: "1px solid #2D62ED" }}
+        >
+          <div
+            id="basic-button"
+            aria-controls={open ? "basic-menu" : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? "true" : undefined}
+            onClick={handleRowsClick}
+            className={
+              "h-9 w-9 rounded-sm flex justify-center items-center cursor-pointer"
+            }
+            style={{ backgroundColor: "#0099FB" }}
+          >
+            <MdOutlineKeyboardArrowDown
+              color="#fff"
+              fontSize={"1.5rem"}
+            ></MdOutlineKeyboardArrowDown>
+          </div>
+          <Menu
+            id="basic-menu"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            MenuListProps={{
+              "aria-labelledby": "basic-button",
+            }}
+          >
+            {rowsPerPagesCount.map((rowsPer, rowsIdx) => {
+              return (
+                <MenuItem
+                  value={rowsPer}
+                  onClick={(e) => {
+                    handleChangeRowsPerPage(e);
+                    handleClose();
+                  }}
+                  key={rowsIdx}
+                >
+                  {rowsPer}
+                </MenuItem>
+              );
+            })}
+          </Menu>
+          <h2 className="font-medium" style={{ color: "#0077FF" }}>
+            عدد الصفوف
+          </h2>
+        </div>
+        <div className="flex gap-6 items-center">
+          <MdOutlineArrowBackIosNew
+            className="cursor-pointer"
+            style={{ visibility: page === 0 && "hidden" }}
+            onClick={() => {
+              setPage(page - 1);
+            }}
+          ></MdOutlineArrowBackIosNew>
+
+          <div className="flex gap-4">
+            {allRows().map((item, itemIdx) => {
+              return (
+                <div
+                  className="cursor-pointer font-medium rounded-lg flex justify-center items-center w-6 h-6"
+                  style={{
+                    backgroundColor: item === page + 1 && "#508FF4",
+                    color: item === page + 1 && "#fff",
+                  }}
+                  onClick={() => {
+                    setPage(itemIdx);
+                  }}
+                >
+                  {item}
+                </div>
+              );
+            })}
+          </div>
+          <MdOutlineArrowForwardIos
+            className="cursor-pointer"
+            style={{ visibility: page + 1 === allRows().length && "hidden" }}
+            onClick={() => {
+              setPage(page + 1);
+            }}
+          ></MdOutlineArrowForwardIos>
+        </div>
+        <div></div>
+      </div>
     </Box>
   );
 }

@@ -10,15 +10,13 @@ import FormControl from "@mui/material/FormControl";
 import { Editor } from "react-draft-wysiwyg";
 import { EditorState, convertToRaw } from "draft-js";
 import draftToHtml from "draftjs-to-html";
-import FormLabel from "@mui/material/FormLabel";
 import dayjs from "dayjs";
-import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
 import { DataIcon } from "../../../assets/Icons/index";
 import { FiSend } from "react-icons/fi";
+import { DatePicker as DateRange, Space } from "antd";
 
 const packagesOptions = ["تجديد الاشتراك", "الغاء الاشتراك"];
 
@@ -59,7 +57,7 @@ const TraderAlert = ({ cancel, traderPackageDetails }) => {
     <>
       <BackDrop onClick={cancel} />
       <div
-        className="fixed trader_alert overflow-y-scroll flex flex-col top-1/2 translate-x-2/4 -translate-y-2/4 right-2/4 z-20 rounded-md overflow-hidden"
+        className="fixed trader_alert overflow-y-scroll flex flex-col top-1/2 translate-x-2/4 -translate-y-2/4 right-2/4 z-20 rounded-lg overflow-hidden"
         style={{ height: "40rem", width: "51.25rem", maxHeight: "75%" }}
       >
         <div
@@ -172,82 +170,39 @@ const TraderAlert = ({ cancel, traderPackageDetails }) => {
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <Stack spacing={3} sx={{ flexDirection: "row" }}>
                     <div
-                      className="w-20 flex justify-center items-center rounded-r-md"
+                      className="w-20 p-2 flex justify-center items-center rounded-r-md"
                       style={{ backgroundColor: "#1DBBBE" }}
                     >
                       <img src={DataIcon} alt="" />
                     </div>
-                    <MobileDatePicker
-                      placeholder="من"
-                      value={fromValue}
-                      onChange={(newValue) => {
-                        setFromValue(newValue);
+
+                    <DateRange.RangePicker
+                      className="main_page_date_picker rounded-none rounded-l-sm  mt-0 w-80"
+                      style={{
+                        backgroundColor: "rgb(239, 249, 255)",
                       }}
-                      renderInput={(params) => (
-                        <TextField
-                          sx={{
-                            "& .MuiInputBase-root": {
-                              height: "3rem",
-                            },
-                            "& .MuiOutlinedInput-notchedOutline": {
-                              borderLeft: "none",
-                              borderRadius: "0",
-                            },
-                            "& .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root.Mui-error .MuiOutlinedInput-notchedOutline":
-                              { borderLeft: "none", borderRadius: "0" },
-                          }}
-                          placeholder="اختر الفترة من "
-                          {...params}
-                        />
-                      )}
-                      className="mt-0"
-                    />
-                    <MobileDatePicker
-                      placeholder="من"
-                      value={toValue}
-                      onChange={(newValue) => {
-                        setToValue(newValue);
+                      placeholder={["اختر الفترة من إلى", ""]}
+                      allowEmpty={[true, true]}
+                      onChange={(e) => {
+                        console.log(e);
+                        const date = new Date(e[0]);
+                        const [year, month, day] = [
+                          date.getFullYear(),
+                          date.getMonth() + 1,
+                          date.getDate(),
+                        ];
+                        console.log(year, month, day);
                       }}
-                      renderInput={(params) => (
-                        <TextField
-                          sx={{
-                            "& .MuiInputBase-root": {
-                              height: "3rem",
-                            },
-                            "& .MuiOutlinedInput-notchedOutline": {
-                              borderRight: "none",
-                              borderRadius: "6px 0 0 6px",
-                            },
-                            "& .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root.Mui-error .MuiOutlinedInput-notchedOutline":
-                              { borderRadius: "6px 0 0 6px" },
-                          }}
-                          placeholder="إلى"
-                          {...params}
-                        />
-                      )}
-                      className="mt-0"
+                      suffixIcon={""}
                     />
                   </Stack>
                 </LocalizationProvider>
               </FormControl>
             </div>
           </div>
-          <div className="mt-28">
+          <div className="mt-20 rounded-lg">
             <h2 className="mb-4 font-medium">نص الرسالة</h2>
-            {/* <textarea
-              className={"p-4 outline-0 rounded-md"}
-              style={{
-                width: "100%",
-                border: "1px solid rgba(167, 167, 167, 0.5)",
-                resize: "none",
-              }}
-              resize={false}
-              name=""
-              placeholder="وصف تفاصيل المنتج"
-              id=""
-              cols="30"
-              rows="1"
-            ></textarea> */}
+
             <Editor
               toolbarHidden={false}
               editorState={description.editorState}

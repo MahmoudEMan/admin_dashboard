@@ -135,6 +135,7 @@ const FilteringOptions = ({ showFilteringOptions, hideFilteringOptions }) => {
           onClick={hideFilteringOptions}
           type={"normal"}
           className={"w-44 h-14"}
+          style={{ backgroundColor: "#02466A" }}
         >
           تنفيذ الفرز
         </Button>

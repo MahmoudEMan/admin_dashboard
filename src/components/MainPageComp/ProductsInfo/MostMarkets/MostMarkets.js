@@ -50,7 +50,12 @@ const MostMarkets = () => {
           {rows.map((row) => (
             <TableRow
               key={row.name}
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              sx={{
+                "&:last-child td, &:last-child th": { border: 0 },
+                "& .MuiTableCell-root": {
+                  height: "4rem",
+                },
+              }}
             >
               <TableCell component="th" scope="row" align="right">
                 {row.name}

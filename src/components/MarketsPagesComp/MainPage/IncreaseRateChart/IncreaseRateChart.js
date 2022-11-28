@@ -1,24 +1,7 @@
 import * as React from "react";
-// import Box from "@mui/material/Box";
-// import MenuItem from "@mui/material/MenuItem";
-// import FormControl from "@mui/material/FormControl";
-// import Select from "@mui/material/Select";
-// import { MdAccessibilityNew } from "react-icons/md";
-// import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-// import { SwitchOff } from "../../../../assets/Icons/index";
 import IncreaseRateChartPiece from "./IncreaseRateChartPiece/IncreaseRateChartPiece";
 
 const IncreaseRateChart = () => {
-  // const [age, setAge] = React.useState(`${new Date().getFullYear()}`);
-
-  // const handleChange = (event) => {
-  //   setAge(event.target.value);
-  // };
-  // const array = [];
-  // for (let index = 0; index < 10; index++) {
-  //   array.push(age - index);
-  // }
-
   const array = [];
   for (let index = 0; index < 10; index++) {
     array.push(new Date().getFullYear() - index);

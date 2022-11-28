@@ -22,7 +22,7 @@ import { visuallyHidden } from "@mui/utils";
 import { BsTrash } from "react-icons/bs";
 import { HiOutlineMail } from "react-icons/hi";
 import { FiSend } from "react-icons/fi";
-
+import { ReactComponent as SortIcon } from "../../../assets/Icons/icon-24-sort.svg";
 import { Gift } from "../../../assets/Icons/index";
 import { BsStarFill, BsStarHalf } from "react-icons/bs";
 
@@ -149,10 +149,14 @@ function EnhancedTableHead(props) {
             sx={{
               width: headCell.width ? headCell.width : "auto",
               fontSize: "1rem",
+              color: "#02466A",
             }}
           >
             {headCell.sort && (
               <TableSortLabel
+                IconComponent={() => {
+                  return <SortIcon />;
+                }}
                 active={orderBy === headCell.id}
                 direction={orderBy === headCell.id ? order : "asc"}
                 onClick={createSortHandler(headCell.id)}
@@ -390,7 +394,7 @@ export default function EnhancedTable({ openTraderAlert }) {
 
                       <TableCell
                         align="right"
-                        sx={{ display: "flex", gap: "0.5rem", p: "24px" }}
+                        sx={{ display: "flex", gap: "0.5rem", p: "24px 0" }}
                       >
                         <img src={Gift} alt="" />
                         <h2 className="font-medium">{row.name}</h2>
