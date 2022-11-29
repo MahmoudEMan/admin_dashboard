@@ -37,11 +37,11 @@ const TrainingCourses = () => {
           const image = require("../../../assets/images/drop_shipping_img.png");
           console.log(`"${course.img}"`);
           return (
-            <div key={index} className="flex justify-between mb-2">
+            <div key={index} className="flex justify-between shadow-lg  mb-4">
               <div className="flex gap-4">
                 <div className="w-40 h-40 relative cursor-pointer">
                   <img
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover rounded-md"
                     src={image}
                     alt=""
                   />
@@ -52,7 +52,7 @@ const TrainingCourses = () => {
                     color={"#fff"}
                   ></BsPlayCircle>
                 </div>
-                <div>
+                <div className="pt-4">
                   <h2
                     className="font-medium text-xl mb-4"
                     style={{ color: "#02466A" }}
@@ -63,8 +63,8 @@ const TrainingCourses = () => {
                   <h2 className=" text-lg">{course.numberOfVideos} فيديو</h2>
                 </div>
               </div>
-              <div className="flex items-end">
-                <BsTrash color="red"></BsTrash>
+              <div className="flex pl-6 pb-2 items-end">
+                <BsTrash color="red" size={"1.2rem"}></BsTrash>
               </div>
             </div>
           );

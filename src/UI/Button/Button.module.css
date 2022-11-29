@@ -6,7 +6,7 @@
     justify-content: center;
     gap: 8px;
     padding: 0.5rem 1rem;
-    border-radius: 0.25rem;
+    border-radius: 0.5rem;
     cursor: pointer;
     min-width: 120px;
 }.outline h2{
@@ -19,7 +19,7 @@
     justify-content: center;
     gap: 8px;
     padding: 0.5rem 1rem;
-    border-radius: 0.25rem;
+    border-radius: 0.5rem;
     cursor: pointer;
     background-color: #1DBBBE;
     outline: none;

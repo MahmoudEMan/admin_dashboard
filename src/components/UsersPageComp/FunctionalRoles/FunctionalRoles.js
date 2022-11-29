@@ -1,7 +1,8 @@
 import React from "react";
 import styles from "./FunctionalRoles.module.css";
 import Button from "../../../UI/Button/Button";
-import { AiOutlineEdit } from "react-icons/ai";
+import { ReactComponent as EditIcon } from "../../../assets/Icons/editt 2.svg";
+import { FiEdit } from "react-icons/fi";
 import { BsTrash } from "react-icons/bs";
 
 const roles = ["أدمن", "سوبر أدمن", "دعم فنى", "خدمات عملاء", "تسويق"];
@@ -51,13 +52,13 @@ const FunctionalRoles = ({ cancel }) => {
             <div>
               {roles.map((role, index) => {
                 return (
-                  <div className="flex justify-between items-center shadow-md mb-3 py-2 mx-1 px-4">
+                  <div className="flex justify-between items-center shadow-lg mb-3 py-4 mx-1 px-4">
                     <h2 className="font-semibold">{role}</h2>
                     <div className="flex gap-4 ">
                       <Button
                         textStyle={{ color: "#0099FB" }}
-                        style={{ backgroundColor: "#FFF7F7" }}
-                        svg={<AiOutlineEdit color="#0099FB" />}
+                        style={{ backgroundColor: "rgba(235, 247, 255, 1)" }}
+                        svg={<FiEdit color="#0099FB" />}
                         type={"normal"}
                       >
                         تحرير
@@ -92,7 +93,7 @@ const FunctionalRoles = ({ cancel }) => {
               type={"outline"}
               onClick={cancel}
             >
-              إلغاء
+              اغلاق
             </Button>
           </div>
         </div>

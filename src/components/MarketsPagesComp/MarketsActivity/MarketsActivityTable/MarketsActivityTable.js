@@ -146,17 +146,6 @@ function EnhancedTableHead(props) {
   return (
     <TableHead sx={{ backgroundColor: "#ebebebd9" }}>
       <TableRow>
-        {/* <TableCell padding="checkbox">
-          <Checkbox
-            color="primary"
-            indeterminate={numSelected > 0 && numSelected < rowCount}
-            checked={rowCount > 0 && numSelected === rowCount}
-            onChange={onSelectAllClick}
-            inputProps={{
-              "aria-label": "select all desserts",
-            }}
-          />
-        </TableCell> */}
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
@@ -248,8 +237,9 @@ function EnhancedTableToolbar(props) {
         <Checkbox
           sx={{
             color: "#1DBBBE",
+            paddingRight: "0",
             "& .MuiSvgIcon-root": {
-              color: "#1DBBBE",
+              color: "#011723",
             },
           }}
           indeterminate={numSelected > 0 && numSelected < rowCount}
@@ -352,7 +342,7 @@ export default function EnhancedTable() {
     return arr;
   };
   return (
-    <Box sx={{ width: "100%", mt: "3rem" }}>
+    <Box sx={{ width: "100%", mt: "0rem" }}>
       <Paper sx={{ width: "100%", mb: 2 }}>
         <EnhancedTableToolbar
           onClick={deleteItems}
@@ -413,7 +403,7 @@ export default function EnhancedTable() {
                           sx={{
                             color: "#1DBBBE",
                             "& .MuiSvgIcon-root": {
-                              color: "#1DBBBE",
+                              color: "#011723",
                             },
                           }}
                           checked={isItemSelected}

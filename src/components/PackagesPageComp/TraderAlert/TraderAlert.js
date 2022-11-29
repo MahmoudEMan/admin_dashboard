@@ -57,23 +57,17 @@ const TraderAlert = ({ cancel, traderPackageDetails }) => {
     <>
       <BackDrop onClick={cancel} />
       <div
-        className="fixed trader_alert overflow-y-scroll flex flex-col top-1/2 translate-x-2/4 -translate-y-2/4 right-2/4 z-20 rounded-lg overflow-hidden"
-        style={{ height: "40rem", width: "51.25rem", maxHeight: "75%" }}
+        className="fixed trader_alert   flex flex-col top-1/2 translate-x-2/4 -translate-y-2/4 right-2/4 z-20 rounded-lg overflow-hidden"
+        style={{ width: "51.25rem", maxHeight: "80%" }}
       >
         <div
-          className="h-16 w-full flex items-center justify-between py-4 px-4"
+          className="h-16 w-full flex items-center justify-center py-4 px-4 trader_alert"
           style={{ backgroundColor: "#1DBBBE" }}
         >
-          <h2></h2>
           <h2 className="text-slate-50 text-center">ارسال تنبيه للتاجر </h2>
-          <IoMdCloseCircleOutline
-            color={"#fff"}
-            className={"cursor-pointer"}
-            onClick={cancel}
-          ></IoMdCloseCircleOutline>
         </div>
         <div
-          className="flex-1 p-4 pt-10"
+          className="flex-1 p-4 pt-10 pb-8"
           style={{ backgroundColor: "rgb(246,246,246)" }}
         >
           <div className="flex gap-24">
@@ -201,13 +195,12 @@ const TraderAlert = ({ cancel, traderPackageDetails }) => {
             </div>
           </div>
           <div className="mt-20 rounded-lg">
-            <h2 className="mb-4 font-medium">نص الرسالة</h2>
-
             <Editor
               toolbarHidden={false}
               editorState={description.editorState}
               onEditorStateChange={onEditorStateChange}
               inDropdown={true}
+              placeholder="نص الرسالة"
               wrapperClassName="demo-wrapper"
               editorClassName="demo-editor"
               toolbar={{

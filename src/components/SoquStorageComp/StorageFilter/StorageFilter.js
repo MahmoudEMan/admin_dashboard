@@ -3,6 +3,7 @@ import Button from "../../../UI/Button/Button";
 // import styles from "./StorageFilter.module.css";
 import { ReactComponent as Search } from "../../../assets/Icons/icon_24_search.svg";
 import { ReactComponent as Filter } from "../../../assets/Icons/icon-24-filter.svg";
+import { AiOutlineSearch } from "react-icons/ai";
 
 const StorageFilter = () => {
   return (
@@ -23,7 +24,7 @@ const StorageFilter = () => {
             style={{ border: "2px solid rgba(29, 187, 190, 1)" }}
           />
           <div className={`absolute top-1/2 right-4 -translate-y-2/4`}>
-            <Search></Search>
+            <AiOutlineSearch color="#1DBBBE" size={"18px"}></AiOutlineSearch>
           </div>
         </label>
         <Button className={""} type="normal">
@@ -31,9 +32,9 @@ const StorageFilter = () => {
         </Button>
         <Button
           style={{ backgroundColor: "rgb(180,237,238)" }}
+          textStyle={{ color: "#03787A" }}
           className={""}
           type="normal"
-          fontColor={"text-slate-900"}
         >
           تصدير ملف
         </Button>

@@ -26,6 +26,7 @@ import { Gift } from "../../../assets/Icons/index";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { visuallyHidden } from "@mui/utils";
 import { BsStarFill, BsStarHalf } from "react-icons/bs";
+import { ReactComponent as SortIcon } from "../../../assets/Icons/icon-24-sort.svg";
 import {
   MdOutlineKeyboardArrowDown,
   MdOutlineArrowBackIosNew,
@@ -146,6 +147,9 @@ function EnhancedTableHead(props) {
           >
             {headCell.sort && (
               <TableSortLabel
+                IconComponent={() => {
+                  return <SortIcon />;
+                }}
                 active={orderBy === headCell.id}
                 direction={orderBy === headCell.id ? order : "asc"}
                 onClick={createSortHandler(headCell.id)}
@@ -253,7 +257,7 @@ export default function EnhancedTable({ setUser }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [userMenuOpenedId, setUserMenuOpenedId] = React.useState(null);
   const [rowAnchorEl, setRowAnchorEl] = React.useState(null);
-  const rowsPerPagesCount = [5, 10, 25, 50, 100];
+  const rowsPerPagesCount = [10, 20, 30, 50, 100];
   const handleRowsClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -419,10 +423,27 @@ export default function EnhancedTable({ setUser }) {
                       </TableCell>
                       <TableCell align="right">
                         <div className="">
-                          <h2 dir="rtl" className="font-medium">
-                            <span className="ml-1">{row.daysLeft}</span>
-                            <span>يوم</span>
-                          </h2>
+                          <Switch
+                            onChange={() => {
+                              const findIndex = data.findIndex(
+                                (item) => item.name === row.name
+                              );
+                              const arr = [...data];
+                              arr[findIndex].opened = !arr[findIndex].opened;
+                              setData(arr);
+                            }}
+                            className=""
+                            sx={{
+                              "& .Mui-checked .MuiSwitch-thumb": {
+                                backgroundColor: "#3AE374",
+                              },
+                              "&.MuiSwitch-root .Mui-checked+.MuiSwitch-track":
+                                {
+                                  backgroundColor: "#3AE374",
+                                },
+                            }}
+                            checked={row.opened}
+                          />
                         </div>
                       </TableCell>
                       <TableCell align="right">

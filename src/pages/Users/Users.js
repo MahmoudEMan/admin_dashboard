@@ -9,7 +9,7 @@ const Users = () => {
   const [showFunctionalRoles, setShowFunctionalRoles] = useState(false);
 
   return (
-    <div className="relative">
+    <div className="relative pl-36">
       <div className="flex justify-end">
         <div className="flex gap-4">
           <Button

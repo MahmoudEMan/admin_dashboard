@@ -94,4 +94,14 @@ h2
 .trader_alert .demo-editor{
   height: fit-content !important;
 }
-
+/* trader_alert */
+.trader_alert .demo-wrapper{
+  display: flex;
+  flex-direction: column-reverse;
+}
+ .trader_alert .demo-wrapper .public-DraftEditorPlaceholder-inner
+ {
+  color: #011723;
+  font-weight: 600;
+  font-size: 1rem;
+ }

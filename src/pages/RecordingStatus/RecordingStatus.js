@@ -7,7 +7,7 @@ import { Filter } from "../../assets/Icons/index";
 
 const RecordingStatus = () => {
   return (
-    <div className={`${styles.recording_status} p-4`}>
+    <div className={`${styles.recording_status} p-4 pl-36`}>
       <div className="flex items-center justify-between">
         <PageNavigate currentPage={"حالة التسجيل"} />
         <div className={`${styles.filter_con}`}>

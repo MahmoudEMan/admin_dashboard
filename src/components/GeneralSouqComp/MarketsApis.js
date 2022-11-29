@@ -72,7 +72,7 @@ const MarketsApis = () => {
                     rel="noreferrer"
                   >
                     <img
-                      className={`w-3/5 ${active ? "" : "grayscale"}`}
+                      className={`w-9/12 ${active ? "" : "grayscale"}`}
                       src={logo}
                       alt=""
                     />

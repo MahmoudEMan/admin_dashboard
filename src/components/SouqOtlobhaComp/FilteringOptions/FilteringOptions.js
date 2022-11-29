@@ -40,9 +40,10 @@ const FilteringOptions = ({ showFilteringOptions, hideFilteringOptions }) => {
   };
   return (
     <div
-      className={`flex gap-10 my-16 otlobha_filtering_sec duration-300 ${
+      className={`flex gap-10 pb-2 pt-4 pr-2  rounded-lg otlobha_filtering_sec duration-300 ${
         showFilteringOptions ? "opacity-100" : "opacity-0"
       }`}
+      style={{ backgroundColor: "#EDEDEF" }}
     >
       <FormControl sx={{ minWidth: 120, flex: "1" }}>
         <h2 className="font-semibold mb-2">التصنيف الأساسى</h2>

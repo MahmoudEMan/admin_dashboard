@@ -5,6 +5,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { ReactComponent as Search } from "../../assets/Icons/icon_24_search.svg";
 import TableComp from "./TableComp/TableComp";
 import UserInfo from "./UserInfo/UserInfo";
+import { AiOutlineSearch } from "react-icons/ai";
 
 const category = ["أدمن", "محرر", "إدارة", "دعم فنى"];
 
@@ -39,7 +40,7 @@ const UsersTable = () => {
             className={"flex-1"}
             sx={{
               height: "3.5rem",
-              border: "1px solid rgba(29, 187, 190, 1)",
+              border: "1px solid #A7A7A7",
               "& .MuiOutlinedInput-notchedOutline": {
                 border: "none",
               },
@@ -70,10 +71,10 @@ const UsersTable = () => {
               onChange={() => {
                 console.log("zed");
               }}
-              style={{ border: "2px solid rgba(29, 187, 190, 1)" }}
+              style={{ border: "1px solid #A7A7A7" }}
             />
             <div className={`absolute top-1/2 right-4 -translate-y-2/4`}>
-              <Search></Search>
+              <AiOutlineSearch color="#1DBBBE" size={"18px"}></AiOutlineSearch>
             </div>
           </label>
         </FormControl>

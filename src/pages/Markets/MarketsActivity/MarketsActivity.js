@@ -9,7 +9,7 @@ import AddAnActivity from "../../../components/MarketsPagesComp/MarketsActivity/
 const MarketsActivity = () => {
   const [showAddActivity, setShowAddActivity] = useState(false);
   return (
-    <div className={`${styles.recording_status} p-4`}>
+    <div className={`${styles.recording_status} p-12 pl-36 `}>
       <div className="flex items-center justify-between">
         <PageNavigate currentPage={"نشاط المتاجر"} parentPage={"المتاجر"} />
         <Button
@@ -32,12 +32,9 @@ const MarketsActivity = () => {
           }}
         ></AddAnActivity>
       )}
+      <h2 className="mt-12 text-xl font-medium">الأنشطة المضافة</h2>
       <div dir="ltr">
         <MarketsActivityTable />
-      </div>
-
-      <div className="mt-8" dir="ltr">
-        {/* <UsersTable /> */}
       </div>
     </div>
   );

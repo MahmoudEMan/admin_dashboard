@@ -217,7 +217,7 @@ function EnhancedTableToolbar(props) {
           sx={{
             color: "#1DBBBE",
             "& .MuiSvgIcon-root": {
-              color: "#1DBBBE",
+              color: "#011723",
             },
           }}
           indeterminate={numSelected > 0 && numSelected < rowCount}
@@ -241,12 +241,12 @@ export default function EnhancedTable() {
   const [orderBy, setOrderBy] = React.useState("calories");
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [data, setData] = React.useState(rows);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
-  const rowsPerPagesCount = [5, 10, 25, 50, 100];
+  const rowsPerPagesCount = [10, 20, 30, 50, 100];
   const handleRowsClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -419,7 +419,7 @@ export default function EnhancedTable() {
                           sx={{
                             color: "#1DBBBE",
                             "& .MuiSvgIcon-root": {
-                              color: "#1DBBBE",
+                              color: "#ADB5B9",
                             },
                           }}
                           checked={isItemSelected}

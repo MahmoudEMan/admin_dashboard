@@ -10,7 +10,7 @@ const SouqOtlobha = () => {
   const [showFilteringOptions, setShowFilteringOptions] = useState(false);
   const [showNewProductInfo, setShowNewProductInfo] = useState(false);
   return (
-    <div className={`p-4`} style={{ backgroundColor: "#fafafa" }}>
+    <div className={`p-4 pl-36`} style={{ backgroundColor: "#fafafa" }}>
       <div className="flex items-center justify-between">
         <PageNavigate
           currentPage={"سوق اطلبها"}
@@ -54,7 +54,7 @@ const SouqOtlobha = () => {
           }}
         ></FilteringOptions>
       </div>
-      <div className="mt-8" dir="ltr">
+      <div className="mt-4" dir="ltr">
         <ProductsTable />
       </div>
     </div>

@@ -7,7 +7,7 @@ import { AiOutlinePlus } from "react-icons/ai";
 
 const GeneralSouq = () => {
   return (
-    <div className={`p-4`} style={{ backgroundColor: "#fafafa" }}>
+    <div className={`p-4 pl-36`} style={{ backgroundColor: "#fafafa" }}>
       <div className="flex items-center justify-between">
         <PageNavigate
           currentPage={"السوق العام"}

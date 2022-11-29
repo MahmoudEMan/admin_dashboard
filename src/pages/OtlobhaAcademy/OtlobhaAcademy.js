@@ -12,7 +12,10 @@ const OtlobhaAcademy = () => {
   const [newCourseWindow, setNewCourseWindow] = useState(false);
 
   return (
-    <div className={`p-4 relative`} style={{ backgroundColor: "#fafafa" }}>
+    <div
+      className={`p-4 relative pl-36`}
+      style={{ backgroundColor: "#fafafa" }}
+    >
       <div className="flex items-center justify-between">
         <PageNavigate currentPage={"أكاديمية أطلبها"} />
         <div className="flex gap-2">

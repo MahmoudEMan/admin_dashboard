@@ -7,16 +7,21 @@ import StorageTable from "../../../components/SoquStorageComp/StorageTable/Stora
 const Storage = () => {
   return (
     <div className={`px-4 pt-8`} style={{ backgroundColor: "#fafafa" }}>
-      <div className="p-4 bg-cyan-200">
+      <div
+        className="p-4 font-medium"
+        style={{ color: "#237EAE", backgroundColor: "#C0E9FF" }}
+      >
         هذه الواجهة خاصة بإدارة المخزون الخاص بسوق اطلبها
       </div>
       <div className="mt-6">
         <PageNavigate currentPage={"المخزون"} parentPage={"السوق"} />
       </div>
-      <StorageStatus />
-      <StorageFilter />
-      <div dir="ltr">
-        <StorageTable />
+      <div className={"pl-36"}>
+        <StorageStatus />
+        <StorageFilter />
+        <div dir="ltr">
+          <StorageTable />
+        </div>
       </div>
     </div>
   );
