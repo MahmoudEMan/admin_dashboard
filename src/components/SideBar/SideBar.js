@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import TreeView from "@mui/lab/TreeView/TreeView";
 import Box from "@mui/material/Box";
 import PropTypes from "prop-types";
@@ -122,6 +122,10 @@ StyledTreeItem.propTypes = {
 };
 
 const SideBar = () => {
+  const [expanded, setExpanded] = useState(["1"]);
+  const handleExpanding = (id) => () => {
+    setExpanded([id]);
+  };
   return (
     <Box
       sx={{
@@ -146,6 +150,7 @@ const SideBar = () => {
         aria-label="file system navigator"
         defaultCollapseIcon={<IoIosArrowDown />}
         defaultExpandIcon={<IoIosArrowBack />}
+        expanded={expanded}
         sx={{
           flexGrow: 1,
           maxWidth: 400,
@@ -207,7 +212,7 @@ const SideBar = () => {
               color: "#fff !important",
               transition: "0.1s",
               borderRight: "6px solid #1DBBBE",
-              borderRadius: "10px",
+              borderRadius: "8px",
               paddingRight: "2px",
             },
         }}
@@ -215,8 +220,8 @@ const SideBar = () => {
         <Link className="single_link" to={"/"}>
           <StyledTreeItem
             nodeId="1"
+            onClick={handleExpanding("1")}
             labelText="الرئيسية"
-            // labelIcon={Dashboard}
             svg={
               <Dashboard
                 style={{ marginLeft: 5, height: "1.2rem", zIndex: "10" }}
@@ -227,6 +232,7 @@ const SideBar = () => {
         <StyledTreeItem
           sx={{}}
           nodeId="2"
+          onClick={handleExpanding("2")}
           labelText="السوق"
           svg={
             <Market style={{ marginLeft: 5, height: "1.2rem", zIndex: "10" }} />
@@ -269,6 +275,7 @@ const SideBar = () => {
 
         <Link to={"/المتاجر"}>
           <StyledTreeItem
+            onClick={handleExpanding("4")}
             sx={{
               "& .MuiCollapse-root": {
                 transitionDuration: "3s ",
@@ -326,6 +333,7 @@ const SideBar = () => {
                 transitionDuration: "3s ",
               },
             }}
+            onClick={handleExpanding("8")}
             nodeId="8"
             labelText="الباقات"
             svg={
@@ -351,6 +359,7 @@ const SideBar = () => {
         <Link className="single_link" to={"/الخدمات"}>
           <StyledTreeItem
             nodeId="10"
+            onClick={handleExpanding("")}
             labelText="الخدمات"
             svg={
               <Category
@@ -362,6 +371,7 @@ const SideBar = () => {
         <Link className="single_link" to={"/أكاديمية_اطلبها"}>
           <StyledTreeItem
             nodeId="11"
+            onClick={handleExpanding("")}
             labelText="أكاديمية أطلبها"
             svg={
               <Graduation
@@ -370,47 +380,51 @@ const SideBar = () => {
             }
           ></StyledTreeItem>
         </Link>
-        <StyledTreeItem
-          sx={{
-            "& .MuiCollapse-root": {
-              transitionDuration: "3s ",
-            },
-          }}
-          nodeId="12"
-          labelText="القالب"
-          svg={
-            <Template
-              style={{ marginLeft: 5, height: "1.2rem", zIndex: "10" }}
-            />
-          }
-        >
-          <Link to={"/"}>
-            <StyledTreeItem
-              svg={
-                <GiPlainCircle
-                  style={{ marginLeft: 5, height: "1.2rem", zIndex: "10" }}
-                />
-              }
-              nodeId="13"
-              labelText="نشاط المتاجر"
-            />
-          </Link>
-          <Link to={"/"}>
-            <StyledTreeItem
-              svg={
-                <GiPlainCircle
-                  style={{ marginLeft: 5, height: "1.2rem", zIndex: "10" }}
-                />
-              }
-              nodeId="14"
-              labelText="المتاجر"
-            />
-          </Link>
-        </StyledTreeItem>
+        <Link to={"/القالب"}>
+          <StyledTreeItem
+            sx={{
+              "& .MuiCollapse-root": {
+                transitionDuration: "3s ",
+              },
+            }}
+            nodeId="12"
+            labelText="القالب"
+            onClick={handleExpanding("12")}
+            svg={
+              <Template
+                style={{ marginLeft: 5, height: "1.2rem", zIndex: "10" }}
+              />
+            }
+          >
+            <Link to={"/السلايدر"}>
+              <StyledTreeItem
+                svg={
+                  <GiPlainCircle
+                    style={{ marginLeft: 5, height: "1.2rem", zIndex: "10" }}
+                  />
+                }
+                nodeId="13"
+                labelText="السلايدر"
+              />
+            </Link>
+            <Link to={"/التقسيم"}>
+              <StyledTreeItem
+                svg={
+                  <GiPlainCircle
+                    style={{ marginLeft: 5, height: "1.2rem", zIndex: "10" }}
+                  />
+                }
+                nodeId="14"
+                labelText="التقسيم"
+              />
+            </Link>
+          </StyledTreeItem>
+        </Link>
         <Link className="single_link" to={"/"}>
           <StyledTreeItem
             nodeId="16"
             labelText="الصفحات"
+            onClick={handleExpanding("")}
             svg={
               <Pages
                 style={{ marginLeft: 5, height: "1.2rem", zIndex: "10" }}
@@ -422,6 +436,7 @@ const SideBar = () => {
           <StyledTreeItem
             nodeId="17"
             labelText="المستخدمين"
+            onClick={handleExpanding("")}
             svg={
               <User style={{ marginLeft: 5, height: "1.2rem", zIndex: "10" }} />
             }
@@ -435,6 +450,7 @@ const SideBar = () => {
           }}
           nodeId="18"
           labelText="التسويق"
+          onClick={handleExpanding("18")}
           svg={
             <Marketing
               style={{ marginLeft: 5, height: "1.2rem", zIndex: "10" }}
@@ -461,6 +477,7 @@ const SideBar = () => {
           }}
           nodeId="20"
           labelText="المندوبين"
+          onClick={handleExpanding("20")}
           svg={
             <SalesMan
               style={{ marginLeft: 5, height: "1.2rem", zIndex: "10" }}
@@ -498,6 +515,7 @@ const SideBar = () => {
           }}
           nodeId="23"
           labelText="التصنيفات"
+          onClick={handleExpanding("23")}
           svg={
             <Category
               style={{ marginLeft: 5, height: "1.2rem", zIndex: "10" }}
@@ -531,6 +549,7 @@ const SideBar = () => {
           <StyledTreeItem
             nodeId="26"
             labelText="الطلبات"
+            onClick={handleExpanding("")}
             svg={
               <Order
                 style={{ marginLeft: 5, height: "1.2rem", zIndex: "10" }}
@@ -542,6 +561,7 @@ const SideBar = () => {
           <StyledTreeItem
             nodeId="27"
             labelText="المحفظة"
+            onClick={handleExpanding("")}
             svg={
               <Wallet
                 style={{ marginLeft: 5, height: "1.2rem", zIndex: "10" }}
@@ -553,6 +573,7 @@ const SideBar = () => {
           <StyledTreeItem
             nodeId="28"
             labelText="الدعم الفنى"
+            onClick={handleExpanding("")}
             svg={
               <Support
                 style={{ marginLeft: 5, height: "1.2rem", zIndex: "10" }}
@@ -568,6 +589,7 @@ const SideBar = () => {
           }}
           nodeId="29"
           labelText="الإعدادات"
+          onClick={handleExpanding("29")}
           svg={
             <Setting
               style={{ marginLeft: 5, height: "1.2rem", zIndex: "10" }}

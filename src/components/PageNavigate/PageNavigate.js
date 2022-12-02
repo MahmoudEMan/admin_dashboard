@@ -18,7 +18,9 @@ const PageNavigate = ({ currentPage, parentPage, nestedPage }) => {
           <h2 className="font-semibold ml-4"> / {parentPage} </h2>
         </Link>
       )}
-      <h3>/ {currentPage}</h3>
+      <h3 className="font-medium" style={{ color: "#67747B" }}>
+        / {currentPage}
+      </h3>
     </div>
   );
 };

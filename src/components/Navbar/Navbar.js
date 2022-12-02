@@ -14,8 +14,8 @@ const Navbar = () => {
     <nav className={styles.navbar}>
       <div className="flex">
         <Link to="/" className={`flex items-center gap-2 ${styles.logo}`}>
-          <img className="h-5" src={HomeIcon} alt="" />
-          <h1 className="text-slate-50 font-medium">الموقع</h1>
+          <img className="h-6" src={HomeIcon} alt="" />
+          <h1 className="text-slate-50 font-medium text-base">الموقع</h1>
         </Link>
         <div className={`flex items-center gap-10 px-8 `}>
           <div
@@ -31,7 +31,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      <div className="flex">
+      <div className="flex relative h-12">
         <label className={`h-full relative ${styles.search_input}`}>
           <input
             placeholder=" هنا ستجد ما تبحث عنه"
@@ -39,10 +39,10 @@ const Navbar = () => {
             name="name"
             style={{ backgroundColor: "rgba(29, 187, 190, 0.2)" }}
           />
-          <div className={`absolute top-0 right-0 ${styles.search_container}`}>
-            <img src={SearchIcon} alt="" />
-          </div>
         </label>
+        <div className={`absolute top-0 right-0 ${styles.search_container}`}>
+          <img src={SearchIcon} alt="" />
+        </div>
       </div>
     </nav>
   );

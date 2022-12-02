@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { IoMdCloseCircleOutline } from "react-icons/io";
 import Button from "../../../UI/Button/Button";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
@@ -10,13 +9,12 @@ import FormControl from "@mui/material/FormControl";
 import { Editor } from "react-draft-wysiwyg";
 import { EditorState, convertToRaw } from "draft-js";
 import draftToHtml from "draftjs-to-html";
-import dayjs from "dayjs";
 import Stack from "@mui/material/Stack";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DataIcon } from "../../../assets/Icons/index";
 import { FiSend } from "react-icons/fi";
-import { DatePicker as DateRange, Space } from "antd";
+import { DatePicker as DateRange } from "antd";
 
 const packagesOptions = ["تجديد الاشتراك", "الغاء الاشتراك"];
 
@@ -30,8 +28,6 @@ const BackDrop = ({ onClick }) => {
 };
 
 const TraderAlert = ({ cancel, traderPackageDetails }) => {
-  const [fromValue, setFromValue] = React.useState(dayjs(null));
-  const [toValue, setToValue] = React.useState(dayjs(null));
   const [packageOption, setPackageOption] = useState("");
   const [description, setDescription] = useState({
     htmlValue: "<h1></h1>\n",
@@ -58,7 +54,7 @@ const TraderAlert = ({ cancel, traderPackageDetails }) => {
       <BackDrop onClick={cancel} />
       <div
         className="fixed trader_alert   flex flex-col top-1/2 translate-x-2/4 -translate-y-2/4 right-2/4 z-20 rounded-lg overflow-hidden"
-        style={{ width: "51.25rem", maxHeight: "80%" }}
+        style={{ width: "51.25rem", maxHeight: "77.5%" }}
       >
         <div
           className="h-16 w-full flex items-center justify-center py-4 px-4 trader_alert"

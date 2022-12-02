@@ -22,9 +22,9 @@ body {
   font-family: 'Tajawal', sans-serif !important;
 
 }
-body:has(.back_drop){
+/* body:has(.back_drop){
   overflow-y:hidden ;
-}
+} */
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',

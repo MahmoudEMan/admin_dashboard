@@ -16,5 +16,10 @@ export { default as CurrentSubscriptions } from "./Packages/CurrentSubscriptions
 export { default as ServicesPage } from "./ServicesPage/ServicesPage";
 //OtlobhaAcademy
 export { default as OtlobhaAcademy } from "./OtlobhaAcademy/OtlobhaAcademy";
+// template
+export { default as TemplatePage } from "./TemplatePage/TemplatePage";
+export { default as CommentsPage } from "./TemplatePage/CommentsPage/CommentsPage";
+export { default as SliderPage } from "./TemplatePage/SliderPage/SliderPage";
+export { default as PartitionsPage } from "./TemplatePage/PartitionsPage/PartitionsPage ";
 // users
 export { default as Users } from "./Users/Users";

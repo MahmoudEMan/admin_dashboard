@@ -49,7 +49,10 @@ const initialDATA = [
   },
 ];
 
-const MarketsApis = () => {
+const MarketsApis = ({ edit }) => {
+  const handleEditing = (url, logo, marketTitle) => () => {
+    edit(url, logo, marketTitle);
+  };
   return (
     <div>
       <Box sx={{ flexGrow: 1 }}>
@@ -92,7 +95,10 @@ const MarketsApis = () => {
                     <button className="h-8 w-8 bg-slate-50 rounded-full flex justify-center items-center">
                       <BsTrash className="" color={"red"}></BsTrash>
                     </button>
-                    <button className="h-8 w-8 bg-slate-50 rounded-full flex justify-center items-center">
+                    <button
+                      onClick={handleEditing(url, logo, marketTitle)}
+                      className="h-8 w-8 bg-slate-50 rounded-full flex justify-center items-center"
+                    >
                       <img className="w-6/10" src={EditButton} alt="" />
                     </button>
                   </div>

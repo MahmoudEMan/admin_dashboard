@@ -14,6 +14,10 @@ import {
   CurrentSubscriptions,
   ServicesPage,
   OtlobhaAcademy,
+  TemplatePage,
+  CommentsPage,
+  SliderPage,
+  PartitionsPage,
   Users,
 } from "./pages/index";
 function App() {
@@ -46,6 +50,11 @@ function App() {
             {/* الاكاديمية  */}
             <Route path="/أكاديمية_اطلبها" element={<OtlobhaAcademy />} />
             {/* القالب */}
+            <Route path="/القالب" element={<TemplatePage />} />
+            <Route path="/التعليقات" element={<CommentsPage />} />
+            <Route path="/السلايدر" element={<SliderPage />} />
+            <Route path="/التقسيم" element={<PartitionsPage />} />
+
             {/* الصفحات */}
             {/* المستخدمين */}
             <Route path="/جدول_المستخدمين" element={<Users />} />
