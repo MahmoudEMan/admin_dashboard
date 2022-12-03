@@ -241,8 +241,256 @@ const PartitionsSections = () => {
               </Select>
             </div>
           </TabPanel>
-          <TabPanel value="2">Item Two</TabPanel>
-          <TabPanel value="3">Item Three</TabPanel>
+          <TabPanel value="2">
+            <div className="mb-5">
+              <h2 className="mb-2" style={{ color: "#011723" }}>
+                اسم القسم
+              </h2>
+              <label>
+                <input
+                  className="w-full outline-none rounded p-4"
+                  placeholder="المتاجر المميزة"
+                  style={{
+                    backgroundColor: "#FFFFFF",
+                    border: "1px solid #ECECEC",
+                  }}
+                  type="text"
+                  name="name"
+                />
+              </label>
+            </div>
+            <div className="mb-5">
+              <h2 className="mb-2" style={{ color: "#011723" }}>
+                النشاط
+              </h2>
+              <Select
+                value={category}
+                IconComponent={() => {
+                  return <IoIosArrowDown size={"1rem"} />;
+                }}
+                onChange={handleCategoryChange}
+                displayEmpty
+                inputProps={{ "aria-label": "Without label" }}
+                renderValue={(selected) => {
+                  if (category === "") {
+                    return <h2>جميع الأنشطة</h2>;
+                  }
+                  return selected;
+                }}
+                className={"rounded-lg"}
+                sx={{
+                  height: "3.5rem",
+                  backgroundColor: "#fff",
+                  width: "100%",
+                  pl: "1rem",
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    border: "1px solid #A7A7A780",
+                  },
+                  "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                    border: "1px solid #03787A",
+                  },
+                }}
+              >
+                {categoryList.map((item) => {
+                  return (
+                    <MenuItem
+                      className=""
+                      sx={{
+                        backgroundColor: "#fff",
+                        height: "3rem",
+
+                        "&:hover": {},
+                        "ul:has(&)": {
+                          padding: "0",
+                        },
+                      }}
+                      value={`${item}`}
+                    >
+                      {item}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </div>
+            <div className="mb-5">
+              <h2 className="mb-2" style={{ color: "#011723" }}>
+                الحالة
+              </h2>
+              <Select
+                value={specialProduct}
+                IconComponent={() => {
+                  return <IoIosArrowDown size={"1rem"} />;
+                }}
+                onChange={handleSpecialProductChange}
+                displayEmpty
+                inputProps={{ "aria-label": "Without label" }}
+                renderValue={(selected) => {
+                  if (specialProduct === "") {
+                    return <h2>مفعل</h2>;
+                  }
+                  return selected;
+                }}
+                className={"rounded-lg"}
+                sx={{
+                  height: "3.5rem",
+                  backgroundColor: "#fff",
+                  width: "100%",
+                  pl: "1rem",
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    border: "1px solid #A7A7A780",
+                  },
+                  "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                    border: "1px solid #03787A",
+                  },
+                }}
+              >
+                {activate.map((item) => {
+                  return (
+                    <MenuItem
+                      className=""
+                      sx={{
+                        backgroundColor: "#fff",
+                        height: "3rem",
+
+                        "&:hover": {},
+                        "ul:has(&)": {
+                          padding: "0",
+                        },
+                      }}
+                      value={`${item}`}
+                    >
+                      {item}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </div>
+          </TabPanel>
+          <TabPanel value="3">
+            <div className="mb-5">
+              <h2 className="mb-2" style={{ color: "#011723" }}>
+                اسم القسم
+              </h2>
+              <label>
+                <input
+                  className="w-full outline-none rounded p-4"
+                  placeholder=""
+                  style={{
+                    backgroundColor: "#FFFFFF",
+                    border: "1px solid #ECECEC",
+                  }}
+                  type="text"
+                  name="name"
+                />
+              </label>
+            </div>
+            <div className="mb-5">
+              <h2 className="mb-2" style={{ color: "#011723" }}>
+                النشاط
+              </h2>
+              <Select
+                value={category}
+                IconComponent={() => {
+                  return <IoIosArrowDown size={"1rem"} />;
+                }}
+                onChange={handleCategoryChange}
+                displayEmpty
+                inputProps={{ "aria-label": "Without label" }}
+                renderValue={(selected) => {
+                  if (category === "") {
+                    return <h2>ـــ</h2>;
+                  }
+                  return selected;
+                }}
+                className={"rounded-lg"}
+                sx={{
+                  height: "3.5rem",
+                  backgroundColor: "#fff",
+                  width: "100%",
+                  pl: "1rem",
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    border: "1px solid #A7A7A780",
+                  },
+                  "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                    border: "1px solid #03787A",
+                  },
+                }}
+              >
+                {categoryList.map((item) => {
+                  return (
+                    <MenuItem
+                      className=""
+                      sx={{
+                        backgroundColor: "#fff",
+                        height: "3rem",
+
+                        "&:hover": {},
+                        "ul:has(&)": {
+                          padding: "0",
+                        },
+                      }}
+                      value={`${item}`}
+                    >
+                      {item}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </div>
+            <div className="mb-5">
+              <h2 className="mb-2" style={{ color: "#011723" }}>
+                الحالة{" "}
+              </h2>
+              <Select
+                value={specialProduct}
+                IconComponent={() => {
+                  return <IoIosArrowDown size={"1rem"} />;
+                }}
+                onChange={handleSpecialProductChange}
+                displayEmpty
+                inputProps={{ "aria-label": "Without label" }}
+                renderValue={(selected) => {
+                  if (specialProduct === "") {
+                    return <h2>ــ</h2>;
+                  }
+                  return selected;
+                }}
+                className={"rounded-lg"}
+                sx={{
+                  height: "3.5rem",
+                  backgroundColor: "#fff",
+                  width: "100%",
+                  pl: "1rem",
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    border: "1px solid #A7A7A780",
+                  },
+                  "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                    border: "1px solid #03787A",
+                  },
+                }}
+              >
+                {activate.map((item) => {
+                  return (
+                    <MenuItem
+                      className=""
+                      sx={{
+                        backgroundColor: "#fff",
+                        height: "3rem",
+
+                        "&:hover": {},
+                        "ul:has(&)": {
+                          padding: "0",
+                        },
+                      }}
+                      value={`${item}`}
+                    >
+                      {item}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </div>
+          </TabPanel>
         </Box>
       </TabContext>
       <div className="flex gap-4 mt-8">

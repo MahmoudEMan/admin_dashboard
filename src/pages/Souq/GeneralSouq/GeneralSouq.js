@@ -22,19 +22,18 @@ const GeneralSouq = () => {
           nestedPage={true}
           parentPage={"السوق"}
         />
-        <div className="flex gap-2">
-          <Button
-            className={"flex justify-center items-center"}
-            type={"normal"}
-            svg={<AiOutlinePlus color="#fff" />}
-            color={"white"}
-            onClick={() => {
-              setShowAddApi(true);
-            }}
-          >
-            اضافة API
-          </Button>
-        </div>
+
+        <Button
+          className={"flex justify-center items-center"}
+          type={"normal"}
+          svg={<AiOutlinePlus color="#fff" />}
+          color={"white"}
+          onClick={() => {
+            setShowAddApi(true);
+          }}
+        >
+          اضافة API
+        </Button>
       </div>
       {showAddApi && (
         <AddApi

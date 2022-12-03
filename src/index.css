@@ -105,3 +105,17 @@ h2
   font-weight: 600;
   font-size: 1rem;
  }
+ /* pages page  */
+ .add_new_page_popup .rdw-editor-toolbar{
+  background-color: #FAFAFA;
+  border: 1px solid #FAFAFA;
+ }
+ .add_new_page_popup .demo-wrapper{
+  border: 1px solid #D3D3D3;
+ }
+ .add_new_page_popup .rdw-editor-main
+ {
+  height: 30rem !important;
+  padding: 1.25rem;
+  background-color: #fff;
+ }

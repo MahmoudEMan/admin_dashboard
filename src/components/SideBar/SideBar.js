@@ -420,7 +420,7 @@ const SideBar = () => {
             </Link>
           </StyledTreeItem>
         </Link>
-        <Link className="single_link" to={"/"}>
+        <Link className="single_link" to={"/الصفحات"}>
           <StyledTreeItem
             nodeId="16"
             labelText="الصفحات"
@@ -522,7 +522,7 @@ const SideBar = () => {
             />
           }
         >
-          <Link to={"/"}>
+          <Link to={"/تصنيفات_السوق"}>
             <StyledTreeItem
               svg={
                 <GiPlainCircle
@@ -530,10 +530,10 @@ const SideBar = () => {
                 />
               }
               nodeId="24"
-              labelText="عرض المناديب"
+              labelText="تصنيفات السوق"
             />
           </Link>
-          <Link to={"/"}>
+          <Link to={"/تصنيفات_المتاجر"}>
             <StyledTreeItem
               svg={
                 <GiPlainCircle
@@ -541,7 +541,7 @@ const SideBar = () => {
                 />
               }
               nodeId="25"
-              labelText="حالة التسجيل"
+              labelText="تصنيفات المتاجر"
             />
           </Link>
         </StyledTreeItem>

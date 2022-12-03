@@ -18,7 +18,10 @@ import {
   CommentsPage,
   SliderPage,
   PartitionsPage,
+  PagesPage,
   Users,
+  ShopVarieties,
+  MarketsVarieties,
 } from "./pages/index";
 function App() {
   return (
@@ -56,8 +59,12 @@ function App() {
             <Route path="/التقسيم" element={<PartitionsPage />} />
 
             {/* الصفحات */}
+            <Route path="/الصفحات" element={<PagesPage />} />
             {/* المستخدمين */}
             <Route path="/جدول_المستخدمين" element={<Users />} />
+            {/* التصنيفات */}
+            <Route path="/تصنيفات_السوق" element={<ShopVarieties />} />
+            <Route path="/تصنيفات_المتاجر" element={<MarketsVarieties />} />
           </Routes>
         </div>
       </div>

@@ -21,5 +21,10 @@ export { default as TemplatePage } from "./TemplatePage/TemplatePage";
 export { default as CommentsPage } from "./TemplatePage/CommentsPage/CommentsPage";
 export { default as SliderPage } from "./TemplatePage/SliderPage/SliderPage";
 export { default as PartitionsPage } from "./TemplatePage/PartitionsPage/PartitionsPage ";
+// pages
+export { default as PagesPage } from "./PagesPage/PagesPage";
 // users
 export { default as Users } from "./Users/Users";
+// Varieties
+export { default as ShopVarieties } from "./Varieties/ShopVarieties/ShopVarieties";
+export { default as MarketsVarieties } from "./Varieties/MarketsVarieties/MarketsVarieties";
