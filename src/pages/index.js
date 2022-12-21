@@ -25,6 +25,24 @@ export { default as PartitionsPage } from "./TemplatePage/PartitionsPage/Partiti
 export { default as PagesPage } from "./PagesPage/PagesPage";
 // users
 export { default as Users } from "./Users/Users";
+//marketing
+export { default as CouponsPage } from "./MarketingPages/CouponsPage/CouponsPage";
+//delegates
+export { default as DelegatesTablePage } from "./DelegatesPage/DelegatesTablePage/DelegatesTablePage";
+export { default as AddNewDelegatePage } from "./DelegatesPage/AddNewDelegatePage/AddNewDelegatePage";
+export { default as EditDelegatePage } from "./DelegatesPage/EditDelegatePage/EditDelegatePage";
+export { default as StatusPage } from "./DelegatesPage/StatusPage/StatusPage";
 // Varieties
 export { default as ShopVarieties } from "./Varieties/ShopVarieties/ShopVarieties";
 export { default as MarketsVarieties } from "./Varieties/MarketsVarieties/MarketsVarieties";
+// orders
+export { default as OrdersPage } from "./OrdersPage/OrdersPage";
+// الدعم الفنى
+export { default as SupportPage } from "./SupportPage/SupportPage";
+// Setting
+export { default as PrimarySettings } from "./SettingPages/PrimarySettings/PrimarySettings";
+export { default as CountriesPages } from "./SettingPages/Countries/CountriesPages";
+export { default as CitiesPage } from "./SettingPages/CitiesPage/CitiesPage";
+export { default as CurrencyPage } from "./SettingPages/CurrencyPage/CurrencyPage";
+export { default as EmailSettingPage } from "./SettingPages/EmailSettingPage/EmailSettingPage";
+export { default as SocialMediaLinksPage } from "./SettingPages/SocialMediaLinksPage/SocialMediaLinksPage";

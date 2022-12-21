@@ -7,7 +7,7 @@ import { BsTrash } from "react-icons/bs";
 
 const roles = ["أدمن", "سوبر أدمن", "دعم فنى", "خدمات عملاء", "تسويق"];
 
-const BackDrop = ({ onClick }) => {
+const BackDrop = ({ onClick, openCreateRole }) => {
   return (
     <div
       onClick={onClick}
@@ -17,7 +17,7 @@ const BackDrop = ({ onClick }) => {
   );
 };
 
-const FunctionalRoles = ({ cancel }) => {
+const FunctionalRoles = ({ cancel, openCreateRole }) => {
   return (
     <>
       <BackDrop onClick={cancel}></BackDrop>
@@ -44,6 +44,9 @@ const FunctionalRoles = ({ cancel }) => {
               type={"normal"}
               className={"h-fit px-10"}
               fontSize={"text-xl"}
+              onClick={() => {
+                openCreateRole();
+              }}
             >
               إنشاء دور
             </Button>

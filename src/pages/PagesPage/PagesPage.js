@@ -8,7 +8,7 @@ import Button from "../../UI/Button/Button";
 import { AiOutlinePlus, AiOutlineSearch } from "react-icons/ai";
 
 const PagesPage = () => {
-  const [showAddNewPage, setShowAddNewPage] = useState(true);
+  const [showAddNewPage, setShowAddNewPage] = useState(false);
   return (
     <div className={`px-4 pt-8 mt-5`} style={{ backgroundColor: "#fafafa" }}>
       <div

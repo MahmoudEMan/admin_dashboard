@@ -37,3 +37,7 @@
 .bTow{
     filter: invert();
 }
+.btn:disabled{
+    cursor:not-allowed;
+    background-color: #666 !important;
+}

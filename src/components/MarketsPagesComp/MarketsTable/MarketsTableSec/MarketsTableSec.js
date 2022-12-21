@@ -211,28 +211,52 @@ function EnhancedTableToolbar(props) {
             ),
         }),
         display: "flex",
-        justifyContent: "space-between",
+        gap: "2rem",
+        justifyContent: "flex-end",
       }}
     >
       <div className="flex gap-2 items-center">
-        <div></div>
         {numSelected > 0 && (
           <Tooltip onClick={onClick} title="Delete">
-            <IconButton>
-              <DeleteIcon />
-            </IconButton>
+            <div
+              className="fbc px-2 rounded-full"
+              style={{ width: "134px", backgroundColor: "#FF9F1A0A" }}
+            >
+              <h2 className={"font-medium"} style={{ color: "#FF9F1A" }}>
+                تعطيل الكل
+              </h2>
+              {/* <IconButton>
+                <BsTrash
+                  style={{
+                    cursor: "pointer",
+                    color: "red",
+                    fontSize: "1rem",
+                  }}
+                ></BsTrash>
+              </IconButton> */}
+            </div>
           </Tooltip>
         )}
-
         {numSelected > 0 && (
-          <Typography
-            sx={{}}
-            color="inherit"
-            variant="subtitle1"
-            component="div"
-          >
-            {numSelected} selected
-          </Typography>
+          <Tooltip onClick={onClick} title="Delete">
+            <div
+              className="fbc px-2 rounded-full"
+              style={{ width: "134px", backgroundColor: "#FF38380A" }}
+            >
+              <h2 className={"font-medium"} style={{ color: "#FF3838" }}>
+                حذف الكل
+              </h2>
+              <IconButton>
+                <BsTrash
+                  style={{
+                    cursor: "pointer",
+                    color: "red",
+                    fontSize: "1rem",
+                  }}
+                ></BsTrash>
+              </IconButton>
+            </div>
+          </Tooltip>
         )}
       </div>
 
@@ -240,6 +264,7 @@ function EnhancedTableToolbar(props) {
         <h2 className="font-medium">تحديد الكل</h2>
         <Checkbox
           sx={{
+            pr: "0",
             color: "#011723",
             "& .MuiSvgIcon-root": {
               color: "#011723",

@@ -366,8 +366,18 @@ export default function EnhancedTable() {
                       tabIndex={-1}
                       key={index}
                       selected={isItemSelected}
+                      sx={{
+                        "& .MuiTableCell-root": {
+                          // padding: "16px 0",
+                        },
+                      }}
                     >
-                      <TableCell component="th" id={labelId} scope="row">
+                      <TableCell
+                        sx={{ p: "16px 8px" }}
+                        component="th"
+                        id={labelId}
+                        scope="row"
+                      >
                         <div className="flex items-center gap-2">
                           <Switch
                             onChange={() => {

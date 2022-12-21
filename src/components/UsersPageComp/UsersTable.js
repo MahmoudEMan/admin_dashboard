@@ -5,6 +5,8 @@ import MenuItem from "@mui/material/MenuItem";
 import { ReactComponent as Search } from "../../assets/Icons/icon_24_search.svg";
 import TableComp from "./TableComp/TableComp";
 import UserInfo from "./UserInfo/UserInfo";
+import { IoIosArrowDown } from "react-icons/io";
+
 import { AiOutlineSearch } from "react-icons/ai";
 
 const category = ["أدمن", "محرر", "إدارة", "دعم فنى"];
@@ -13,6 +15,7 @@ const UsersTable = () => {
   const [age, setAge] = React.useState("");
   const [user, setUser] = useState([]);
   const [showUserInfo, setShowUserInfo] = useState(false);
+  const [editUser, setEditUser] = useState(false);
 
   const handleCategory = (event) => {
     setAge(event.target.value);
@@ -30,6 +33,9 @@ const UsersTable = () => {
             value={age}
             onChange={handleCategory}
             displayEmpty
+            IconComponent={() => {
+              return <IoIosArrowDown size={"1rem"} />;
+            }}
             inputProps={{ "aria-label": "Without label" }}
             renderValue={(selected) => {
               if (age === "") {
@@ -40,6 +46,7 @@ const UsersTable = () => {
             className={"flex-1"}
             sx={{
               height: "3.5rem",
+              pl: "1rem",
               border: "1px solid #A7A7A7",
               "& .MuiOutlinedInput-notchedOutline": {
                 border: "none",
@@ -82,6 +89,7 @@ const UsersTable = () => {
       {showUserInfo && (
         <UserInfo
           user={user}
+          edit={editUser}
           cancel={() => {
             setShowUserInfo(false);
           }}
@@ -89,9 +97,10 @@ const UsersTable = () => {
       )}
       <div dir={"ltr"}>
         <TableComp
-          setUser={(userDetected) => {
+          setUser={(userDetected, edit) => {
             setUser(userDetected);
             setShowUserInfo(true);
+            setEditUser(edit);
           }}
         ></TableComp>
       </div>

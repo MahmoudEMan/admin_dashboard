@@ -20,7 +20,7 @@ const Button = ({
     <button
       onClick={onClick}
       disabled={disabled}
-      className={`${styles[type]} ${className}`}
+      className={`${styles["btn"]} ${styles[type]} ${className} duration-100`}
       style={style}
     >
       {svg && svg}

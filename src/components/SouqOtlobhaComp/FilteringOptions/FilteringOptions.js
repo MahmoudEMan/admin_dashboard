@@ -7,6 +7,7 @@ import Checkbox from "@mui/material/Checkbox";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Button from "../../../UI/Button/Button";
+import { IoIosArrowDown } from "react-icons/io";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -49,6 +50,9 @@ const FilteringOptions = ({ showFilteringOptions, hideFilteringOptions }) => {
         <h2 className="font-semibold mb-2">التصنيف الأساسى</h2>
         <Select
           value={age}
+          IconComponent={() => {
+            return <IoIosArrowDown size={"1rem"} />;
+          }}
           onChange={handleCategory}
           displayEmpty
           inputProps={{ "aria-label": "Without label" }}
@@ -61,6 +65,7 @@ const FilteringOptions = ({ showFilteringOptions, hideFilteringOptions }) => {
           sx={{
             height: "3.5rem",
             border: "1px solid rgba(29, 187, 190, 1)",
+            pl: "1rem",
             "& .MuiOutlinedInput-notchedOutline": {
               border: "none",
             },
@@ -89,6 +94,9 @@ const FilteringOptions = ({ showFilteringOptions, hideFilteringOptions }) => {
           labelId="demo-multiple-checkbox-label"
           id="demo-multiple-checkbox"
           multiple
+          IconComponent={() => {
+            return <IoIosArrowDown size={"1rem"} />;
+          }}
           displayEmpty
           value={personName}
           onChange={handleSection}
@@ -100,6 +108,7 @@ const FilteringOptions = ({ showFilteringOptions, hideFilteringOptions }) => {
           sx={{
             height: "3.5rem",
             border: "1px solid rgba(29, 187, 190, 1)",
+            pl: "1rem",
             "& .MuiOutlinedInput-notchedOutline": {
               border: "none",
             },

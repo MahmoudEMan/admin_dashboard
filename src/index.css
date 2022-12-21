@@ -10,6 +10,23 @@
   --sec-color:#1DBBBE;
   --third-color:#B6BE34;
 }
+body:has(.full_screen_page){
+  overflow-y: hidden;
+}
+.hide_scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.fcc{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.fbc{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 *{
   box-sizing: border-box;
   padding: 0;

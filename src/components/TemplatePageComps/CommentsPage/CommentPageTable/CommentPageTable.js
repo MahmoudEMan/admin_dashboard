@@ -19,6 +19,7 @@ import Switch from "@mui/material/Switch";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { visuallyHidden } from "@mui/utils";
 import { BsTrash } from "react-icons/bs";
+
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import {
@@ -411,7 +412,7 @@ export default function EnhancedTable() {
                             }}
                             style={{
                               cursor: "pointer",
-                              color: "red",
+                              color: "#67747B",
                               fontSize: "1rem",
                             }}
                           ></BsTrash>

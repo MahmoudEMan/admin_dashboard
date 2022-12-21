@@ -411,14 +411,20 @@ export default function EnhancedTable({ setUser }) {
                         >
                           <MenuItem
                             onClick={() => {
-                              console.log(row);
-                              setUser(row);
+                              setUser(row, false);
                               handleClose();
                             }}
                           >
                             التفاصيل
                           </MenuItem>
-                          <MenuItem onClick={handleClose}>تعديل</MenuItem>
+                          <MenuItem
+                            onClick={() => {
+                              setUser(row, true);
+                              handleClose();
+                            }}
+                          >
+                            تعديل
+                          </MenuItem>
                         </Menu>
                       </TableCell>
                       <TableCell align="right">

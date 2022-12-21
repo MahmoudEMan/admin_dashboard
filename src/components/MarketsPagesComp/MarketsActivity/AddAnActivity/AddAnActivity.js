@@ -16,7 +16,7 @@ const AddAnActivity = ({ cancel }) => {
     <>
       <BackDrop onClick={cancel} />
       <div
-        className="fixed flex flex-col top-12 translate-x-2/4 right-2/4 z-20 rounded-md overflow-hidden"
+        className="fixed flex flex-col top-24 translate-x-2/4 right-2/4 z-20 rounded-md overflow-hidden"
         style={{ height: "36rem", width: "51.25rem" }}
       >
         <div
@@ -24,7 +24,7 @@ const AddAnActivity = ({ cancel }) => {
           style={{ backgroundColor: "#02466A" }}
         >
           <h2></h2>
-          <h2 className="text-slate-50 text-center">احصائيات المنتج </h2>
+          <h2 className="text-slate-50 text-center">اضافة نشاط جديد </h2>
           <IoMdCloseCircleOutline
             color={"#fff"}
             className={"cursor-pointer"}

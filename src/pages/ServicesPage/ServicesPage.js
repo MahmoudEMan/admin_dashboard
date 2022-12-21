@@ -10,7 +10,7 @@ import NewService from "../../components/ServicesPageComp/NewService/NewService"
 const ServicesPage = () => {
   const [showNewProductInfo, setShowNewProductInfo] = useState(false);
   return (
-    <div className={`p-4`} style={{ backgroundColor: "#fafafa" }}>
+    <div className={`p-4 pl-36`} style={{ backgroundColor: "#fafafa" }}>
       <div className="flex items-center justify-between">
         <PageNavigate currentPage={"الخدمات"} />
         <div className="flex gap-2">

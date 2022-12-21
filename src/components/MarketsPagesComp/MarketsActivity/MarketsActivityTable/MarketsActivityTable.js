@@ -207,20 +207,34 @@ function EnhancedTableToolbar(props) {
             ),
         }),
         display: "flex",
-        justifyContent: "space-between",
+        gap: "2rem",
+        justifyContent: "flex-end",
       }}
     >
-      <div className="flex gap-2 items-center">
-        <div></div>
+      <div className="flex gap-8 items-center">
         {numSelected > 0 && (
           <Tooltip onClick={onClick} title="Delete">
-            <IconButton>
-              <DeleteIcon />
-            </IconButton>
+            <div
+              className="fbc px-2 rounded-full"
+              style={{ width: "134px", backgroundColor: "#FF38380A" }}
+            >
+              <h2 className={"font-medium"} style={{ color: "#FF3838" }}>
+                حذف الكل
+              </h2>
+              <IconButton>
+                <BsTrash
+                  style={{
+                    cursor: "pointer",
+                    color: "red",
+                    fontSize: "1rem",
+                  }}
+                ></BsTrash>
+              </IconButton>
+            </div>
           </Tooltip>
         )}
 
-        {numSelected > 0 && (
+        {/* {numSelected > 0 && (
           <Typography
             sx={{}}
             color="inherit"
@@ -229,7 +243,7 @@ function EnhancedTableToolbar(props) {
           >
             {numSelected} selected
           </Typography>
-        )}
+        )} */}
       </div>
 
       <div className="flex items-center">

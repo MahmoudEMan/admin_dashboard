@@ -3,10 +3,12 @@ import Button from "../../UI/Button/Button";
 import UsersTable from "../../components/UsersPageComp/UsersTable";
 import AddNewUser from "../../components/UsersPageComp/AddNewUser/AddNewUser";
 import FunctionalRoles from "../../components/UsersPageComp/FunctionalRoles/FunctionalRoles";
+import CreateRole from "../../components/UsersPageComp/CreateRole/CreateRole";
 
 const Users = () => {
   const [showAddNewUser, setShowAddNewUser] = useState(false);
   const [showFunctionalRoles, setShowFunctionalRoles] = useState(false);
+  const [showCreateRole, setShowCreateRole] = useState(false);
 
   return (
     <div className="relative pl-36">
@@ -33,10 +35,20 @@ const Users = () => {
           </Button>
         </div>
       </div>
+      {showCreateRole && (
+        <CreateRole
+          cancel={() => {
+            setShowCreateRole(false);
+          }}
+        ></CreateRole>
+      )}
       {showFunctionalRoles && (
         <FunctionalRoles
           cancel={() => {
             setShowFunctionalRoles(false);
+          }}
+          openCreateRole={() => {
+            setShowCreateRole(true);
           }}
         ></FunctionalRoles>
       )}

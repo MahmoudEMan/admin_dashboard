@@ -28,6 +28,9 @@ import { ReactComponent as Support } from "../../assets/Icons/icon-24-support.sv
 import { ReactComponent as Price } from "../../assets/Icons/icon-24-price.svg";
 import { ReactComponent as Setting } from "../../assets/Icons/icon-24-setting.svg";
 import { ReactComponent as DolarIcon } from "../../assets/Icons/dolar icon.svg";
+import { ReactComponent as CityIcon } from "../../assets/Icons/icon-24-city.svg";
+import { ReactComponent as EmailIcon } from "../../assets/Icons/icon-24- email.svg";
+import { ReactComponent as ReportIcon } from "../../assets/Icons/icon-24-report.svg";
 
 const StyledTreeItemRoot = styled(TreeItem)(({ theme }) => ({
   color: theme.palette.text.secondary,
@@ -457,7 +460,7 @@ const SideBar = () => {
             />
           }
         >
-          <Link to={"/"}>
+          <Link to={"/كوبونات_الخصم"}>
             <StyledTreeItem
               svg={
                 <GiPlainCircle
@@ -465,7 +468,7 @@ const SideBar = () => {
                 />
               }
               nodeId="19"
-              labelText="نشاط المتاجر"
+              labelText="كوبونات الخصم"
             />
           </Link>
         </StyledTreeItem>
@@ -484,7 +487,7 @@ const SideBar = () => {
             />
           }
         >
-          <Link to={"/"}>
+          <Link to={"/عرض_المناديب"}>
             <StyledTreeItem
               svg={
                 <GiPlainCircle
@@ -495,7 +498,7 @@ const SideBar = () => {
               labelText="عرض المناديب"
             />
           </Link>
-          <Link to={"/"}>
+          <Link to={"/حالة_تسجيل_المندوبين"}>
             <StyledTreeItem
               svg={
                 <GiPlainCircle
@@ -545,7 +548,7 @@ const SideBar = () => {
             />
           </Link>
         </StyledTreeItem>
-        <Link className="single_link" to={"/"}>
+        <Link className="single_link" to={"/الطلبات"}>
           <StyledTreeItem
             nodeId="26"
             labelText="الطلبات"
@@ -569,7 +572,7 @@ const SideBar = () => {
             }
           ></StyledTreeItem>
         </Link>
-        <Link className="single_link" to={"/"}>
+        <Link className="single_link" to={"/الدعم_الفنى"}>
           <StyledTreeItem
             nodeId="28"
             labelText="الدعم الفنى"
@@ -596,11 +599,82 @@ const SideBar = () => {
             />
           }
         >
-          <Link to={"/"}>
-            <StyledTreeItem nodeId="30" label="الواجهة" />
+          <Link to={"/الاعدادت_الأساسية"}>
+            <StyledTreeItem
+              svg={
+                <GiPlainCircle
+                  style={{ marginLeft: 5, height: "1.2rem", zIndex: "10" }}
+                />
+              }
+              nodeId="30"
+              labelText="الاعدادات الأساسية"
+            />
           </Link>
-          <Link to={"/"}>
-            <StyledTreeItem nodeId="31" label="المستخدمين" />
+          <Link to={"/الدول"}>
+            <StyledTreeItem
+              svg={
+                <CityIcon
+                  style={{ marginLeft: 5, height: "1.2rem", zIndex: "10" }}
+                />
+              }
+              nodeId="31"
+              labelText="الدول"
+            />
+          </Link>
+          <Link to={"/المدن"}>
+            <StyledTreeItem
+              svg={
+                <CityIcon
+                  style={{ marginLeft: 5, height: "1.2rem", zIndex: "10" }}
+                />
+              }
+              nodeId="32"
+              labelText="المدن"
+            />
+          </Link>
+          <Link to={"/العملات"}>
+            <StyledTreeItem
+              svg={
+                <DolarIcon
+                  style={{ marginLeft: 5, height: "1.2rem", zIndex: "10" }}
+                />
+              }
+              nodeId="40"
+              labelText="العملات"
+            />
+          </Link>
+          <Link to={"/البريد"}>
+            <StyledTreeItem
+              svg={
+                <EmailIcon
+                  style={{ marginLeft: 5, height: "1.2rem", zIndex: "10" }}
+                />
+              }
+              nodeId="41"
+              labelText="البريد"
+            />
+          </Link>
+          <Link to={"/التقارير"}>
+            <StyledTreeItem
+              svg={
+                <ReportIcon
+                  style={{ marginLeft: 5, height: "1.2rem", zIndex: "10" }}
+                />
+              }
+              nodeId="42"
+              labelText="التقارير"
+            />
+          </Link>
+          <Link to={"/التواصل_الاجتماعى"}>
+            <StyledTreeItem
+              svg={
+                <GiPlainCircle
+                  style={{ marginLeft: 5, height: "1.2rem", zIndex: "10" }}
+                />
+              }
+              nodeId="43"
+              labelText="التواصل الإجتماعى"
+            />
           </Link>
         </StyledTreeItem>
       </TreeView>

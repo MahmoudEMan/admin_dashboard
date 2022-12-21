@@ -241,7 +241,7 @@ const PartitionsSections = () => {
               </Select>
             </div>
           </TabPanel>
-          <TabPanel value="2">
+          <TabPanel value="2" className="pr-0">
             <div className="mb-5">
               <h2 className="mb-2" style={{ color: "#011723" }}>
                 اسم القسم
@@ -366,7 +366,7 @@ const PartitionsSections = () => {
               </Select>
             </div>
           </TabPanel>
-          <TabPanel value="3">
+          <TabPanel value="3" className="pr-0">
             <div className="mb-5">
               <h2 className="mb-2" style={{ color: "#011723" }}>
                 اسم القسم
