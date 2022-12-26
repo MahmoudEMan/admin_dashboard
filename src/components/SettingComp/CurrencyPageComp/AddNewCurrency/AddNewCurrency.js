@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Currency } from "../../../../assets/Icons/index";
 import Button from "../../../../UI/Button/Button";
+import Context from "../../../../store/context";
 import styles from "./AddNewCurrency.module.css";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -34,6 +35,8 @@ const formInputStyle = {
 };
 
 const AddNewCurrency = ({ cancel, data }) => {
+  const contextStore = useContext(Context);
+  const { setEndActionTitle } = contextStore;
   const [images, setImages] = useState([]);
 
   const [countryNumber, setCountryNumber] = useState("");
@@ -198,6 +201,10 @@ const AddNewCurrency = ({ cancel, data }) => {
               className={"h-14 w-44"}
               style={{ backgroundColor: `rgba(2, 70, 106, 1)` }}
               type={"normal"}
+              onClick={() => {
+                setEndActionTitle("تم اضافة عملة جديدة بنجاح");
+                cancel();
+              }}
             >
               حفظ
             </Button>

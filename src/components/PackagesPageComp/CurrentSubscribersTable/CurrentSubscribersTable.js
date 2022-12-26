@@ -23,6 +23,16 @@ import { BsTrash } from "react-icons/bs";
 import { HiOutlineMail } from "react-icons/hi";
 import { FiSend } from "react-icons/fi";
 import { ReactComponent as SortIcon } from "../../../assets/Icons/icon-24-sort.svg";
+import { ReactComponent as CheckedSquare } from "../../../assets/Icons/icon-24-square checkmark.svg";
+import { ReactComponent as SwitchIcon } from "../../../assets/Icons/icon-38-switch.svg";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import {
+  MdOutlineKeyboardArrowDown,
+  MdOutlineArrowBackIosNew,
+  MdOutlineArrowForwardIos,
+} from "react-icons/md";
+
 import { Gift } from "../../../assets/Icons/index";
 import { BsStarFill, BsStarHalf } from "react-icons/bs";
 
@@ -174,6 +184,7 @@ function EnhancedTableHead(props) {
             {!headCell.sort && headCell.label}
           </TableCell>
         ))}
+        <TableCell padding={"none"}></TableCell>
       </TableRow>
     </TableHead>
   );
@@ -204,38 +215,73 @@ function EnhancedTableToolbar(props) {
             ),
         }),
         display: "flex",
-        justifyContent: "space-between",
+        gap: "2rem",
+        justifyContent: "flex-end",
       }}
     >
       <div className="flex gap-2 items-center">
-        <div></div>
         {numSelected > 0 && (
-          <Tooltip onClick={onClick} title="Delete">
-            <IconButton>
-              <DeleteIcon />
-            </IconButton>
-          </Tooltip>
-        )}
-
-        {numSelected > 0 && (
-          <Typography
-            sx={{}}
-            color="inherit"
-            variant="subtitle1"
-            component="div"
+          <div
+            className="fcc gap-4 px-4 rounded-full"
+            style={{
+              width: "114px",
+              backgroundColor: "rgba(255, 159, 26, 0.04)",
+            }}
           >
-            {numSelected} selected
-          </Typography>
+            <Box
+              sx={{
+                "& #Path_820": {
+                  fill: "#FF9F1A",
+                },
+              }}
+            >
+              <SwitchIcon
+                style={{
+                  cursor: "pointer",
+                  color: "red",
+                  fontSize: "0.5rem",
+                }}
+                className={"w-5"}
+              ></SwitchIcon>
+            </Box>
+            <h2 className={"font-semibold"} style={{ color: "#FF9F1A" }}>
+              تعطيل
+            </h2>
+          </div>
+        )}
+        {numSelected > 0 && (
+          <div
+            className="fcc gap-2 px-4 rounded-full"
+            style={{
+              width: "114px",
+              backgroundColor: "rgba(255, 56, 56, 0.1)",
+            }}
+          >
+            <IconButton>
+              <BsTrash
+                style={{
+                  cursor: "pointer",
+                  color: "red",
+                  fontSize: "1rem",
+                }}
+              ></BsTrash>
+            </IconButton>
+            <h2 className={"font-semibold"} style={{ color: "#FF3838" }}>
+              حذف
+            </h2>
+          </div>
         )}
       </div>
 
       <div className="flex items-center">
         <h2 className="font-medium">تحديد الكل</h2>
         <Checkbox
+          checkedIcon={<CheckedSquare />}
           sx={{
-            color: "#1DBBBE",
+            pr: "0",
+            color: "#011723",
             "& .MuiSvgIcon-root": {
-              color: "#1DBBBE",
+              color: "#011723",
             },
           }}
           indeterminate={numSelected > 0 && numSelected < rowCount}
@@ -259,9 +305,18 @@ export default function EnhancedTable({ openTraderAlert }) {
   const [orderBy, setOrderBy] = React.useState("calories");
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
-
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [data, setData] = React.useState(rows);
-  const [rowsPerPage, setRowsPerPage] = React.useState(data.length);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+
+  const rowsPerPagesCount = [10, 20, 30, 50, 100];
+  const handleRowsClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -322,9 +377,24 @@ export default function EnhancedTable({ openTraderAlert }) {
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
+  const allRows = () => {
+    const num = Math.ceil(data.length / rowsPerPage);
+    const arr = [];
+    for (let index = 0; index < num; index++) {
+      arr.push(index + 1);
+    }
+    return arr;
+  };
+
   return (
     <Box sx={{ width: "100%" }}>
       <Paper sx={{ width: "100%", mb: 2 }}>
+        <EnhancedTableToolbar
+          onClick={deleteItems}
+          numSelected={selected.length}
+          rowCount={data.length}
+          onSelectAllClick={handleSelectAllClick}
+        />
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}
@@ -414,6 +484,22 @@ export default function EnhancedTable({ openTraderAlert }) {
                           useGrouping: false,
                         })}
                       </TableCell>
+                      <TableCell padding="none" align={"right"}>
+                        <Checkbox
+                          checkedIcon={<CheckedSquare />}
+                          sx={{
+                            color: "#011723",
+                            "& .MuiSvgIcon-root": {
+                              color: "#011723",
+                            },
+                          }}
+                          checked={isItemSelected}
+                          onClick={(event) => handleClick(event, row.name)}
+                          inputProps={{
+                            "aria-labelledby": labelId,
+                          }}
+                        />
+                      </TableCell>
                     </TableRow>
                   );
                 })}
@@ -421,6 +507,101 @@ export default function EnhancedTable({ openTraderAlert }) {
           </Table>
         </TableContainer>
       </Paper>
+      <div className="flex items-center justify-between">
+        <div
+          className="flex items-center gap-2 p-2 rounded-md"
+          style={{ border: "1px solid #2D62ED" }}
+        >
+          <div
+            id="basic-button"
+            aria-controls={open ? "basic-menu" : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? "true" : undefined}
+            onClick={handleRowsClick}
+            className={
+              "h-9 w-9 rounded-sm flex justify-center items-center cursor-pointer"
+            }
+            style={{ backgroundColor: "#0099FB" }}
+          >
+            <MdOutlineKeyboardArrowDown
+              color="#fff"
+              fontSize={"1.5rem"}
+            ></MdOutlineKeyboardArrowDown>
+          </div>
+          <Menu
+            id="basic-menu"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            MenuListProps={{
+              "aria-labelledby": "basic-button",
+            }}
+          >
+            {rowsPerPagesCount.map((rowsPer, rowsIdx) => {
+              return (
+                <MenuItem
+                  value={rowsPer}
+                  onClick={(e) => {
+                    handleChangeRowsPerPage(e);
+                    handleClose();
+                  }}
+                  key={rowsIdx}
+                  sx={{
+                    backgroundColor: "#FFEEEE",
+                    "ul:has(&)": {
+                      p: 0,
+                    },
+                    "ul:has(&) li:hover": {
+                      backgroundColor: "#C6E1F0",
+                    },
+                  }}
+                >
+                  {rowsPer}
+                </MenuItem>
+              );
+            })}
+          </Menu>
+          <h2 className="font-medium" style={{ color: "#0077FF" }}>
+            عدد الصفوف
+          </h2>
+        </div>
+        <div className="flex gap-6 items-center">
+          <MdOutlineArrowBackIosNew
+            className="cursor-pointer"
+            style={{ visibility: page === 0 && "hidden" }}
+            onClick={() => {
+              setPage(page - 1);
+            }}
+          ></MdOutlineArrowBackIosNew>
+
+          <div className="flex gap-4">
+            {allRows().map((item, itemIdx) => {
+              return (
+                <div
+                  className="cursor-pointer font-medium rounded-lg flex justify-center items-center w-6 h-6"
+                  style={{
+                    backgroundColor: item === page + 1 && "#508FF4",
+                    color: item === page + 1 && "#fff",
+                  }}
+                  onClick={() => {
+                    setPage(itemIdx);
+                  }}
+                >
+                  {item}
+                </div>
+              );
+            })}
+          </div>
+          <MdOutlineArrowForwardIos
+            className="cursor-pointer"
+            style={{ visibility: page + 1 === allRows().length && "hidden" }}
+            onClick={() => {
+              setPage(page + 1);
+            }}
+          ></MdOutlineArrowForwardIos>
+        </div>
+        <div></div>
+      </div>
     </Box>
   );
 }

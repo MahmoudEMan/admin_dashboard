@@ -44,14 +44,17 @@ const rows = [
   createData(true, true, true, true, true, true, false),
 ];
 
-const Plans = ({ yearlyPlan }) => {
+const Plans = ({ yearlyPlan, editPackage, editPackageTemplate }) => {
   return (
     <div>
       <div className="flex gap-4 items-center">
         {rows.map((row, idx) => {
           const proPackage = idx === 1 ? styles.pro : styles.normal;
           return (
-            <div className={`flex-1 p-5 shadow-xl rounded-lg ${proPackage}`}>
+            <div
+              key={idx}
+              className={`flex-1 p-5 shadow-xl rounded-lg ${proPackage}`}
+            >
               <div className="py-6 ">
                 <h2 className="flex items-center text-xl font-medium gap-4 mb-6 justify-center">
                   {title[idx]}
@@ -93,6 +96,9 @@ const Plans = ({ yearlyPlan }) => {
                 className={`mb-2 w-full ${idx === 1 ? "bg-slate-50" : ""} `}
                 style={{ borderColor: idx === 1 ? "" : "#0099FB" }}
                 textStyle={{ color: "#0099FB" }}
+                onClick={() => {
+                  editPackage(row);
+                }}
               >
                 تعديل خصائص الباقة
               </Button>
@@ -102,6 +108,9 @@ const Plans = ({ yearlyPlan }) => {
                 type={"outline"}
                 style={{ borderColor: idx === 1 ? "" : "#67747B" }}
                 textStyle={{ color: idx === 1 ? "#fff" : "#67747B" }}
+                onClick={() => {
+                  editPackageTemplate();
+                }}
               >
                 عرض قوالب الباقة
               </Button>

@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import Button from "../../../../UI/Button/Button";
+import Context from "../../../../store/context";
 
 const BackDrop = ({ onClick }) => {
   return (
@@ -12,6 +13,8 @@ const BackDrop = ({ onClick }) => {
 };
 
 const AddAnActivity = ({ cancel }) => {
+  const contextStore = useContext(Context);
+  const { setEndActionTitle } = contextStore;
   return (
     <>
       <BackDrop onClick={cancel} />
@@ -33,7 +36,7 @@ const AddAnActivity = ({ cancel }) => {
         </div>
         <div
           className="flex-1 px-44 pt-10"
-          style={{ backgroundColor: "rgb(246,246,246)" }}
+          style={{ backgroundColor: "#FFFFFF" }}
         >
           <h2 className="font-medium">اسم النشاط</h2>
           <label>
@@ -58,6 +61,10 @@ const AddAnActivity = ({ cancel }) => {
               className={"text-center w-full mt-12"}
               style={{ borderColor: "#02466A" }}
               textStyle={{ color: "#02466A" }}
+              onClick={() => {
+                setEndActionTitle("تم إضافة نشاط جديد بنجاح");
+                cancel();
+              }}
             >
               حفظ
             </Button>

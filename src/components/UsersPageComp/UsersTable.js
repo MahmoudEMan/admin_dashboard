@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import { ReactComponent as Search } from "../../assets/Icons/icon_24_search.svg";
 import TableComp from "./TableComp/TableComp";
 import UserInfo from "./UserInfo/UserInfo";
 import { IoIosArrowDown } from "react-icons/io";
@@ -58,9 +57,13 @@ const UsersTable = () => {
                 <MenuItem
                   className="souq_storge_category_filter_items"
                   sx={{
-                    backgroundColor: "rgba(211, 211, 211, 1)",
+                    backgroundColor: "#EBEBEB",
                     height: "3rem",
                     "&:hover": {},
+                    "ul:has(&) li:hover": {
+                      backgroundColor: "rgba(29, 187, 190, 1)",
+                      color: "#fff",
+                    },
                   }}
                   value={`${item}`}
                 >

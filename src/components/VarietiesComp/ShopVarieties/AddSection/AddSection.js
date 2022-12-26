@@ -27,27 +27,15 @@ const formInputStyle = {
   width: "555px",
   border: "1px solid rgba(167, 167, 167, 0.5)",
 };
-const NewProduct = ({ cancel }) => {
+const NewProduct = ({ cancel, data }) => {
   const [age, setAge] = useState("");
-  const [tagsSelected, setTagsSelected] = useState([]);
-  const [images, setImages] = useState([]);
   const [multiImages, setMultiImages] = useState([]);
-  console.log(multiImages);
 
   const emptyMultiImages = [];
   for (let index = 0; index < 5 - multiImages.length; index++) {
     emptyMultiImages.push(index);
   }
-  console.log(images);
-  const maxNumber = 2;
-  const onChange = (imageList, addUpdateIndex) => {
-    // data for submit
-    setImages(imageList);
-  };
-  const onChangeMultiImages = (imageList, addUpdateIndex) => {
-    // data for submit
-    setMultiImages(imageList);
-  };
+
   const handleCategory = (event) => {
     setAge(event.target.value);
   };

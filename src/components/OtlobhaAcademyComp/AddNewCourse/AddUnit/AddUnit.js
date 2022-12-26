@@ -1,15 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Currency } from "../../../../assets/Icons/index";
+import { ReactComponent as AddIcon } from "../../../../assets/Icons/icon-34-add.svg";
+
 import Button from "../../../../UI/Button/Button";
+import Context from "../../../../store/context";
+
 import styles from "./AddUnit.module.css";
 import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import { TagsInput } from "react-tag-input-component";
-import ImageUploading from "react-images-uploading";
-import { IoMdCloudUpload } from "react-icons/io";
-import { GrAddCircle } from "react-icons/gr";
-import { TiDeleteOutline } from "react-icons/ti";
+import Box from "@mui/material/Box";
+
 import { GrAttachment } from "react-icons/gr";
 
 const BackDrop = ({ onClick }) => {
@@ -32,11 +31,25 @@ const formInputStyle = {
   border: "1px solid rgba(167, 167, 167, 0.5)",
 };
 
-const AddUnit = ({ cancel }) => {
-  const [age, setAge] = useState("");
-  const [tagsSelected, setTagsSelected] = useState([]);
+const AddUnit = ({ cancel, cancelAll }) => {
+  const contextStore = useContext(Context);
+  const { setEndActionTitle } = contextStore;
   const [images, setImages] = useState([]);
   const [multiImages, setMultiImages] = useState([]);
+  const inputRef = React.useRef();
+
+  const [source, setSource] = React.useState(null);
+  console.log(source?.name);
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    console.log(file);
+    const url = URL.createObjectURL(file);
+    setSource(url);
+  };
+
+  const handleChoose = (event) => {
+    inputRef.current.click();
+  };
   console.log(multiImages);
 
   const emptyMultiImages = [];
@@ -44,18 +57,7 @@ const AddUnit = ({ cancel }) => {
     emptyMultiImages.push(index);
   }
   console.log(images);
-  const maxNumber = 2;
-  const onChange = (imageList, addUpdateIndex) => {
-    // data for submit
-    setImages(imageList);
-  };
-  const onChangeMultiImages = (imageList, addUpdateIndex) => {
-    // data for submit
-    setMultiImages(imageList);
-  };
-  const handleCategory = (event) => {
-    setAge(event.target.value);
-  };
+
   return (
     <>
       <BackDrop onClick={cancel}></BackDrop>
@@ -71,10 +73,8 @@ const AddUnit = ({ cancel }) => {
               backgroundColor: "rgba(235, 235, 235, 1)",
             }}
           >
-            <h2 className="font-semibold text-2xl  mb-3">
-              اضافة منتج جديد للسوق
-            </h2>
-            <h2>أدخل بيانات المنتج ليتم اضافته في منتجات سوق اطلبها</h2>
+            <h2 className="font-semibold text-2xl  mb-3">اضافة وحدة</h2>
+            <h2>اضف وحدة جديدة للكورس</h2>
           </div>
           <div
             className={`flex-1 overflow-y-scroll py-12 pr-8 ${styles.content}`}
@@ -116,12 +116,114 @@ const AddUnit = ({ cancel }) => {
               </div>
               <div className="flex mb-8">
                 <h2 className={formTitleClasses} style={formTitleStyle}>
-                  إضافة فيديو
+                  إضافة درس
                 </h2>
                 <div>
-                  <div>
-                    <input type="text" />
-                    <h2>zed</h2>
+                  <div className="flex gap-5 mb-5" style={{ width: "555px" }}>
+                    <div style={{ width: "392px" }}>
+                      <input
+                        ref={inputRef}
+                        className="hidden"
+                        type="file"
+                        onChange={handleFileChange}
+                        accept=".mov,.mp4"
+                      />
+                      <div
+                        className="fcc p-3 gap-4  cursor-pointer"
+                        style={{
+                          width: "392px",
+                          height: "56px",
+                          backgroundColor: "#02466A00",
+                          border: "1px solid #A7A7A7",
+                        }}
+                        onClick={handleChoose}
+                      >
+                        {!source && (
+                          <>
+                            <Box
+                              sx={{
+                                "& svg": {
+                                  width: "24px",
+                                },
+                                "& circle": { fill: "#ADB5B9" },
+                              }}
+                            >
+                              <AddIcon></AddIcon>
+                            </Box>
+                            <h2 style={{ color: "#ADB5B9" }}>
+                              اضف درس جديد للوحدة
+                            </h2>
+                          </>
+                        )}
+                        {source && (
+                          <h2 style={{ color: "#ADB5B9" }}>{source.name}</h2>
+                        )}
+                      </div>
+                    </div>
+                    <div
+                      className="flex-1 fcc p-3 gap-4  cursor-pointer"
+                      style={{
+                        width: "392px",
+                        height: "56px",
+                        backgroundColor: "#02466A00",
+                        border: "1px solid #A7A7A7",
+                      }}
+                    >
+                      <h2 style={{ color: "#ADB5B9" }}>0 دقيقة</h2>
+                    </div>
+                  </div>
+                  <div className="flex gap-5" style={{ width: "555px" }}>
+                    <div style={{ width: "392px" }}>
+                      <input
+                        ref={inputRef}
+                        className="hidden"
+                        type="file"
+                        onChange={handleFileChange}
+                        accept=".mov,.mp4"
+                      />
+                      <div
+                        className="fcc p-3 gap-4  cursor-pointer"
+                        style={{
+                          width: "392px",
+                          height: "56px",
+                          backgroundColor: "#02466A00",
+                          border: "1px dashed #A7A7A7",
+                        }}
+                        onClick={handleChoose}
+                      >
+                        {!source && (
+                          <>
+                            <Box
+                              sx={{
+                                "& svg": {
+                                  width: "24px",
+                                },
+                                "& circle": { fill: "#ADB5B9" },
+                              }}
+                            >
+                              <AddIcon></AddIcon>
+                            </Box>
+                            <h2 style={{ color: "#ADB5B9" }}>
+                              اضف درس جديد للوحدة
+                            </h2>
+                          </>
+                        )}
+                        {source && (
+                          <h2 style={{ color: "#ADB5B9" }}>{source?.name}</h2>
+                        )}
+                      </div>
+                    </div>
+                    <div
+                      className="flex-1 fcc p-3 gap-4  cursor-pointer"
+                      style={{
+                        width: "392px",
+                        height: "56px",
+                        backgroundColor: "#02466A00",
+                        border: "1px dashed #A7A7A7",
+                      }}
+                    >
+                      <h2 style={{ color: "#ADB5B9" }}>0 دقيقة</h2>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -138,6 +240,11 @@ const AddUnit = ({ cancel }) => {
               className={"h-14 w-44"}
               style={{ backgroundColor: `rgba(2, 70, 106, 1)` }}
               type={"normal"}
+              onClick={() => {
+                setEndActionTitle("تم اضافة كورس جديد بنجاح");
+                cancel();
+                cancelAll();
+              }}
             >
               حفظ
             </Button>

@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Currency } from "../../../../assets/Icons/index";
+import Context from "../../../../store/context";
 import Button from "../../../../UI/Button/Button";
 import styles from "./AddCity.module.css";
 import MenuItem from "@mui/material/MenuItem";
@@ -39,6 +40,8 @@ const formInputStyle = {
 };
 
 const AddCountry = ({ cancel, data }) => {
+  const contextStore = useContext(Context);
+  const { setEndActionTitle } = contextStore;
   const [countryNumber, setCountryNumber] = useState("");
 
   const [cityNumber, setCityNumber] = useState("");
@@ -245,6 +248,14 @@ const AddCountry = ({ cancel, data }) => {
               className={"h-14 w-44"}
               style={{ backgroundColor: `rgba(2, 70, 106, 1)` }}
               type={"normal"}
+              onClick={() => {
+                setEndActionTitle(
+                  data
+                    ? "تم تعديل بيانات المدينة بنجاح"
+                    : "تم اضافة مدينة بنجاح"
+                );
+                cancel();
+              }}
             >
               حفظ واعتماد
             </Button>

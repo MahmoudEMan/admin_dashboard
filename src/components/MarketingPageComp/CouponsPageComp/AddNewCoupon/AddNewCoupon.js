@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
@@ -6,6 +6,7 @@ import Grid from "@mui/material/Grid";
 import { AiFillStar } from "react-icons/ai";
 import Select from "@mui/material/Select";
 import Button from "../../../../UI/Button/Button";
+import Context from "../../../../store/context";
 import styles from "./AddNewCoupon.module.css";
 import MenuItem from "@mui/material/MenuItem";
 import { GoArrowRight } from "react-icons/go";
@@ -29,6 +30,8 @@ const packagesOptions = [
 ];
 
 const AddNewUser = ({ cancel, couponDetails }) => {
+  const contextStore = useContext(Context);
+  const { setEndActionTitle } = contextStore;
   const [couponTypePercent, setCouponTypePercent] = useState(true);
   const [value, setValue] = useState(dayjs("0"));
   const [couponCode, setCouponCode] = useState("");
@@ -71,6 +74,14 @@ const AddNewUser = ({ cancel, couponDetails }) => {
         <Button
           type={"normal"}
           style={{ backgroundColor: couponDetails ? "#67747B" : "#B6BE34" }}
+          onClick={() => {
+            setEndActionTitle(
+              couponDetails
+                ? "تم تعديل كوبون  بنجاح"
+                : "تم اضافة كوبون جديد بنجاح"
+            );
+            cancel();
+          }}
         >
           {" "}
           {couponDetails ? "تعديل الكوبون" : "اعتماد الكوبون"}

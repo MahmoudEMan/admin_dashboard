@@ -497,6 +497,15 @@ export default function EnhancedTable({ setDataRow }) {
                     handleClose();
                   }}
                   key={rowsIdx}
+                  sx={{
+                    backgroundColor: "#FFEEEE",
+                    "ul:has(&)": {
+                      p: 0,
+                    },
+                    "ul:has(&) li:hover": {
+                      backgroundColor: "#C6E1F0",
+                    },
+                  }}
                 >
                   {rowsPer}
                 </MenuItem>

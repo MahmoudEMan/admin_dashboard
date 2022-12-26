@@ -9,6 +9,7 @@ import NewProduct from "../../../components/SouqOtlobhaComp/NewProduct/NewProduc
 const SouqOtlobha = () => {
   const [showFilteringOptions, setShowFilteringOptions] = useState(false);
   const [showNewProductInfo, setShowNewProductInfo] = useState(false);
+  const [editProduct, setEditProduct] = useState(null);
   return (
     <div className={`p-4 pl-36`} style={{ backgroundColor: "#fafafa" }}>
       <div className="flex items-center justify-between">
@@ -32,6 +33,7 @@ const SouqOtlobha = () => {
           <Button
             onClick={() => {
               setShowNewProductInfo(true);
+              setEditProduct(false);
             }}
             type={"normal"}
             img={Product}
@@ -48,6 +50,7 @@ const SouqOtlobha = () => {
           cancel={() => {
             setShowNewProductInfo(false);
           }}
+          editProduct={editProduct}
         />
       )}
       <div>
@@ -59,7 +62,12 @@ const SouqOtlobha = () => {
         ></FilteringOptions>
       </div>
       <div className="mt-4" dir="ltr">
-        <ProductsTable />
+        <ProductsTable
+          editProduct={(item) => {
+            setEditProduct(item);
+            setShowNewProductInfo(true);
+          }}
+        />
       </div>
     </div>
   );

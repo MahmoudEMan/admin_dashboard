@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Button from "../../../UI/Button/Button";
 import CitiesComp from "../../../components/SettingComp/CitiesPageComp/CitiesComp/CitiesComp";
 import AddCity from "../../../components/SettingComp/CitiesPageComp/AddCity/AddCity";
-import FunctionalRoles from "../../../components/UsersPageComp/FunctionalRoles/FunctionalRoles";
 import { AiOutlinePlus } from "react-icons/ai";
 
 const CitiesPage = () => {

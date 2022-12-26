@@ -6,6 +6,7 @@ import AddNewPackagePlan from "../../components/PackagesPageComp/AddNewPackagePl
 
 const Packages = () => {
   const [openNewPackage, setOpenNewPackage] = useState(false);
+  const [editPackageDetails, setEditPackageDetails] = useState(null);
   return (
     <div className={`p-4 relative`} style={{ backgroundColor: "#fafafa" }}>
       <div className="flex justify-end ">
@@ -15,6 +16,7 @@ const Packages = () => {
           type={"normal"}
           onClick={() => {
             setOpenNewPackage(true);
+            setEditPackageDetails(null);
           }}
         >
           إضافة باقة جديدة
@@ -25,9 +27,15 @@ const Packages = () => {
           cancel={() => {
             setOpenNewPackage(false);
           }}
+          editPackageDetails={editPackageDetails}
         ></AddNewPackagePlan>
       )}
-      <PackagesTypes></PackagesTypes>
+      <PackagesTypes
+        editPackage={(row) => {
+          setOpenNewPackage(true);
+          setEditPackageDetails(row);
+        }}
+      ></PackagesTypes>
     </div>
   );
 };

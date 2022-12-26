@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import Context from "../../../../store/context";
 import { Currency } from "../../../../assets/Icons/index";
 import Button from "../../../../UI/Button/Button";
 import styles from "./AddCountry.module.css";
@@ -34,6 +35,8 @@ const formInputStyle = {
 };
 
 const AddCountry = ({ cancel, data }) => {
+  const contextStore = useContext(Context);
+  const { setEndActionTitle } = contextStore;
   const [countryNumber, setCountryNumber] = useState("");
   const [arabicCountryName, setArabicCountryName] = useState("");
   const [englishCountryName, setEnglishCountryName] = useState("");
@@ -176,6 +179,12 @@ const AddCountry = ({ cancel, data }) => {
               className={"h-14 w-44"}
               style={{ backgroundColor: `rgba(2, 70, 106, 1)` }}
               type={"normal"}
+              onClick={() => {
+                setEndActionTitle(
+                  data ? "تم تعديل بيانات الدولة بنجاح" : "تم اضافة دولة بنجاح"
+                );
+                cancel();
+              }}
             >
               حفظ واعتماد
             </Button>

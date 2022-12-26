@@ -213,7 +213,7 @@ function EnhancedTableToolbar(props) {
     >
       <div className="flex gap-8 items-center">
         {numSelected > 0 && (
-          <Tooltip onClick={onClick} title="Delete">
+          <Tooltip title="Delete">
             <div
               className="fbc px-2 rounded-full"
               style={{ width: "134px", backgroundColor: "#FF38380A" }}

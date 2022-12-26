@@ -4,11 +4,13 @@ import UsersTable from "../../components/UsersPageComp/UsersTable";
 import AddNewUser from "../../components/UsersPageComp/AddNewUser/AddNewUser";
 import FunctionalRoles from "../../components/UsersPageComp/FunctionalRoles/FunctionalRoles";
 import CreateRole from "../../components/UsersPageComp/CreateRole/CreateRole";
+import EditRole from "../../components/UsersPageComp/EditRole/EditRole";
 
 const Users = () => {
   const [showAddNewUser, setShowAddNewUser] = useState(false);
   const [showFunctionalRoles, setShowFunctionalRoles] = useState(false);
   const [showCreateRole, setShowCreateRole] = useState(false);
+  const [showEditRole, setShowEditRole] = useState(null);
 
   return (
     <div className="relative pl-36">
@@ -42,6 +44,15 @@ const Users = () => {
           }}
         ></CreateRole>
       )}
+      {showEditRole && (
+        <EditRole
+          cancel={() => {
+            setShowEditRole(false);
+          }}
+          role={showEditRole}
+        ></EditRole>
+      )}
+
       {showFunctionalRoles && (
         <FunctionalRoles
           cancel={() => {
@@ -49,6 +60,9 @@ const Users = () => {
           }}
           openCreateRole={() => {
             setShowCreateRole(true);
+          }}
+          EditRole={(role) => {
+            setShowEditRole(role);
           }}
         ></FunctionalRoles>
       )}

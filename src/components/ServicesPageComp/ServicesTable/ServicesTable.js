@@ -17,10 +17,12 @@ import Checkbox from "@mui/material/Checkbox";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { ReactComponent as SwitchIcon } from "../../../assets/Icons/icon-38-switch.svg";
 
 import { HiOutlineMail } from "react-icons/hi";
 import { visuallyHidden } from "@mui/utils";
 import { BsTrash } from "react-icons/bs";
+import { ReactComponent as CheckedSquare } from "../../../assets/Icons/icon-24-square checkmark.svg";
 
 function createData(name, amount) {
   return {
@@ -179,38 +181,44 @@ function EnhancedTableToolbar(props) {
             ),
         }),
         display: "flex",
-        justifyContent: "space-between",
+        gap: "2rem",
+        justifyContent: "flex-end",
       }}
     >
       <div className="flex gap-2 items-center">
-        <div></div>
         {numSelected > 0 && (
-          <Tooltip onClick={onClick} title="Delete">
-            <IconButton>
-              <DeleteIcon />
-            </IconButton>
-          </Tooltip>
-        )}
-
-        {numSelected > 0 && (
-          <Typography
-            sx={{}}
-            color="inherit"
-            variant="subtitle1"
-            component="div"
+          <div
+            className="fcc gap-2 px-4 rounded-full"
+            style={{
+              width: "114px",
+              backgroundColor: "rgba(255, 56, 56, 0.1)",
+            }}
           >
-            {numSelected} selected
-          </Typography>
+            <IconButton>
+              <BsTrash
+                style={{
+                  cursor: "pointer",
+                  color: "red",
+                  fontSize: "1rem",
+                }}
+              ></BsTrash>
+            </IconButton>
+            <h2 className={"font-semibold"} style={{ color: "#FF3838" }}>
+              حذف
+            </h2>
+          </div>
         )}
       </div>
 
       <div className="flex items-center">
         <h2 className="font-medium">تحديد الكل</h2>
         <Checkbox
+          checkedIcon={<CheckedSquare />}
           sx={{
-            color: "#1DBBBE",
+            pr: "0",
+            color: "#011723",
             "& .MuiSvgIcon-root": {
-              color: "#1DBBBE",
+              color: "#011723",
             },
           }}
           indeterminate={numSelected > 0 && numSelected < rowCount}
@@ -300,6 +308,12 @@ export default function EnhancedTable() {
   return (
     <Box sx={{ width: "100%" }}>
       <Paper sx={{ width: "100%", mb: 2 }}>
+        <EnhancedTableToolbar
+          onClick={deleteItems}
+          numSelected={selected.length}
+          rowCount={data.length}
+          onSelectAllClick={handleSelectAllClick}
+        />
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}
@@ -376,6 +390,22 @@ export default function EnhancedTable() {
                           minimumIntegerDigits: 2,
                           useGrouping: false,
                         })}
+                      </TableCell>
+                      <TableCell padding="none" align={"right"}>
+                        <Checkbox
+                          checkedIcon={<CheckedSquare />}
+                          sx={{
+                            color: "#011723",
+                            "& .MuiSvgIcon-root": {
+                              color: "#011723",
+                            },
+                          }}
+                          checked={isItemSelected}
+                          onClick={(event) => handleClick(event, row.name)}
+                          inputProps={{
+                            "aria-labelledby": labelId,
+                          }}
+                        />
                       </TableCell>
                     </TableRow>
                   );

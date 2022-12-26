@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Button from "../../../../UI/Button/Button";
 import styles from "./AddVariety.module.css";
@@ -15,7 +15,6 @@ const BackDrop = ({ onClick }) => {
     ></div>
   );
 };
-const category = ["الكترونيات", "ألعاب وهدايا", "مستلزمات طبية", "مواد غذائية"];
 
 const formTitleClasses = "font-semibold text-lg";
 const formTitleStyle = { width: "315px" };
@@ -25,30 +24,28 @@ const formInputStyle = {
   width: "555px",
   border: "1px solid rgba(167, 167, 167, 0.5)",
 };
-const NewProduct = ({ cancel }) => {
-  const [age, setAge] = useState("");
-  const [tagsSelected, setTagsSelected] = useState([]);
+const NewProduct = ({ cancel, data }) => {
   const [images, setImages] = useState([]);
-  const [multiImages, setMultiImages] = useState([]);
-  console.log(multiImages);
 
-  const emptyMultiImages = [];
-  for (let index = 0; index < 5 - multiImages.length; index++) {
-    emptyMultiImages.push(index);
-  }
+  const [varietyNumber, setVarietyNumber] = useState("");
+  const [varietyName, setVarietyName] = useState("");
+
+  console.log(data);
+
+  useEffect(() => {
+    if (data) {
+      setVarietyNumber(data.number);
+      setVarietyName(data.name);
+    }
+  }, [data]);
+
   console.log(images);
   const maxNumber = 2;
   const onChange = (imageList, addUpdateIndex) => {
     // data for submit
     setImages(imageList);
   };
-  const onChangeMultiImages = (imageList, addUpdateIndex) => {
-    // data for submit
-    setMultiImages(imageList);
-  };
-  const handleCategory = (event) => {
-    setAge(event.target.value);
-  };
+
   return (
     <>
       <BackDrop onClick={cancel}></BackDrop>
@@ -77,62 +74,64 @@ const NewProduct = ({ cancel }) => {
                 <h2 className={formTitleClasses} style={formTitleStyle}>
                   صور المنتج الرئيسية
                 </h2>
-                <ImageUploading
-                  value={images}
-                  onChange={onChange}
-                  maxNumber={maxNumber}
-                  dataURLKey="data_url"
-                  acceptType={["jpg", "png", "jpeg"]}
-                >
-                  {({
-                    imageList,
-                    onImageUpload,
-                    onImageRemoveAll,
-                    onImageUpdate,
-                    onImageRemove,
-                    isDragging,
-                    dragProps,
-                  }) => (
-                    // write your building UI
-                    <div
-                      className="upload__image-wrapper relative overflow-hidden"
-                      style={{
-                        width: "555px",
-                        height: "170px",
-                        border: images[0] ? "none" : "3px dashed #ccc",
-                        borderRadius: "10px",
-                      }}
-                      onClick={() => {
-                        onImageUpload();
-                      }}
-                      {...dragProps}
-                    >
-                      <div className="image-item h-full w-full cursor-pointer">
-                        {/* <button
+                <div>
+                  <ImageUploading
+                    value={images}
+                    onChange={onChange}
+                    maxNumber={maxNumber}
+                    dataURLKey="data_url"
+                    acceptType={["jpg", "png", "jpeg"]}
+                  >
+                    {({
+                      imageList,
+                      onImageUpload,
+                      onImageRemoveAll,
+                      onImageUpdate,
+                      onImageRemove,
+                      isDragging,
+                      dragProps,
+                    }) => (
+                      // write your building UI
+                      <div
+                        className="upload__image-wrapper relative overflow-hidden"
+                        style={{
+                          width: "555px",
+                          height: "170px",
+                          border: images[0] ? "none" : "3px dashed #ccc",
+                          borderRadius: "10px",
+                        }}
+                        onClick={() => {
+                          onImageUpload();
+                        }}
+                        {...dragProps}
+                      >
+                        <div className="image-item h-full w-full cursor-pointer">
+                          {/* <button
                           style={isDragging ? { color: "red" } : null}
                           onClick={onImageUpload}
                           {...dragProps}
                         >
                           Click or Drop here
                         </button> */}
-                        {!images[0] && (
-                          <div className="flex flex-col justify-center items-center gap-6 h-full w-full">
-                            <IoMdCloudUpload size={"2em"}></IoMdCloudUpload>
-                            <h2 className="font-semibold">اسحب الصورة هنا</h2>
-                            <h2>(سيتم قبول الصور png & jpg)</h2>
-                          </div>
-                        )}
-                        {images[0] && (
-                          <img
-                            src={images[0]?.data_url}
-                            alt=""
-                            className="w-full h-full object-cover"
-                          />
-                        )}
+                          {!images[0] && (
+                            <div className="flex flex-col justify-center items-center gap-6 h-full w-full">
+                              <IoMdCloudUpload size={"2em"}></IoMdCloudUpload>
+                              <h2 className="font-semibold">اسحب الصورة هنا</h2>
+                              <h2>(سيتم قبول الصور png & jpg)</h2>
+                            </div>
+                          )}
+                          {images[0] && (
+                            <img
+                              src={images[0]?.data_url}
+                              alt=""
+                              className="w-full h-full object-cover"
+                            />
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  )}
-                </ImageUploading>
+                    )}
+                  </ImageUploading>
+                </div>
               </div>
               <div className="flex mb-8 items-center">
                 <h2 className={formTitleClasses} style={formTitleStyle}>
@@ -147,6 +146,10 @@ const NewProduct = ({ cancel }) => {
                 </h2>
                 <label>
                   <input
+                    value={varietyName}
+                    onChange={(e) => {
+                      setVarietyName(e.target.value);
+                    }}
                     className={formInputClasses}
                     style={formInputStyle}
                     placeholder="تلقائي"
@@ -168,6 +171,10 @@ const NewProduct = ({ cancel }) => {
                 </h2>
                 <label>
                   <input
+                    value={varietyNumber}
+                    onChange={(e) => {
+                      setVarietyNumber(e.target.value);
+                    }}
                     className={formInputClasses}
                     style={formInputStyle}
                     placeholder="ادخل اسم التصنيف"
@@ -189,6 +196,10 @@ const NewProduct = ({ cancel }) => {
                 </h2>
                 <label>
                   <input
+                    value={varietyName}
+                    onChange={(e) => {
+                      setVarietyName(e.target.value);
+                    }}
                     className={formInputClasses}
                     style={formInputStyle}
                     placeholder="اكتب ثم اضغط على'Enter' لإضافة قسم جديد"

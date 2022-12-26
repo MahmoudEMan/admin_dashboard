@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Currency } from "../../../assets/Icons/index";
 import Button from "../../../UI/Button/Button";
+import Context from "../../../store/context";
+
 import styles from "./NewService.module.css";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -10,6 +12,8 @@ import ImageUploading from "react-images-uploading";
 import { IoMdCloudUpload } from "react-icons/io";
 import { GrAddCircle } from "react-icons/gr";
 import { TiDeleteOutline } from "react-icons/ti";
+import { ReactComponent as AddIcon } from "../../../assets/Icons/icon-34-add.svg";
+import Box from "@mui/material/Box";
 
 const BackDrop = ({ onClick }) => {
   return (
@@ -32,6 +36,8 @@ const formInputStyle = {
 };
 
 const NewService = ({ cancel }) => {
+  const contextStore = useContext(Context);
+  const { setEndActionTitle } = contextStore;
   const [age, setAge] = useState("");
   const [tagsSelected, setTagsSelected] = useState([]);
   const [images, setImages] = useState([]);
@@ -70,10 +76,8 @@ const NewService = ({ cancel }) => {
               backgroundColor: "rgba(235, 235, 235, 1)",
             }}
           >
-            <h2 className="font-semibold text-2xl  mb-3">
-              اضافة منتج جديد للسوق
-            </h2>
-            <h2>أدخل بيانات المنتج ليتم اضافته في منتجات سوق اطلبها</h2>
+            <h2 className="font-semibold text-2xl  mb-3">اضافة خدمة </h2>
+            <h2>أضف فئة المنتج الخاص بك والمعلومات الضرورية من هنا</h2>
           </div>
           <div
             className={`flex-1 overflow-y-scroll py-12 pr-8 ${styles.content}`}
@@ -129,62 +133,17 @@ const NewService = ({ cancel }) => {
                 <h2 className={formTitleClasses} style={formTitleStyle}>
                   اضافة صورة / فيديو
                 </h2>
-                <ImageUploading
-                  value={images}
-                  onChange={onChange}
-                  maxNumber={maxNumber}
-                  dataURLKey="data_url"
-                  acceptType={["jpg", "png", "jpeg"]}
+                <div
+                  className="fcc p-3 gap-4 border-dashed cursor-pointer"
+                  style={formInputStyle}
+                  // onClick={() => {
+                  //   setShowAddProductOptions(true);
+                  // }}
                 >
-                  {({
-                    imageList,
-                    onImageUpload,
-                    onImageRemoveAll,
-                    onImageUpdate,
-                    onImageRemove,
-                    isDragging,
-                    dragProps,
-                  }) => (
-                    // write your building UI
-                    <div
-                      className="upload__image-wrapper relative overflow-hidden"
-                      style={{
-                        width: "555px",
-                        height: "300px",
-                        border: images[0] ? "none" : "3px dashed #ccc",
-                        borderRadius: "10px",
-                      }}
-                      onClick={() => {
-                        onImageUpload();
-                      }}
-                      {...dragProps}
-                    >
-                      <div className="image-item h-full w-full cursor-pointer">
-                        {/* <button
-                            style={isDragging ? { color: "red" } : null}
-                            onClick={onImageUpload}
-                            {...dragProps}
-                          >
-                            Click or Drop here
-                          </button> */}
-                        {!images[0] && (
-                          <div className="flex flex-col justify-center items-center gap-6 h-full w-full">
-                            <IoMdCloudUpload size={"2em"}></IoMdCloudUpload>
-                            <h2 className="font-semibold">اسحب الصورة هنا</h2>
-                            <h2>(سيتم قبول الصور png & jpg)</h2>
-                          </div>
-                        )}
-                        {images[0] && (
-                          <img
-                            src={images[0]?.data_url}
-                            alt=""
-                            className="w-full h-full object-cover"
-                          />
-                        )}
-                      </div>
-                    </div>
-                  )}
-                </ImageUploading>
+                  <Box sx={{ "& circle": { fill: "rgba(36, 36, 36, 1)" } }}>
+                    <AddIcon width={"1.5rem"}></AddIcon>
+                  </Box>
+                </div>
               </div>
               <div className="flex mb-8 ">
                 <h2 className={formTitleClasses} style={formTitleStyle}>
@@ -226,6 +185,10 @@ const NewService = ({ cancel }) => {
               className={"h-14 w-44"}
               style={{ backgroundColor: `rgba(2, 70, 106, 1)` }}
               type={"normal"}
+              onClick={() => {
+                setEndActionTitle("تم اضافة خدمة جديدة بنجاح");
+                cancel();
+              }}
             >
               حفظ
             </Button>

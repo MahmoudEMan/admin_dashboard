@@ -4,8 +4,6 @@ import ChangeLogoSec from "../../components/TemplatePageComps/MainPage/ChangeLog
 import ChangeBannerSec from "../../components/TemplatePageComps/MainPage/ChangeBannerSec/ChangeBannerSec";
 import CommentsAndClients from "../../components/TemplatePageComps/MainPage/CommentsAndClients/CommentsAndClients";
 
-import StorageTable from "../../components/SoquStorageComp/StorageTable/StorageTable";
-
 const TemplatePage = () => {
   return (
     <div className={`px-4 pt-8`} style={{ backgroundColor: "#fafafa" }}>

@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import Context from "../../../store/context";
+
 import { Currency } from "../../../assets/Icons/index";
 import Button from "../../../UI/Button/Button";
 import styles from "./NewMarket.module.css";
@@ -58,6 +60,8 @@ const stateChanges = [
 ];
 
 const AddCountry = ({ cancel, complaintDetails }) => {
+  const contextStore = useContext(Context);
+  const { setEndActionTitle, setActionWarning } = contextStore;
   const [countryNumber, setCountryNumber] = useState("");
 
   const [cityNumber, setCityNumber] = useState("");
@@ -590,158 +594,6 @@ const AddCountry = ({ cancel, complaintDetails }) => {
                 </Box>
               </TabContext>
             </Box>
-            {/* <Box
-              sx={{
-                "& path, & g": {
-                  fill: "#1DBBBE",
-                },
-              }}
-            >
-              <div
-                className={"mt-8 gap-12 p-6 flex justify-between"}
-                style={{ width: "752px", backgroundColor: "#fff" }}
-              >
-                <div className="flex-1">
-                  <div className="flex items-center gap-4 mb-5">
-                    <div className="flex gap-2" style={{ width: "136px" }}>
-                      <StoreIcon></StoreIcon>
-                      <h2>اسم المتجر</h2>
-                    </div>
-                    <div
-                      className={"flex items-center justify-center rounded-lg"}
-                      style={{
-                        backgroundColor: "#EFF9FF",
-                        height: "70px",
-                        width: "180px",
-                      }}
-                    >
-                      <h2 className="font-medium" style={{ color: "#0077FF" }}>
-                        {complaintDetails.marketName}
-                      </h2>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-4 mb-5">
-                    <div className="flex gap-2" style={{ width: "136px" }}>
-                      <Category></Category>
-                      <h2>التصنيف</h2>
-                    </div>
-                    <div
-                      className={"flex items-center justify-center rounded-lg"}
-                      style={{
-                        backgroundColor: "#EFF9FF",
-                        height: "70px",
-                        width: "180px",
-                      }}
-                    >
-                      <h2 className="font-medium" style={{ color: "#0077FF" }}>
-                        {complaintDetails.variety}
-                      </h2>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-4 mb-5">
-                    <div className="flex gap-2" style={{ width: "136px" }}>
-                      <CallIcon></CallIcon>
-                      <h2>الهاتف</h2>
-                    </div>
-                    <div
-                      className={"flex items-center justify-center rounded-lg"}
-                      style={{
-                        backgroundColor: "#EFF9FF",
-                        height: "70px",
-                        width: "180px",
-                      }}
-                    >
-                      <h2 className="font-medium" style={{ color: "#0077FF" }}>
-                        {complaintDetails.phoneNumber}
-                      </h2>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-4 mb-5">
-                    <div className="flex gap-2" style={{ width: "136px" }}>
-                      <StatusIcon></StatusIcon>
-                      <h2>الحالة</h2>
-                    </div>
-                    <div
-                      className={"flex items-center justify-center rounded-lg"}
-                      style={{
-                        backgroundColor: findStateChanges.color,
-                        height: "70px",
-                        width: "180px",
-                      }}
-                    >
-                      <h2 className="font-medium" style={{ color: "#fff" }}>
-                        {complaintDetails.state}
-                      </h2>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex-1">
-                  <div className="flex items-center gap-4 mb-5">
-                    <div
-                      className="flex gap-2 items-center"
-                      style={{ width: "136px" }}
-                    >
-                      <IoCalendar></IoCalendar>
-                      <h2>تاريخ الشكوى</h2>
-                    </div>
-                    <div
-                      className={"flex items-center justify-center rounded-lg"}
-                      style={{
-                        backgroundColor: "#EFF9FF",
-                        height: "70px",
-                        width: "180px",
-                      }}
-                    >
-                      <h2 className="font-medium" style={{ color: "#0077FF" }}>
-                        {complaintDetails.complaintDate}
-                      </h2>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-4 mb-5">
-                    <div className="flex gap-2" style={{ width: "136px" }}>
-                      <TypeSupportIcon></TypeSupportIcon>
-                      <h2>نوع الاتصال</h2>
-                    </div>
-                    <div
-                      className={"flex items-center justify-center rounded-lg"}
-                      style={{
-                        backgroundColor: "#EFF9FF",
-                        height: "70px",
-                        width: "180px",
-                      }}
-                    >
-                      <h2 className="font-medium" style={{ color: "#0077FF" }}>
-                        {complaintDetails.connectionType}
-                      </h2>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-4 mb-5">
-                    <div className="flex gap-2" style={{ width: "136px" }}>
-                      <SupportIcon></SupportIcon>
-                      <h2>عنوان الشكوى</h2>
-                    </div>
-                    <div
-                      className={"flex items-center justify-center rounded-lg"}
-                      style={{
-                        backgroundColor: "#EFF9FF",
-                        height: "70px",
-                        width: "180px",
-                      }}
-                    >
-                      <h2 className="font-medium" style={{ color: "#0077FF" }}>
-                        {complaintDetails.complaintAddress}
-                      </h2>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Box> */}
           </div>
           <div
             className="p-8 flex justify-center gap-4"
@@ -754,7 +606,10 @@ const AddCountry = ({ cancel, complaintDetails }) => {
               className={"h-14 w-44"}
               style={{ backgroundColor: `#3AE374` }}
               type={"normal"}
-              onClick={cancel}
+              onClick={() => {
+                setEndActionTitle("تم قبول طلب إضافة متجر جديد بنجاح");
+                cancel();
+              }}
             >
               قبول المتجر
             </Button>
@@ -763,7 +618,11 @@ const AddCountry = ({ cancel, complaintDetails }) => {
               style={{ borderColor: `#FF3838` }}
               textStyle={{ color: "#FF3838" }}
               type={"outline"}
-              onClick={cancel}
+              onClick={() => {
+                setEndActionTitle("تم رفض طلب إضافة متجر جديد");
+                setActionWarning(true);
+                cancel();
+              }}
             >
               رفض المتجر
             </Button>

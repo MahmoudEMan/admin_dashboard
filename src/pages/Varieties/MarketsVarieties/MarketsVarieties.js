@@ -7,7 +7,7 @@ import AddSection from "../../../components/VarietiesComp/MarketVarieties/AddSec
 import ShopVarietiesTable from "../../../components/VarietiesComp/MarketVarieties/ShopVarietiesTable/ShopVarietiesTable";
 
 import Button from "../../../UI/Button/Button";
-import { AiOutlinePlus, AiOutlineSearch } from "react-icons/ai";
+import { AiOutlinePlus } from "react-icons/ai";
 
 const ShopVarieties = () => {
   const [showAddVarietyPage, setShowAddVarietyPage] = useState(false);

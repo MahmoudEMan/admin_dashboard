@@ -1,6 +1,8 @@
 import React from "react";
 import Stack from "@mui/material/Stack";
 import Paper from "@mui/material/Paper";
+import Box from "@mui/material/Box";
+
 import { ReactComponent as Product } from "../../../assets/Icons/product 24.svg";
 
 const INITIAL_DATA = [

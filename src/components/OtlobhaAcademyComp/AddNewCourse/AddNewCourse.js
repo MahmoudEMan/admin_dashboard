@@ -11,6 +11,7 @@ import { IoAddCircleSharp } from "react-icons/io5";
 import AddUnit from "./AddUnit/AddUnit";
 
 const AddNewCourse = ({ cancel }) => {
+  const [showAddUnit, setShowAddUnit] = useState(false);
   const [description, setDescription] = useState({
     htmlValue: "<h1></h1>\n",
     editorState: EditorState.createEmpty(),
@@ -34,13 +35,32 @@ const AddNewCourse = ({ cancel }) => {
       className="absolute pl-36  top-0 right-0  z-10  w-full h-full otlobha_acadmic"
       style={{ backgroundColor: "#fafafa" }}
     >
-      {/* <AddUnit></AddUnit> */}
+      {showAddUnit && (
+        <AddUnit
+          cancel={() => {
+            setShowAddUnit(false);
+          }}
+          cancelAll={cancel}
+        ></AddUnit>
+      )}
       <div className="flex justify-between items-center mb-2">
-        <div className="flex items-center gap-2">
-          <div onClick={cancel} className={` ${styles.arrow_con}`}>
-            <GoArrowRight style={{ color: "#02466A", fontSize: "1.2rem" }} />
+        <div className="flex">
+          <div className={`flex items-center gap-2 `}>
+            <div
+              onClick={cancel}
+              className={`flex items-center gap-2 cursor-pointer ${styles.arrow_con}`}
+            >
+              <GoArrowRight style={{ color: "#02466A", fontSize: "1.2rem" }} />
+            </div>
+
+            <h2 className="font-semibold ml-4"> الإعدادات </h2>
           </div>
-          <h2>اضافة كورس</h2>
+
+          <h2 className="font-semibold ml-4"> / جدول الدول </h2>
+
+          <h3 className="font-medium" style={{ color: "#67747B" }}>
+            / اضافة دولة
+          </h3>
         </div>
       </div>
       <div className="mt-4 pr-24">
@@ -111,6 +131,9 @@ const AddNewCourse = ({ cancel }) => {
             className={"flex-1"}
             type={"normal"}
             svg={<IoAddCircleSharp color={"#fff"} />}
+            onClick={() => {
+              setShowAddUnit(true);
+            }}
           >
             إضافة وحدة
           </Button>

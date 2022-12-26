@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Currency } from "../../../assets/Icons/index";
+import Context from "../../../store/context";
 import Button from "../../../UI/Button/Button";
 import styles from "./ServiceOrder.module.css";
 import MenuItem from "@mui/material/MenuItem";
@@ -67,6 +68,8 @@ const stateChanges = [
 ];
 
 const AddCountry = ({ cancel, complaintDetails }) => {
+  const contextStore = useContext(Context);
+  const { setEndActionTitle, setActionWarning } = contextStore;
   const [countryNumber, setCountryNumber] = useState("");
 
   const [cityNumber, setCityNumber] = useState("");
@@ -772,18 +775,25 @@ const AddCountry = ({ cancel, complaintDetails }) => {
               className={"h-14 w-44"}
               style={{ backgroundColor: `#3AE374` }}
               type={"normal"}
-              onClick={cancel}
+              onClick={() => {
+                setEndActionTitle("تم قبول طلب خدمة جديدة بنجاح");
+                cancel();
+              }}
             >
-              قبول المتجر
+              قبول الخدمة
             </Button>
             <Button
               className={"h-14 w-44"}
               style={{ borderColor: `#FF3838` }}
               textStyle={{ color: "#FF3838" }}
               type={"outline"}
-              onClick={cancel}
+              onClick={() => {
+                setEndActionTitle("تم رفض طلب خدمة جديدة بنجاح");
+                setActionWarning(true);
+                cancel();
+              }}
             >
-              رفض المتجر
+              رفض الخدمة
             </Button>
           </div>
         </div>

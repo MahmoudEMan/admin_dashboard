@@ -14,7 +14,7 @@ const MarketsTable = () => {
   return (
     <div className={`pr-4 pt-8 pl-36`} style={{ backgroundColor: "#fafafa" }}>
       <div className="flex items-center justify-between">
-        <PageNavigate currentPage={"عرض المتاجر"} parentPage={"المتاجر"} />
+        <PageNavigate nestedPage={false} currentPage={"عرض المتاجر"} />
 
         <Button
           onClick={() => {

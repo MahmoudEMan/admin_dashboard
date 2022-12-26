@@ -15,11 +15,13 @@ import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import Checkbox from "@mui/material/Checkbox";
 import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
+import Fade from "@mui/material/Fade";
+import Zoom from "@mui/material/Zoom";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { ReactComponent as SortIcon } from "../../../assets/Icons/icon-24-sort.svg";
+import { ReactComponent as CheckedSquare } from "../../../assets/Icons/icon-24-square checkmark.svg";
 
 import {
   MdOutlineKeyboardArrowDown,
@@ -31,7 +33,21 @@ import { BsTrash } from "react-icons/bs";
 import { Gift, CarImg, CameraImg, ShoesImg } from "../../../assets/Icons/index";
 import { ReactComponent as EditIcon } from "../../../assets/Icons/editt 2.svg";
 import { ReactComponent as AddIcon } from "../../../assets/Icons/icon-24-action-add.svg";
+import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
+import { styled } from "@mui/material/styles";
+
 import { MdOutlineAddBox } from "react-icons/md";
+
+const BootstrapTooltip = styled(({ className, ...props }) => (
+  <Tooltip {...props} arrow classes={{ popper: className }} />
+))(({ theme }) => ({
+  [`& .${tooltipClasses.arrow}`]: {
+    color: "#3AE374",
+  },
+  [`& .${tooltipClasses.tooltip}`]: {
+    backgroundColor: "#3AE374",
+  },
+}));
 
 function createData(name, activity, amount, price, sku, icon) {
   return {
@@ -128,7 +144,7 @@ const headCells = [
     id: "productNumber",
     numeric: true,
     disablePadding: false,
-    label: "رقم المنتج",
+    label: "  (SKU) رقم ",
   },
   {
     id: "number",
@@ -212,38 +228,43 @@ function EnhancedTableToolbar(props) {
             ),
         }),
         display: "flex",
-        justifyContent: "space-between",
+        gap: "2rem",
+        justifyContent: "flex-end",
       }}
     >
       <div className="flex gap-2 items-center">
-        <div></div>
         {numSelected > 0 && (
           <Tooltip onClick={onClick} title="Delete">
-            <IconButton>
-              <DeleteIcon />
-            </IconButton>
+            <div
+              className="fcc gap-2 px-4 rounded-full"
+              style={{ width: "114px", backgroundColor: "#FF38381A" }}
+            >
+              <h2 className={"font-medium"} style={{ color: "#FF3838" }}>
+                حذف
+              </h2>
+              <IconButton>
+                <BsTrash
+                  style={{
+                    cursor: "pointer",
+                    color: "red",
+                    fontSize: "1rem",
+                  }}
+                ></BsTrash>
+              </IconButton>
+            </div>
           </Tooltip>
-        )}
-
-        {numSelected > 0 && (
-          <Typography
-            sx={{}}
-            color="inherit"
-            variant="subtitle1"
-            component="div"
-          >
-            {numSelected} selected
-          </Typography>
         )}
       </div>
 
       <div className="flex items-center">
         <h2 className="font-medium">تحديد الكل</h2>
         <Checkbox
+          checkedIcon={<CheckedSquare />}
           sx={{
-            color: "#1DBBBE",
+            pr: "0",
+            color: "#011723",
             "& .MuiSvgIcon-root": {
-              color: "#1DBBBE",
+              color: "#011723",
             },
           }}
           indeterminate={numSelected > 0 && numSelected < rowCount}
@@ -293,6 +314,34 @@ export default function EnhancedTable() {
     }
     setSelected([]);
   };
+  const deleteItems = () => {
+    const array = [...data];
+    selected.forEach((item, idx) => {
+      const findIndex = array.findIndex((i) => item === i.name);
+      array.splice(findIndex, 1);
+    });
+    setData(array);
+    setSelected([]);
+  };
+  const handleClick = (event, name) => {
+    const selectedIndex = selected.indexOf(name);
+    let newSelected = [];
+
+    if (selectedIndex === -1) {
+      newSelected = newSelected.concat(selected, name);
+    } else if (selectedIndex === 0) {
+      newSelected = newSelected.concat(selected.slice(1));
+    } else if (selectedIndex === selected.length - 1) {
+      newSelected = newSelected.concat(selected.slice(0, -1));
+    } else if (selectedIndex > 0) {
+      newSelected = newSelected.concat(
+        selected.slice(0, selectedIndex),
+        selected.slice(selectedIndex + 1)
+      );
+    }
+
+    setSelected(newSelected);
+  };
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -319,12 +368,12 @@ export default function EnhancedTable() {
   return (
     <Box sx={{ width: "100%" }}>
       <Paper sx={{ width: "100%", mb: 2 }}>
-        {/* <EnhancedTableToolbar
+        <EnhancedTableToolbar
           onClick={deleteItems}
           numSelected={selected.length}
           rowCount={data.length}
           onSelectAllClick={handleSelectAllClick}
-        /> */}
+        />
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}
@@ -376,10 +425,22 @@ export default function EnhancedTable() {
                             }}
                           ></BsTrash>
                           <EditIcon width={"18px"}></EditIcon>
-                          <MdOutlineAddBox
-                            color="#1DBBBE"
-                            size={"18px"}
-                          ></MdOutlineAddBox>
+
+                          <BootstrapTooltip
+                            // style={{ backgroundColor: "#3AE374" }}
+                            className={"p-0"}
+                            TransitionProps={{ timeout: 300 }}
+                            TransitionComponent={Zoom}
+                            title="اضف للسوق"
+                            placement="top-start"
+                          >
+                            <IconButton>
+                              <MdOutlineAddBox
+                                color="#1DBBBE"
+                                size={"18px"}
+                              ></MdOutlineAddBox>
+                            </IconButton>
+                          </BootstrapTooltip>
                         </div>
                       </TableCell>
                       <TableCell align="center">
@@ -417,6 +478,22 @@ export default function EnhancedTable() {
                           minimumIntegerDigits: 2,
                           useGrouping: false,
                         })}
+                      </TableCell>
+                      <TableCell padding="none" align={"right"}>
+                        <Checkbox
+                          checkedIcon={<CheckedSquare />}
+                          sx={{
+                            color: "#011723",
+                            "& .MuiSvgIcon-root": {
+                              color: "#011723",
+                            },
+                          }}
+                          checked={isItemSelected}
+                          onClick={(event) => handleClick(event, row.name)}
+                          inputProps={{
+                            "aria-labelledby": labelId,
+                          }}
+                        />
                       </TableCell>
                     </TableRow>
                   );
@@ -473,6 +550,15 @@ export default function EnhancedTable() {
                     handleClose();
                   }}
                   key={rowsIdx}
+                  sx={{
+                    backgroundColor: "#FFEEEE",
+                    "ul:has(&)": {
+                      p: 0,
+                    },
+                    "ul:has(&) li:hover": {
+                      backgroundColor: "#C6E1F0",
+                    },
+                  }}
                 >
                   {rowsPer}
                 </MenuItem>

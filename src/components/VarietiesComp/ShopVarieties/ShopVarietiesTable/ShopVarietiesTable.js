@@ -29,19 +29,20 @@ import {
   MdOutlineArrowForwardIos,
 } from "react-icons/md";
 import { ReactComponent as SortIcon } from "../../../../assets/Icons/icon-24-sort.svg";
-function createData(name, sectionTags, active) {
+function createData(name, sectionTags, active, number) {
   return {
     name,
     sectionTags,
     active,
+    number,
   };
 }
 
 const rows = [
-  createData("ملابس أطفال", ["تى شيرت", "شورت", "قميص", "بلوفر"], true),
-  createData("ملابس شباب", ["جينز", "سليكون", "قميص", "تى شيرت"], true),
-  createData("ملابس نسائية", ["عباية", "شالات", "تنورة"], true),
-  createData("ملابس رجال", ["عمامة", "قميص", "بنطلون كتان"], true),
+  createData("ملابس أطفال", ["تى شيرت", "شورت", "قميص", "بلوفر"], true, "23"),
+  createData("ملابس شباب", ["جينز", "سليكون", "قميص", "تى شيرت"], true, "28"),
+  createData("ملابس نسائية", ["عباية", "شالات", "تنورة"], true, "46"),
+  createData("ملابس رجال", ["عمامة", "قميص", "بنطلون كتان"], true, "57"),
 ];
 
 function descendingComparator(a, b, orderBy) {
@@ -234,7 +235,7 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
-export default function EnhancedTable() {
+export default function EnhancedTable({ editSection }) {
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("calories");
   const [selected, setSelected] = React.useState([]);
@@ -367,7 +368,13 @@ export default function EnhancedTable() {
                     >
                       <TableCell component="th" id={labelId} scope="row">
                         <div className="flex items-center gap-2">
-                          <EditIcon width={"18px"}></EditIcon>
+                          <EditIcon
+                            className={"cursor-pointer"}
+                            onClick={() => {
+                              editSection(row);
+                            }}
+                            width={"18px"}
+                          ></EditIcon>
                           <BsTrash
                             onClick={() => {
                               const findIndex = data.findIndex(
@@ -527,6 +534,15 @@ export default function EnhancedTable() {
                     handleClose();
                   }}
                   key={rowsIdx}
+                  sx={{
+                    backgroundColor: "#FFEEEE",
+                    "ul:has(&)": {
+                      p: 0,
+                    },
+                    "ul:has(&) li:hover": {
+                      backgroundColor: "#C6E1F0",
+                    },
+                  }}
                 >
                   {rowsPer}
                 </MenuItem>

@@ -10,6 +10,10 @@
   --sec-color:#1DBBBE;
   --third-color:#B6BE34;
 }
+body:has(.MuiPopover-root){
+  overflow: auto !important;
+  padding-right: 0 !important;
+}
 body:has(.full_screen_page){
   overflow-y: hidden;
 }

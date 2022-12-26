@@ -1,5 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Currency } from "../../../assets/Icons/index";
+import { ReactComponent as AddIcon } from "../../../assets/Icons/icon-34-add.svg";
+import Box from "@mui/material/Box";
+import AddProductOptions from "./AddProductOptions/AddProductOptions";
+
 import Button from "../../../UI/Button/Button";
 import styles from "./NewProduct.module.css";
 import MenuItem from "@mui/material/MenuItem";
@@ -10,6 +14,7 @@ import ImageUploading from "react-images-uploading";
 import { IoMdCloudUpload } from "react-icons/io";
 import { GrAddCircle } from "react-icons/gr";
 import { TiDeleteOutline } from "react-icons/ti";
+import Context from "../../../store/context";
 
 const BackDrop = ({ onClick }) => {
   return (
@@ -30,12 +35,38 @@ const formInputStyle = {
   width: "555px",
   border: "1px solid rgba(167, 167, 167, 0.5)",
 };
-const NewProduct = ({ cancel }) => {
+const NewProduct = ({ cancel, editProduct }) => {
+  const contextStore = useContext(Context);
+  const { setEndActionTitle } = contextStore;
+
   const [age, setAge] = useState("");
   const [tagsSelected, setTagsSelected] = useState([]);
   const [images, setImages] = useState([]);
   const [multiImages, setMultiImages] = useState([]);
-  console.log(multiImages);
+  const [showAddProductOptions, setShowAddProductOptions] = useState(false);
+
+  const [productName, setProductName] = useState("");
+  const [productInfo, setProductInfo] = useState("");
+  const [buyPrice, setBuyPrice] = useState("");
+  const [sellPrice, setSellPrice] = useState("");
+  const [productCode, setProductCode] = useState("");
+  const [inStore, setInStore] = useState("");
+  const [actionClicked, setActionClicked] = useState(false);
+
+  const [productSection, setProductSection] = useState("");
+
+  useEffect(() => {
+    if (editProduct) {
+      setProductName(editProduct.title);
+      setProductInfo(editProduct.info);
+      setBuyPrice(editProduct.price);
+      setSellPrice(editProduct.sellPrice);
+      setProductCode(editProduct.id);
+      setInStore(editProduct.inStore);
+      setAge(editProduct.category);
+      setProductSection(editProduct.section);
+    }
+  }, [editProduct]);
 
   const emptyMultiImages = [];
   for (let index = 0; index < 5 - multiImages.length; index++) {
@@ -57,6 +88,15 @@ const NewProduct = ({ cancel }) => {
   return (
     <>
       <BackDrop onClick={cancel}></BackDrop>
+
+      {showAddProductOptions && (
+        <AddProductOptions
+          closeDetails={() => {
+            setShowAddProductOptions(false);
+          }}
+          editProduct={editProduct}
+        ></AddProductOptions>
+      )}
       <div
         className={`fixed bottom-0 left-0 bg-slate-50 z-20 otlobha_new_product ${styles.container}`}
         style={{ width: "1104px", height: "calc(100% - 4rem)" }}
@@ -70,9 +110,13 @@ const NewProduct = ({ cancel }) => {
             }}
           >
             <h2 className="font-semibold text-2xl  mb-3">
-              اضافة منتج جديد للسوق
+              {editProduct ? "تفاصيل المنتج" : "اضافة منتج جديد للسوق"}
             </h2>
-            <h2>أدخل بيانات المنتج ليتم اضافته في منتجات سوق اطلبها</h2>
+            <h2>
+              {editProduct
+                ? "تعديل بيانات المنتجات في سق اطلبها"
+                : "أدخل بيانات المنتج ليتم اضافته في منتجات سوق اطلبها"}
+            </h2>
           </div>
           <div
             className={`flex-1 overflow-y-scroll py-12 pr-8 ${styles.content}`}
@@ -84,6 +128,10 @@ const NewProduct = ({ cancel }) => {
                 </h2>
                 <label>
                   <input
+                    value={productName}
+                    onChange={(e) => {
+                      setProductName(e.target.value);
+                    }}
                     className={formInputClasses}
                     style={formInputStyle}
                     placeholder="اسم المنتج"
@@ -97,6 +145,10 @@ const NewProduct = ({ cancel }) => {
                   وصف المنتج
                 </h2>
                 <textarea
+                  value={productInfo}
+                  onChange={(e) => {
+                    setProductInfo(e.target.value);
+                  }}
                   className={formInputClasses}
                   style={{ ...formInputStyle, resize: "none" }}
                   resize={false}
@@ -118,6 +170,10 @@ const NewProduct = ({ cancel }) => {
                   <div className="p-4 flex flex-1">
                     <img className="ml-2 opacity-50" src={Currency} alt="" />
                     <input
+                      value={buyPrice}
+                      onChange={(e) => {
+                        setBuyPrice(e.target.value);
+                      }}
                       className="flex-1 border-none outline-none"
                       placeholder="0"
                       type="text"
@@ -146,6 +202,10 @@ const NewProduct = ({ cancel }) => {
                   <div className="p-4 flex flex-1">
                     <img className="ml-2 opacity-50" src={Currency} alt="" />
                     <input
+                      value={sellPrice}
+                      onChange={(e) => {
+                        setSellPrice(e.target.value);
+                      }}
                       className="flex-1 border-none outline-none"
                       placeholder="0"
                       type="text"
@@ -169,6 +229,10 @@ const NewProduct = ({ cancel }) => {
                 </h2>
                 <label>
                   <input
+                    value={productCode}
+                    onChange={(e) => {
+                      setProductCode(e.target.value);
+                    }}
                     className={formInputClasses}
                     style={formInputStyle}
                     placeholder="#251"
@@ -225,6 +289,10 @@ const NewProduct = ({ cancel }) => {
                   القسم
                 </h2>
                 <TagsInput
+                  // value={productSection}
+                  // onChange={(e) => {
+                  //   setProductSection(e.target.value);
+                  // }}
                   value={tagsSelected.slice(-2, tagsSelected.length)}
                   onChange={setTagsSelected}
                   name="القسم"
@@ -252,42 +320,56 @@ const NewProduct = ({ cancel }) => {
                     dragProps,
                   }) => (
                     // write your building UI
-                    <div
-                      className="upload__image-wrapper relative overflow-hidden"
-                      style={{
-                        width: "555px",
-                        height: "300px",
-                        border: images[0] ? "none" : "3px dashed #ccc",
-                        borderRadius: "10px",
-                      }}
-                      onClick={() => {
-                        onImageUpload();
-                      }}
-                      {...dragProps}
-                    >
-                      <div className="image-item h-full w-full cursor-pointer">
-                        {/* <button
-                          style={isDragging ? { color: "red" } : null}
-                          onClick={onImageUpload}
-                          {...dragProps}
+                    <div>
+                      <div
+                        className="upload__image-wrapper relative overflow-hidden"
+                        style={{
+                          width: "555px",
+
+                          border: images[0] ? "none" : "3px dashed #ccc",
+                          borderRadius: "10px",
+                        }}
+                        onClick={() => {
+                          onImageUpload();
+                        }}
+                        {...dragProps}
+                      >
+                        <div
+                          className="image-item w-full cursor-pointer"
+                          style={{ height: "220px" }}
                         >
-                          Click or Drop here
-                        </button> */}
-                        {!images[0] && (
-                          <div className="flex flex-col justify-center items-center gap-6 h-full w-full">
-                            <IoMdCloudUpload size={"2em"}></IoMdCloudUpload>
-                            <h2 className="font-semibold">اسحب الصورة هنا</h2>
-                            <h2>(سيتم قبول الصور png & jpg)</h2>
-                          </div>
-                        )}
-                        {images[0] && (
-                          <img
-                            src={images[0]?.data_url}
-                            alt=""
-                            className="w-full h-full object-cover"
-                          />
-                        )}
+                          {/* <button
+                        style={isDragging ? { color: "red" } : null}
+                        onClick={onImageUpload}
+                        {...dragProps}
+                      >
+                        Click or Drop here
+                      </button> */}
+                          {!images[0] && (
+                            <div className="flex flex-col justify-center items-center gap-6 h-full w-full">
+                              <IoMdCloudUpload size={"2em"}></IoMdCloudUpload>
+                              <h2 className="font-semibold">اسحب الصورة هنا</h2>
+                              <h2>(سيتم قبول الصور png & jpg)</h2>
+                            </div>
+                          )}
+                          {images[0] && (
+                            <img
+                              src={images[0]?.data_url}
+                              alt=""
+                              className="w-full h-full object-cover"
+                            />
+                          )}
+                        </div>
                       </div>
+                      {editProduct && (
+                        <div className="w-28 h-28 mt-4">
+                          <img
+                            className="object-cover w-full h-full"
+                            src={editProduct.img}
+                            alt=""
+                          />
+                        </div>
+                      )}
                     </div>
                   )}
                 </ImageUploading>
@@ -368,6 +450,10 @@ const NewProduct = ({ cancel }) => {
                 </h2>
                 <label>
                   <input
+                    value={inStore}
+                    onChange={(e) => {
+                      setInStore(e.target.value);
+                    }}
                     className={formInputClasses}
                     style={formInputStyle}
                     placeholder="0"
@@ -375,6 +461,23 @@ const NewProduct = ({ cancel }) => {
                     name="name"
                   />
                 </label>
+              </div>
+              <div className="flex mb-8">
+                <h2 className={formTitleClasses} style={formTitleStyle}>
+                  اضافة خيارات المنتج
+                </h2>
+                <div
+                  className="fcc p-3 gap-4 border-dashed cursor-pointer"
+                  style={formInputStyle}
+                  onClick={() => {
+                    setShowAddProductOptions(true);
+                  }}
+                >
+                  <Box sx={{ "& circle": { fill: "#ADB5B9" } }}>
+                    <AddIcon></AddIcon>
+                  </Box>
+                  اضافة خيارات
+                </div>
               </div>
             </form>
           </div>
@@ -389,6 +492,10 @@ const NewProduct = ({ cancel }) => {
               className={"h-14 w-44"}
               style={{ backgroundColor: `rgba(2, 70, 106, 1)` }}
               type={"normal"}
+              onClick={() => {
+                cancel();
+                setEndActionTitle("تم اضافة منتج جديد بنجاح");
+              }}
             >
               حفظ
             </Button>

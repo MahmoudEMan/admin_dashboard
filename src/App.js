@@ -1,6 +1,10 @@
 import "./App.css";
+import React, { useState, useContext } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ActionCompleteComp from "./components/ActionCompleteComp/ActionCompleteComp";
 import { Navbar, SideBar } from "./components/index";
+import Context from "./store/context";
+
 import {
   MainPage,
   SouqOtlobha,
@@ -37,9 +41,13 @@ import {
   SocialMediaLinksPage,
 } from "./pages/index";
 function App() {
+  const contextStore = useContext(Context);
+  const { title, setTitle } = contextStore;
+
   return (
     <BrowserRouter>
       <Navbar></Navbar>
+      {title && <ActionCompleteComp></ActionCompleteComp>}
       <div className="flex mx-auto mt-20" style={{ maxWidth: "1440px" }}>
         <SideBar />
         <div className="p-4 flex-1">

@@ -17,7 +17,7 @@ const BackDrop = ({ onClick, openCreateRole }) => {
   );
 };
 
-const FunctionalRoles = ({ cancel, openCreateRole }) => {
+const FunctionalRoles = ({ cancel, openCreateRole, EditRole }) => {
   return (
     <>
       <BackDrop onClick={cancel}></BackDrop>
@@ -63,6 +63,9 @@ const FunctionalRoles = ({ cancel, openCreateRole }) => {
                         style={{ backgroundColor: "rgba(235, 247, 255, 1)" }}
                         svg={<FiEdit color="#0099FB" />}
                         type={"normal"}
+                        onClick={() => {
+                          EditRole(role);
+                        }}
                       >
                         تحرير
                       </Button>

@@ -18,8 +18,8 @@ const MenuProps = {
     },
   },
 };
-const category = ["ملابس أطفال", "ملابس شباب", "ملابس نسائية", "ملابس رجال"];
-const sections = ["قميص", "جينز", "سيليكون", "نى شيرت"];
+const category = [" المفعلة", "المعطلة"];
+const sections = ["حسب الاضافة", "ابجديا"];
 
 const FilteringOptions = ({ showFilteringOptions, hideFilteringOptions }) => {
   const [age, setAge] = React.useState("");
@@ -70,9 +70,11 @@ const FilteringOptions = ({ showFilteringOptions, hideFilteringOptions }) => {
                 key={idx}
                 className="souq_storge_category_filter_items"
                 sx={{
-                  backgroundColor: "rgba(211, 211, 211, 1)",
+                  backgroundColor: "rgba(255, 255, 255, 0)",
                   height: "3rem",
-                  "&:hover": {},
+                  "&:hover": {
+                    backgroundColor: "rgba(242, 245, 207, 1)",
+                  },
                 }}
                 value={`${item}`}
               >
@@ -82,20 +84,19 @@ const FilteringOptions = ({ showFilteringOptions, hideFilteringOptions }) => {
           })}
         </Select>
       </FormControl>
-      <FormControl sx={{ width: 300, flex: "1" }}>
-        <h2 className="font-semibold mb-2">القسم</h2>
+      <FormControl sx={{ minWidth: 120, flex: "1" }}>
+        <h2 className="font-semibold mb-2">التصنيف الأساسى</h2>
         <Select
-          labelId="demo-multiple-checkbox-label"
-          id="demo-multiple-checkbox"
-          multiple
+          value={age}
+          onChange={handleCategory}
           displayEmpty
-          value={personName}
-          onChange={handleSection}
-          input={<OutlinedInput label="Tag" />}
-          renderValue={() => {
-            return <h2>الكل</h2>;
+          inputProps={{ "aria-label": "Without label" }}
+          renderValue={(selected) => {
+            if (age === "") {
+              return <h2>تلقائى</h2>;
+            }
+            return selected;
           }}
-          MenuProps={MenuProps}
           sx={{
             height: "3.5rem",
             border: "1px solid #B6BE34",
@@ -104,30 +105,24 @@ const FilteringOptions = ({ showFilteringOptions, hideFilteringOptions }) => {
             },
           }}
         >
-          {sections.map((name) => (
-            <MenuItem
-              key={name}
-              value={name}
-              className="souq_storge_section_filter_items"
-              sx={{
-                "&.Mui-selected": {
-                  backgroundColor: "rgba(29, 187, 190, 1)",
-                },
-                "&.Mui-selected:hover": {
-                  backgroundColor: "rgba(29, 187, 190, 1)",
-                },
-                "& .MuiButtonBase-root": {
-                  color: "rgba(0, 0, 0, 1)",
-                },
-                "& .MuiListItemText-root span": {
-                  fontWeight: "500",
-                },
-              }}
-            >
-              <Checkbox checked={personName.indexOf(name) > -1} />
-              <ListItemText primary={name} />
-            </MenuItem>
-          ))}
+          {sections.map((item, idx) => {
+            return (
+              <MenuItem
+                key={idx}
+                className="souq_storge_category_filter_items"
+                sx={{
+                  backgroundColor: "rgba(255, 255, 255, 0)",
+                  height: "3rem",
+                  "&:hover": {
+                    backgroundColor: "rgba(242, 245, 207, 1)",
+                  },
+                }}
+                value={`${item}`}
+              >
+                {item}
+              </MenuItem>
+            );
+          })}
         </Select>
       </FormControl>
       <div className="flex items-end">

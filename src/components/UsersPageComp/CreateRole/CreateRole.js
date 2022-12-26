@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styles from "./CreateRole.module.css";
 import Button from "../../../UI/Button/Button";
+import Context from "../../../store/context";
+
 import { GoArrowRight } from "react-icons/go";
 import { AiFillStar } from "react-icons/ai";
 import FormGroup from "@mui/material/FormGroup";
@@ -34,6 +36,9 @@ const dataTitle = [
 const permissionsTitle = ["عرض", "تعديل", "إضافة", "حذف"];
 
 const CreateRole = ({ cancel }) => {
+  const contextStore = useContext(Context);
+  const { setEndActionTitle } = contextStore;
+
   const [yearlyPlan, setYearlyPlan] = useState(false);
 
   return (
@@ -50,11 +55,11 @@ const CreateRole = ({ cancel }) => {
       >
         <h2 className="font-semibold text-2xl  mb-3">انشاء دور جديد</h2>
         <div className="flex">
-          <div className={`flex items-center gap-2 `}>
-            <div
-              onClick={cancel}
-              className={`flex items-center gap-2 cursor-pointer ${styles.arrow_con}`}
-            >
+          <div
+            onClick={cancel}
+            className={`flex cursor-pointer items-center gap-2 `}
+          >
+            <div className={`flex items-center gap-2  ${styles.arrow_con}`}>
               <GoArrowRight style={{ color: "#02466A", fontSize: "1.2rem" }} />
             </div>
 
@@ -108,7 +113,7 @@ const CreateRole = ({ cancel }) => {
           </h2>
         </div>
         <div
-          className="p-4 overflow-scroll hide_scrollbar"
+          className="p-4 overflow-scroll hide_scrollbar mr-24"
           style={{ backgroundColor: "#FAFAFA", height: "525px" }}
         >
           {dataTitle.map((item, index) => {
@@ -207,6 +212,10 @@ const CreateRole = ({ cancel }) => {
           style={{ borderColor: `rgba(2, 70, 106, 1)` }}
           type={"outline"}
           textStyle={{ color: "#02466A" }}
+          onClick={() => {
+            setEndActionTitle("تم انشاء دور جديد بنجاح");
+            cancel();
+          }}
         >
           حفظ واعتماد
         </Button>

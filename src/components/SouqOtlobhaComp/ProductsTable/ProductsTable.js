@@ -1,11 +1,35 @@
 import { useState, useEffect } from "react";
 import Checkbox from "@mui/material/Checkbox";
+import Box from "@mui/material/Box";
+
 import { Currency } from "../../../assets/Icons/index";
+import { ReactComponent as StaticsIcon } from "../../../assets/Icons/icon-24-static.svg";
+import { ReactComponent as TrashICon } from "../../../assets/Icons/icon-24-delete.svg";
+import { ReactComponent as CheckedSquare } from "../../../assets/Icons/icon-24-square checkmark.svg";
+import { ReactComponent as SwitchIcon } from "../../../assets/Icons/icon-38-switch.svg";
+
+import IconButton from "@mui/material/IconButton";
+import { BsTrash } from "react-icons/bs";
+
 import Button from "../../../UI/Button/Button";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import ProductDetails from "./ProductDetails/ProductDetails";
+import { Button as MenuButton } from "@mui/material";
+import Menu from "@mui/material/Menu";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import MenuItem from "@mui/material/MenuItem";
+import { BiLinkAlt } from "react-icons/bi";
+import { HiOutlineDocumentDuplicate } from "react-icons/hi";
 
 const ItemCategory = (props) => {
+  const [menuButton, setMenuButton] = useState(null);
+  const open = Boolean(menuButton);
+  const handleClick = (event) => {
+    setMenuButton(event.currentTarget);
+  };
+  const handleClose = () => {
+    setMenuButton(null);
+  };
   const {
     title,
     id,
@@ -27,6 +51,7 @@ const ItemCategory = (props) => {
     >
       <div className="flex">
         <Checkbox
+          checkedIcon={<CheckedSquare />}
           sx={{ display: "inline", padding: "0" }}
           className="ml-4"
           item={id}
@@ -83,34 +108,102 @@ const ItemCategory = (props) => {
       </div>
       <div className="w-64 gap-12 flex flex-col justify-between">
         <div className="flex gap-4 flex-1">
-          <div className="flex font-medium bg-red-50 flex-1 justify-center items-center">
+          <div
+            className="flex font-medium flex-1 justify-center items-center"
+            style={{ backgroundColor: "#FFEEEE" }}
+          >
             {category}
           </div>
-          <div className="flex font-medium bg-red-50 flex-1 justify-center items-center">
+          <div
+            className="flex font-medium flex-1 justify-center items-center"
+            style={{ backgroundColor: "#FFEEEE" }}
+          >
             {section}
           </div>
         </div>
         <div className="flex gap-4 flex-1">
           <Button
             onClick={() => {
-              handleProductDetails(item);
+              props.editProduct(item);
             }}
+            className={"rounded-none"}
             fontSize={"text-xs"}
             type={"outline"}
           >
             تفاصيل المنتج
           </Button>
-          <Button fontWeight={"font-medium"} type={"outline"}>
+          <MenuButton
+            id="demo-customized-button"
+            aria-controls={open ? "demo-customized-menu" : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? "true" : undefined}
+            variant="contained"
+            disableElevation
+            onClick={handleClick}
+            className={"rounded-none"}
+            style={{
+              color: "#1DBBBE",
+              backgroundColor: "#FAFAFA",
+              border: "1px solid #ADB5B966",
+            }}
+            endIcon={
+              <KeyboardArrowDownIcon fill={"#1DBBBE"} className="mr-3" />
+            }
+          >
             المزيد
-            <MdKeyboardArrowDown className="inline mr-2" />
-          </Button>
+          </MenuButton>
+          <Menu
+            id="basic-menu"
+            anchorEl={menuButton}
+            open={open}
+            onClose={handleClose}
+            MenuListProps={{
+              "aria-labelledby": "basic-button",
+            }}
+            sx={{
+              "& ul.MuiList-root": {
+                backgroundColor: "#FAFAFA",
+                width: "240px",
+              },
+              "& ul.MuiList-root li": {
+                display: "flex",
+                gap: "0.75rem",
+              },
+              "& ul.MuiList-root li svg": {
+                height: "1rem",
+                width: "1rem",
+              },
+            }}
+          >
+            <MenuItem onClick={handleClose}>
+              <BiLinkAlt></BiLinkAlt>
+              نسخ رابط المنتج
+            </MenuItem>
+            <MenuItem onClick={handleClose}>
+              <HiOutlineDocumentDuplicate></HiOutlineDocumentDuplicate>
+              تكرار المنتج
+            </MenuItem>
+            <MenuItem
+              onClick={() => {
+                handleClose();
+                handleProductDetails(item);
+              }}
+            >
+              <StaticsIcon></StaticsIcon>
+              احصائيات المنتج
+            </MenuItem>
+            <MenuItem onClick={handleClose}>
+              <TrashICon></TrashICon>
+              حذف المنتج
+            </MenuItem>
+          </Menu>
         </div>
       </div>
     </li>
   );
 };
 
-const ProductsTable = () => {
+const ProductsTable = ({ editProduct }) => {
   const [categories, setCategories] = useState([]);
   const [checkedList, setCheckedList] = useState([]);
   const [itemsChecked, setItemsChecked] = useState(false);
@@ -215,11 +308,60 @@ const ProductsTable = () => {
           }}
         />
       )}
-      <header>
+      <header className="flex gap-4 items-center">
         <label>
-          <Checkbox checked={itemsChecked} onClick={selectItem.bind(this)} />
+          <Checkbox
+            checkedIcon={<CheckedSquare />}
+            checked={itemsChecked}
+            onClick={selectItem.bind(this)}
+          />
           تحديد الكل
         </label>
+        {itemsChecked && (
+          <div
+            className="fcc gap-2 px-4 rounded-full"
+            style={{ width: "114px", backgroundColor: "#FF38381A" }}
+          >
+            <IconButton>
+              <BsTrash
+                style={{
+                  cursor: "pointer",
+                  color: "red",
+                  fontSize: "1rem",
+                }}
+              ></BsTrash>
+            </IconButton>
+            <h2 className={"font-semibold"} style={{ color: "#FF3838" }}>
+              حذف
+            </h2>
+          </div>
+        )}
+        {itemsChecked && (
+          <div
+            className="fcc gap-4 px-4 rounded-full"
+            style={{ width: "114px", backgroundColor: "#FF9F1A0A" }}
+          >
+            <Box
+              sx={{
+                "& #Path_820": {
+                  fill: "#FF9F1A",
+                },
+              }}
+            >
+              <SwitchIcon
+                style={{
+                  cursor: "pointer",
+                  color: "red",
+                  fontSize: "0.5rem",
+                }}
+                className={"w-5"}
+              ></SwitchIcon>
+            </Box>
+            <h2 className={"font-semibold"} style={{ color: "#FF9F1A" }}>
+              تعطيل
+            </h2>
+          </div>
+        )}
       </header>
       <ul className="">
         {categories.map((category) => {
@@ -232,6 +374,9 @@ const ProductsTable = () => {
               handleCheckboxClick={handleCheckboxClick}
               checkedList={checkedList}
               handleProductDetails={handleProductDetails}
+              editProduct={(item) => {
+                editProduct(item);
+              }}
             />
           );
         })}

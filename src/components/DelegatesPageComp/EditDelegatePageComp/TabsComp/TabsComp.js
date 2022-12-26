@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
@@ -8,6 +8,8 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { IoIosArrowDown } from "react-icons/io";
 import Button from "../../../../UI/Button/Button";
+import Context from "../../../../store/context";
+
 import { ReactComponent as CheckMarkImageIcon } from "../../../../assets/Icons/icon-24-checkmark-image.svg";
 import { ReactComponent as BsWhatsapp } from "../../../../assets/Icons/icon-24-whatsapp.svg";
 import { ReactComponent as BsFacebook } from "../../../../assets/Icons/icon-24-facebook.svg";
@@ -15,12 +17,16 @@ import { ReactComponent as BsTwitter } from "../../../../assets/Icons/icon-24-tw
 import { ReactComponent as BsInstagram } from "../../../../assets/Icons/icon-32-instagram.svg";
 
 import { BsSnapchat, BsYoutube } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 
 const countries = ["السعودية", "الامارات", "الكويت", "مصر"];
 const cities = ["الرباض", "جدة", "دمام", "مكة المكرمة"];
 const activate = ["مفعل", "غير مفعل"];
 
 const TabsComp = () => {
+  const contextStore = useContext(Context);
+  const { setEndActionTitle } = contextStore;
+  const navigate = useNavigate();
   const [value, setValue] = React.useState("1");
   const [category, setCategory] = useState("");
   const [specialProduct, setSpecialProduct] = useState("");
@@ -190,7 +196,7 @@ const TabsComp = () => {
                     <Button
                       type={"normal"}
                       style={{
-                        backgroundColor: "#ADB5B9",
+                        backgroundColor: "rgba(35, 126, 174, 1)",
                         height: "56px",
                         width: "180px",
                       }}
@@ -503,6 +509,17 @@ const TabsComp = () => {
           </TabPanel>
         </Box>
       </TabContext>
+      <Button
+        onClick={() => {
+          setEndActionTitle("تم تعديل المندوب بنجاح");
+          navigate("/عرض_المناديب");
+        }}
+        className={"w-full mt-10"}
+        type={"normal"}
+      >
+        {" "}
+        حفظ
+      </Button>
     </Box>
   );
 };

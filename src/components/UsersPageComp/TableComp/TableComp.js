@@ -16,26 +16,25 @@ import Checkbox from "@mui/material/Checkbox";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import Switch from "@mui/material/Switch";
-import { HiOutlineMail } from "react-icons/hi";
-import { FiSend } from "react-icons/fi";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import { Gift } from "../../../assets/Icons/index";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { visuallyHidden } from "@mui/utils";
-import { BsStarFill, BsStarHalf } from "react-icons/bs";
 import { ReactComponent as SortIcon } from "../../../assets/Icons/icon-24-sort.svg";
+import { ReactComponent as DocumentIcon } from "../../../assets/Icons/document_text_outlined.svg";
+import { ReactComponent as EditIcon } from "../../../assets/Icons/editt 2.svg";
+import { ReactComponent as CheckedSquare } from "../../../assets/Icons/icon-24-square checkmark.svg";
+import { ReactComponent as SwitchIcon } from "../../../assets/Icons/icon-38-switch.svg";
+
+import { BsTrash } from "react-icons/bs";
+import { FaRegEdit } from "react-icons/fa";
 import {
   MdOutlineKeyboardArrowDown,
   MdOutlineArrowBackIosNew,
   MdOutlineArrowForwardIos,
 } from "react-icons/md";
-
-const trader = { title: "تاجر", class: "rgba(164, 161, 251, 0.4)" };
-const proTrader = { title: "تاجر محترف", class: "#00CCF266" };
-const privateBrand = { title: "براند خاص", class: "#B6BE3466" };
 
 function createData(name, email, role) {
   return {
@@ -167,6 +166,7 @@ function EnhancedTableHead(props) {
             {!headCell.sort && headCell.label}
           </TableCell>
         ))}
+        <TableCell padding={"none"}></TableCell>
       </TableRow>
     </TableHead>
   );
@@ -197,38 +197,73 @@ function EnhancedTableToolbar(props) {
             ),
         }),
         display: "flex",
-        justifyContent: "space-between",
+        gap: "2rem",
+        justifyContent: "flex-end",
       }}
     >
       <div className="flex gap-2 items-center">
-        <div></div>
         {numSelected > 0 && (
-          <Tooltip onClick={onClick} title="Delete">
-            <IconButton>
-              <DeleteIcon />
-            </IconButton>
-          </Tooltip>
-        )}
-
-        {numSelected > 0 && (
-          <Typography
-            sx={{}}
-            color="inherit"
-            variant="subtitle1"
-            component="div"
+          <div
+            className="fcc gap-4 px-4 rounded-full"
+            style={{
+              width: "114px",
+              backgroundColor: "rgba(255, 159, 26, 0.04)",
+            }}
           >
-            {numSelected} selected
-          </Typography>
+            <Box
+              sx={{
+                "& #Path_820": {
+                  fill: "#FF9F1A",
+                },
+              }}
+            >
+              <SwitchIcon
+                style={{
+                  cursor: "pointer",
+                  color: "red",
+                  fontSize: "0.5rem",
+                }}
+                className={"w-5"}
+              ></SwitchIcon>
+            </Box>
+            <h2 className={"font-semibold"} style={{ color: "#FF9F1A" }}>
+              تعطيل
+            </h2>
+          </div>
+        )}
+        {numSelected > 0 && (
+          <div
+            className="fcc gap-2 px-4 rounded-full"
+            style={{
+              width: "114px",
+              backgroundColor: "rgba(255, 56, 56, 0.1)",
+            }}
+          >
+            <IconButton>
+              <BsTrash
+                style={{
+                  cursor: "pointer",
+                  color: "red",
+                  fontSize: "1rem",
+                }}
+              ></BsTrash>
+            </IconButton>
+            <h2 className={"font-semibold"} style={{ color: "#FF3838" }}>
+              حذف
+            </h2>
+          </div>
         )}
       </div>
 
       <div className="flex items-center">
         <h2 className="font-medium">تحديد الكل</h2>
         <Checkbox
+          checkedIcon={<CheckedSquare />}
           sx={{
-            color: "#1DBBBE",
+            pr: "0",
+            color: "#011723",
             "& .MuiSvgIcon-root": {
-              color: "#1DBBBE",
+              color: "#011723",
             },
           }}
           indeterminate={numSelected > 0 && numSelected < rowCount}
@@ -243,10 +278,6 @@ function EnhancedTableToolbar(props) {
   );
 }
 
-EnhancedTableToolbar.propTypes = {
-  numSelected: PropTypes.number.isRequired,
-};
-
 export default function EnhancedTable({ setUser }) {
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("calories");
@@ -258,16 +289,13 @@ export default function EnhancedTable({ setUser }) {
   const [userMenuOpenedId, setUserMenuOpenedId] = React.useState(null);
   const [rowAnchorEl, setRowAnchorEl] = React.useState(null);
   const rowsPerPagesCount = [10, 20, 30, 50, 100];
-  const handleRowsClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+
   const handlePagRowsClick = (event) => {
     setRowAnchorEl(event.currentTarget);
   };
   const handleRowMenuClose = () => {
     setRowAnchorEl(null);
   };
-  const open = Boolean(anchorEl);
   const rowMenuOpen = Boolean(rowAnchorEl);
   const handleOptionsClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -278,31 +306,6 @@ export default function EnhancedTable({ setUser }) {
     setRowAnchorEl(null);
     setUserMenuOpenedId(null);
   };
-
-  const handleRequestSort = (event, property) => {
-    const isAsc = orderBy === property && order === "asc";
-    setOrder(isAsc ? "desc" : "asc");
-    setOrderBy(property);
-  };
-
-  const handleSelectAllClick = (event) => {
-    if (event.target.checked) {
-      const newSelected = data.map((n) => n.name);
-      setSelected(newSelected);
-      return;
-    }
-    setSelected([]);
-  };
-  const deleteItems = () => {
-    const array = [...data];
-    selected.forEach((item, idx) => {
-      const findIndex = array.findIndex((i) => item === i.name);
-      array.splice(findIndex, 1);
-    });
-    setData(array);
-    setSelected([]);
-  };
-
   const handleClick = (event, name) => {
     const selectedIndex = selected.indexOf(name);
     let newSelected = [];
@@ -323,6 +326,21 @@ export default function EnhancedTable({ setUser }) {
     setSelected(newSelected);
   };
 
+  const handleRequestSort = (event, property) => {
+    const isAsc = orderBy === property && order === "asc";
+    setOrder(isAsc ? "desc" : "asc");
+    setOrderBy(property);
+  };
+
+  const handleSelectAllClick = (event) => {
+    if (event.target.checked) {
+      const newSelected = data.map((n) => n.name);
+      setSelected(newSelected);
+      return;
+    }
+    setSelected([]);
+  };
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -335,8 +353,7 @@ export default function EnhancedTable({ setUser }) {
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
   // Avoid a layout jump when reaching the last page with empty rows.
-  const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+
   const allRows = () => {
     const num = Math.ceil(data.length / rowsPerPage);
     const arr = [];
@@ -345,8 +362,23 @@ export default function EnhancedTable({ setUser }) {
     }
     return arr;
   };
+  const deleteItems = () => {
+    const array = [...data];
+    selected.forEach((item, idx) => {
+      const findIndex = array.findIndex((i) => item === i.name);
+      array.splice(findIndex, 1);
+    });
+    setData(array);
+    setSelected([]);
+  };
   return (
     <Box sx={{ width: "100%" }}>
+      <EnhancedTableToolbar
+        onClick={deleteItems}
+        numSelected={selected.length}
+        rowCount={data.length}
+        onSelectAllClick={handleSelectAllClick}
+      />
       <Paper sx={{ width: "100%", mb: 2 }}>
         <TableContainer>
           <Table
@@ -415,15 +447,47 @@ export default function EnhancedTable({ setUser }) {
                               handleClose();
                             }}
                           >
+                            <Box
+                              sx={{
+                                cursor: "pointer",
+                                fontSize: "1rem",
+                                marginLeft: "0.25rem",
+                                "& svg": {
+                                  fill: "#67747B",
+                                },
+                              }}
+                            >
+                              <DocumentIcon width={"1rem"}></DocumentIcon>
+                            </Box>
                             التفاصيل
                           </MenuItem>
+
                           <MenuItem
                             onClick={() => {
                               setUser(row, true);
                               handleClose();
                             }}
                           >
+                            <FaRegEdit
+                              style={{
+                                cursor: "pointer",
+                                color: "#67747B",
+                                fontSize: "1rem",
+                                marginLeft: "0.25rem",
+                              }}
+                            ></FaRegEdit>
                             تعديل
+                          </MenuItem>
+                          <MenuItem onClick={handleClose}>
+                            <BsTrash
+                              style={{
+                                cursor: "pointer",
+                                color: "#67747B",
+                                fontSize: "1rem",
+                                marginLeft: "0.25rem",
+                              }}
+                            ></BsTrash>
+                            حذف
                           </MenuItem>
                         </Menu>
                       </TableCell>
@@ -477,6 +541,22 @@ export default function EnhancedTable({ setUser }) {
                           useGrouping: false,
                         })}
                       </TableCell>
+                      <TableCell padding="none" align={"right"}>
+                        <Checkbox
+                          checkedIcon={<CheckedSquare />}
+                          sx={{
+                            color: "#011723",
+                            "& .MuiSvgIcon-root": {
+                              color: "#011723",
+                            },
+                          }}
+                          checked={isItemSelected}
+                          onClick={(event) => handleClick(event, row.name)}
+                          inputProps={{
+                            "aria-labelledby": labelId,
+                          }}
+                        />
+                      </TableCell>
                     </TableRow>
                   );
                 })}
@@ -523,6 +603,15 @@ export default function EnhancedTable({ setUser }) {
                     handleClose();
                   }}
                   key={rowsIdx}
+                  sx={{
+                    backgroundColor: "#FFEEEE",
+                    "ul:has(&)": {
+                      p: 0,
+                    },
+                    "ul:has(&) li:hover": {
+                      backgroundColor: "#C6E1F0",
+                    },
+                  }}
                 >
                   {rowsPer}
                 </MenuItem>

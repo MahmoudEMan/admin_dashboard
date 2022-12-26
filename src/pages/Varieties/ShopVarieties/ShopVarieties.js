@@ -7,11 +7,12 @@ import AddSection from "../../../components/VarietiesComp/ShopVarieties/AddSecti
 import ShopVarietiesTable from "../../../components/VarietiesComp/ShopVarieties/ShopVarietiesTable/ShopVarietiesTable";
 
 import Button from "../../../UI/Button/Button";
-import { AiOutlinePlus, AiOutlineSearch } from "react-icons/ai";
+import { AiOutlinePlus } from "react-icons/ai";
 
 const ShopVarieties = () => {
   const [showAddVarietyPage, setShowAddVarietyPage] = useState(false);
   const [showAddSectionPage, setShowAddSectionPage] = useState(false);
+  const [editSection, setEditSection] = useState(null);
 
   return (
     <div className={`px-4 pt-8 mt-5`} style={{ backgroundColor: "#F6F6F6" }}>
@@ -58,6 +59,7 @@ const ShopVarieties = () => {
             cancel={() => {
               setShowAddVarietyPage(false);
             }}
+            data={editSection}
           ></AddVariety>
         )}
         {showAddSectionPage && (
@@ -68,7 +70,12 @@ const ShopVarieties = () => {
           ></AddSection>
         )}
         <div dir="ltr" className={"mt-10"}>
-          <ShopVarietiesTable></ShopVarietiesTable>
+          <ShopVarietiesTable
+            editSection={(item) => {
+              setEditSection(item);
+              setShowAddVarietyPage(true);
+            }}
+          ></ShopVarietiesTable>
         </div>
       </div>
     </div>

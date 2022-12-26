@@ -24,6 +24,9 @@ import { Gift } from "../../../../assets/Icons/index";
 import { BsStarFill, BsStarHalf } from "react-icons/bs";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import { ReactComponent as CheckedSquare } from "../../../../assets/Icons/icon-24-square checkmark.svg";
+import { ReactComponent as SwitchIcon } from "../../../../assets/Icons/icon-38-switch.svg";
+
 import {
   MdOutlineKeyboardArrowDown,
   MdOutlineArrowBackIosNew,
@@ -215,54 +218,42 @@ function EnhancedTableToolbar(props) {
         justifyContent: "flex-end",
       }}
     >
-      <div className="flex gap-2 items-center">
+      <div
+        className="fcc gap-2 px-4 rounded-full"
+        style={{ backgroundColor: "rgba(255, 159, 26, 0.04)" }}
+      >
         {numSelected > 0 && (
-          <Tooltip onClick={onClick} title="Delete">
-            <div
-              className="fbc px-2 rounded-full"
-              style={{ width: "134px", backgroundColor: "#FF9F1A0A" }}
+          <div
+            className="fcc gap-4 px-4 rounded-full"
+            style={{ minWidth: "114px", backgroundColor: "#FF9F1A0A" }}
+          >
+            <h2 className={"font-medium"} style={{ color: "#FF9F1A" }}>
+              نشط/ غير نشط
+            </h2>
+            <Box
+              sx={{
+                "& #Path_820": {
+                  fill: "#FF9F1A",
+                },
+              }}
             >
-              <h2 className={"font-medium"} style={{ color: "#FF9F1A" }}>
-                تعطيل الكل
-              </h2>
-              {/* <IconButton>
-                <BsTrash
-                  style={{
-                    cursor: "pointer",
-                    color: "red",
-                    fontSize: "1rem",
-                  }}
-                ></BsTrash>
-              </IconButton> */}
-            </div>
-          </Tooltip>
-        )}
-        {numSelected > 0 && (
-          <Tooltip onClick={onClick} title="Delete">
-            <div
-              className="fbc px-2 rounded-full"
-              style={{ width: "134px", backgroundColor: "#FF38380A" }}
-            >
-              <h2 className={"font-medium"} style={{ color: "#FF3838" }}>
-                حذف الكل
-              </h2>
-              <IconButton>
-                <BsTrash
-                  style={{
-                    cursor: "pointer",
-                    color: "red",
-                    fontSize: "1rem",
-                  }}
-                ></BsTrash>
-              </IconButton>
-            </div>
-          </Tooltip>
+              <SwitchIcon
+                style={{
+                  cursor: "pointer",
+                  color: "red",
+                  fontSize: "0.5rem",
+                }}
+                className={"w-5"}
+              ></SwitchIcon>
+            </Box>
+          </div>
         )}
       </div>
 
       <div className="flex items-center">
         <h2 className="font-medium">تحديد الكل</h2>
         <Checkbox
+          checkedIcon={<CheckedSquare />}
           sx={{
             pr: "0",
             color: "#011723",
@@ -481,7 +472,9 @@ export default function EnhancedTable() {
                         <div
                           className="w-20 h-full py-1 rounded-xl"
                           style={{
-                            backgroundColor: row.opened ? "#3AE374" : "#D3D3D3",
+                            backgroundColor: row.opened
+                              ? "rgba(58, 227, 116, 0.4)"
+                              : "#D3D3D3",
                             marginLeft: "auto",
                           }}
                         >
@@ -506,6 +499,7 @@ export default function EnhancedTable() {
                       </TableCell>
                       <TableCell padding="none" align={"right"}>
                         <Checkbox
+                          checkedIcon={<CheckedSquare />}
                           sx={{
                             color: "#1DBBBE",
                             "& .MuiSvgIcon-root": {
@@ -574,6 +568,15 @@ export default function EnhancedTable() {
                     handleClose();
                   }}
                   key={rowsIdx}
+                  sx={{
+                    backgroundColor: "#FFEEEE",
+                    "ul:has(&)": {
+                      p: 0,
+                    },
+                    "ul:has(&) li:hover": {
+                      backgroundColor: "#C6E1F0",
+                    },
+                  }}
                 >
                   {rowsPer}
                 </MenuItem>

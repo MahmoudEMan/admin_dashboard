@@ -4,7 +4,7 @@ import SocialMediaActivity from "../../../components/SettingComp/SocialMediaLink
 import AddNewLink from "../../../components/SettingComp/SocialMediaLinksPageComp/AddNewLink/AddNewLink";
 
 const SocialMediaLinksPage = () => {
-  const [showAddNewLink, setShowAddNewLink] = useState(true);
+  const [showAddNewLink, setShowAddNewLink] = useState(false);
   return (
     <div className={`px-4 pt-6`} style={{ backgroundColor: "#F7F7F7" }}>
       <h2 className="text-2xl font-semibold mb-5">صفحات التواصل الاجتماعي </h2>

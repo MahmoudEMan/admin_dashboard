@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Button from "../../../UI/Button/Button";
 import CountriesInfo from "../../../components/SettingComp/CountriesPageComp/CountriesInfo/CountriesInfo";
 import AddCountry from "../../../components/SettingComp/CountriesPageComp/AddCountry/AddCountry";
-import FunctionalRoles from "../../../components/UsersPageComp/FunctionalRoles/FunctionalRoles";
 import { AiOutlinePlus } from "react-icons/ai";
 
 const CountriesPages = () => {

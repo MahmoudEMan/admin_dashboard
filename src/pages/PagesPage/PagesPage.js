@@ -5,7 +5,7 @@ import Filtering from "../../components/PagesPageComp/Filtering/Filtering";
 import AddNewPage from "../../components/PagesPageComp/AddNewPage/AddNewPage";
 
 import Button from "../../UI/Button/Button";
-import { AiOutlinePlus, AiOutlineSearch } from "react-icons/ai";
+import { AiOutlinePlus } from "react-icons/ai";
 
 const PagesPage = () => {
   const [showAddNewPage, setShowAddNewPage] = useState(false);

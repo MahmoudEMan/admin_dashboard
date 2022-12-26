@@ -1,16 +1,13 @@
 import React, { useState } from "react";
 import PageNavigate from "../../../components/PageNavigate/PageNavigate";
 import PersonalInfo from "../../../components/DelegatesPageComp/AddNewDelegateComp/PersonalInfo/PersonalInfo";
+import CopyRights from "../../../components/DelegatesPageComp/AddNewDelegateComp/CopyRights/CopyRights";
+
 import SocialMediaInfo from "../../../components/DelegatesPageComp/AddNewDelegateComp/SocialMediaInfo/SocialMediaInfo";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Button from "../../../UI/Button/Button";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
-import { IoIosArrowDown } from "react-icons/io";
-import { AiOutlinePlus, AiOutlineSearch } from "react-icons/ai";
 
 const DelegatesTablePage = () => {
   const [valid, setValid] = useState(false);
@@ -20,10 +17,15 @@ const DelegatesTablePage = () => {
       style={{ backgroundColor: "#F7F7F7" }}
     >
       <div className="mt-6 flex justify-between items-center">
-        <PageNavigate currentPage={"اضافة مندوب جديد"} />
+        <PageNavigate
+          nestedPage={true}
+          parentPage={"عرض المناديب"}
+          currentPage={"اضافة مندوب جديد"}
+        />
       </div>
       <PersonalInfo></PersonalInfo>
       <SocialMediaInfo></SocialMediaInfo>
+      <CopyRights></CopyRights>
       <FormGroup>
         <FormControlLabel
           sx={{

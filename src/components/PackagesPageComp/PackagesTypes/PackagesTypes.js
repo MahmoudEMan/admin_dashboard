@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import Plans from "./Plans/Plans";
+import EditPackageTemplates from "../EditPackageTemplates/EditPackageTemplates";
 
-const PackagesTypes = () => {
+const PackagesTypes = ({ editPackage }) => {
   const [yearlyPlan, setYearlyPlan] = useState(false);
+  const [showEditTemplates, setShowEditTemplates] = useState(false);
   return (
-    <div className="relative">
+    <div className="">
       <div className="flex justify-center gap-4 my-12">
         <h2 className="font-semibold">سنوى/شهرى </h2>
         <div
@@ -21,7 +23,22 @@ const PackagesTypes = () => {
           ></div>
         </div>
       </div>
-      <Plans yearlyPlan={yearlyPlan}></Plans>
+      {showEditTemplates && (
+        <EditPackageTemplates
+          cancel={() => {
+            setShowEditTemplates(false);
+          }}
+        ></EditPackageTemplates>
+      )}
+      <Plans
+        editPackage={(row) => {
+          editPackage(row);
+        }}
+        editPackageTemplate={() => {
+          setShowEditTemplates(true);
+        }}
+        yearlyPlan={yearlyPlan}
+      ></Plans>
     </div>
   );
 };

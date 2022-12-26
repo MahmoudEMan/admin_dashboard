@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import draftToHtml from "draftjs-to-html";
 import { EditorState, convertToRaw } from "draft-js";
 import Button from "../../../UI/Button/Button";
+import Context from "../../../store/context";
+
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import { ReactComponent as WriteIcon } from "../../../assets/Icons/icon-24-write.svg";
 import styles from "./AddNewPage.module.css";
@@ -20,6 +22,8 @@ const BackDrop = ({ onClick }) => {
 };
 
 const AddNewPage = ({ cancel }) => {
+  const contextStore = useContext(Context);
+  const { setEndActionTitle } = contextStore;
   // const [marketTitle, setMarketTitle] = useState("");
   const [description, setDescription] = useState({
     htmlValue: "<h1></h1>\n",
@@ -237,7 +241,7 @@ const AddNewPage = ({ cancel }) => {
                   border: "1px solid #ECECEC",
                 }}
               >
-                ربط (تاج)
+                كلمات مفتاحية)
               </h2>
               <div className="flex gap-4 mt-8 px-3">
                 <Button style={{ minWidth: "fit-content" }} type={"outline"}>
@@ -256,6 +260,10 @@ const AddNewPage = ({ cancel }) => {
               fontSize={"text-2xl font-thin"}
               style={{ minWidth: "fit-content" }}
               type={"normal"}
+              onClick={() => {
+                setEndActionTitle("تم حفظ صفحة جديدة بنجاح");
+                cancel();
+              }}
             >
               حفظ
             </Button>
@@ -263,6 +271,10 @@ const AddNewPage = ({ cancel }) => {
               fontSize={"text-2xl font-normal"}
               style={{ minWidth: "fit-content" }}
               type={"outline"}
+              onClick={() => {
+                setEndActionTitle("تم نشر صفحة جديدة بنجاح");
+                cancel();
+              }}
             >
               نشر
             </Button>

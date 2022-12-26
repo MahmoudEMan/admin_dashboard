@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import { alpha } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -22,6 +22,8 @@ import { BsTrash } from "react-icons/bs";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { ReactComponent as EditIcon } from "../../../../assets/Icons/editt 2.svg";
+import { ReactComponent as CheckedSquare } from "../../../../assets/Icons/icon-24-square checkmark.svg";
+
 import { useNavigate } from "react-router-dom";
 
 import {
@@ -217,37 +219,41 @@ function EnhancedTableToolbar(props) {
             ),
         }),
         display: "flex",
-        justifyContent: "space-between",
+        gap: "2rem",
+        justifyContent: "flex-end",
       }}
     >
       <div className="flex gap-2 items-center">
-        <div></div>
         {numSelected > 0 && (
           <Tooltip onClick={onClick} title="Delete">
-            <IconButton>
-              <DeleteIcon />
-            </IconButton>
+            <div
+              className="fcc gap-2 px-4 rounded-full"
+              style={{ width: "114px", backgroundColor: "#FF38381A" }}
+            >
+              <h2 className={"font-medium"} style={{ color: "#FF3838" }}>
+                حذف
+              </h2>
+              <IconButton>
+                <BsTrash
+                  style={{
+                    cursor: "pointer",
+                    color: "red",
+                    fontSize: "1rem",
+                  }}
+                ></BsTrash>
+              </IconButton>
+            </div>
           </Tooltip>
-        )}
-
-        {numSelected > 0 && (
-          <Typography
-            sx={{}}
-            color="inherit"
-            variant="subtitle1"
-            component="div"
-          >
-            {numSelected} selected
-          </Typography>
         )}
       </div>
 
       <div className="flex items-center">
         <h2 className="font-medium">تحديد الكل</h2>
         <Checkbox
+          checkedIcon={<CheckedSquare />}
           sx={{
+            pr: "0",
             color: "#011723",
-            paddingRight: "0",
             "& .MuiSvgIcon-root": {
               color: "#011723",
             },
@@ -467,10 +473,11 @@ export default function EnhancedTable() {
                       </TableCell>
                       <TableCell padding="none" align={"right"}>
                         <Checkbox
+                          checkedIcon={<CheckedSquare />}
                           sx={{
-                            color: "#1DBBBE",
+                            color: "#011723",
                             "& .MuiSvgIcon-root": {
-                              color: "#ADB5B9",
+                              color: "#011723",
                             },
                           }}
                           checked={isItemSelected}

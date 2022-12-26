@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Button from "../../../UI/Button/Button";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import ImageUploading from "react-images-uploading";
 import { IoMdCloudUpload } from "react-icons/io";
 import styles from "./AddApi.module.css";
+import Context from "../../../store/context";
 
 const BackDrop = ({ onClick }) => {
   return (
@@ -15,6 +16,8 @@ const BackDrop = ({ onClick }) => {
 };
 
 const AddApi = ({ cancel, editDetails }) => {
+  const contextStore = useContext(Context);
+  const { setEndActionTitle } = contextStore;
   const [images, setImages] = useState([]);
   const [marketTitle, setMarketTitle] = useState("");
   const [marketUrl, setMarketUrl] = useState("");
@@ -144,7 +147,10 @@ const AddApi = ({ cancel, editDetails }) => {
               />
             </label>
             <Button
-              onClick={cancel}
+              onClick={() => {
+                setEndActionTitle("تم اضافة API جديد بنجاح");
+                cancel();
+              }}
               type={"normal"}
               className={"text-center w-full mt-10"}
             >

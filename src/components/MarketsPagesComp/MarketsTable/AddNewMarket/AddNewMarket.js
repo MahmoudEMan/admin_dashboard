@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Currency } from "../../../../assets/Icons/index";
 import Button from "../../../../UI/Button/Button";
+import Context from "../../../../store/context";
+
 import styles from "./AddNewMarket.module.css";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -33,6 +35,8 @@ const formInputStyle = {
 };
 
 const AddNewMarket = ({ cancel }) => {
+  const contextStore = useContext(Context);
+  const { setEndActionTitle } = contextStore;
   const [age, setAge] = useState("");
   const [tagsSelected, setTagsSelected] = useState([]);
   const [images, setImages] = useState([]);
@@ -216,6 +220,10 @@ const AddNewMarket = ({ cancel }) => {
               className={"h-14 w-44"}
               style={{ backgroundColor: `rgba(2, 70, 106, 1)` }}
               type={"normal"}
+              onClick={() => {
+                setEndActionTitle("تم انشاء متجر جديد بنجاح");
+                cancel();
+              }}
             >
               حفظ
             </Button>

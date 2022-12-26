@@ -5,12 +5,7 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { ReactComponent as FilterIcon } from "../../../assets/Icons/icon-24-filter.svg";
 import { IoIosArrowDown } from "react-icons/io";
 
-const categoryList = [
-  "الكترونيات",
-  "ألعاب وهدايا",
-  "مستلزمات طبية",
-  "مواد غذائية",
-];
+const categoryList = ["تاريخ الانشاء ", "الحالة"];
 
 const Filtering = () => {
   const [category, setCategory] = useState("");
@@ -97,12 +92,17 @@ const Filtering = () => {
             <MenuItem
               className=""
               sx={{
-                backgroundColor: "#fff",
+                backgroundColor: "#EBEBEB",
                 height: "3rem",
 
                 "&:hover": {},
                 "ul:has(&)": {
                   padding: "0",
+                  borderRadius: "8px",
+                },
+                "ul:has(&) li:hover": {
+                  backgroundColor: "#8D8AD3",
+                  color: "#fff",
                 },
               }}
               value={`${item}`}
